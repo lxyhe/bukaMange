@@ -1,0 +1,68 @@
+page-loging {
+  .scroll-content {
+    background-image: url('../assets/imgs/logingBackground.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: 1; // background-color: #F0F0F2;
+  }
+  .text-input text-input-ios ng-pristine ng-valid ng-touched {
+    border: 1px solid #ddd;
+    padding: 5px;
+  }
+  ion-input {
+    margin: 0;
+  }
+  .login_icon {
+    width: 50%;
+    height: 50%;
+    margin: 20vh auto 20vh;
+  }
+  .login_icon>img {
+    border-radius: 8px;
+  }
+  .login_btn_border {
+    width: 90%;
+    margin: 0 auto;
+  }
+  .login_btn {
+    border-radius: 10px;
+    border-radius: 22px;
+    font-size: 18px;
+    color: #FF5652;
+    height: 44px;
+  }
+  .login_btn.avtive {
+    background: bukaRed;
+  }
+  .login-top {
+    margin-top: 15%;
+  }
+  .login-top>p {
+    text-align: right;
+    margin-right: 40px;
+  }
+  .login-top>.note>p {
+    text-align: center;
+  }
+  .login-top>.note>p>a {
+    text-decoration: none;
+  }
+  .login-top>p>a {
+    text-decoration: none;
+  }
+  .loginborder {
+    position: relative;
+    background-color: #DA4B46;
+    border-radius: 22px;
+    padding-left: 50px;
+    width: 80%;
+    margin: 10px 10%;
+    color: #F8F6F5;
+    font-size: 18px;
+  }
+  .loginborder img {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+  }
+}

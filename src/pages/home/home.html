@@ -58,7 +58,7 @@
   <div [ngSwitch]="pet">
     <ion-card *ngSwitchCase="'puppies'">
       <ion-list *ngFor="let item of clientList">
-        <ion-item>
+        <ion-item (click)="goClientDetails(item)">
           <ion-avatar item-start>
             <img [src]="item.imgUrl">
           </ion-avatar>

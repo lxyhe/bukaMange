@@ -1,4 +1,4 @@
-page-client-detailspage {
+page-private-cilent-details {
   .scroll-content {
     background-color: #F8F6F5;
   }
@@ -25,6 +25,9 @@ page-client-detailspage {
   .item-ios,
   .item-md {
     padding: 0;
+  }
+  .input-wrapper {
+    padding-left: 0.6rem;
   }
   ion-item div {
     padding-left: 0.6rem;

@@ -62,5 +62,9 @@ export class HomePage {
   ionViewDidEnter() {
 
   }
+  goClientDetails(items) {
+    console.log(items);
+    this.navCtrl.push('PrivateCilentDetailsPage', { data: items })
+  }
 
 }

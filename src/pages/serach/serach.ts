@@ -1,20 +1,27 @@
+
+/**
+ * Generated class for the SerachPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
+
+
 import { Component } from '@angular/core';
 
-import { NavController, IonicPage } from 'ionic-angular';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 
 @IonicPage()
 @Component({
-  selector: 'page-contact',
-  templateUrl: 'contact.html'
+  selector: 'page-serach',
+  templateUrl: 'serach.html',
 })
-export class ContactPage {
+export class SerachPage {
   public clientList: Array<object> = [];
   public searcheMemo: string = '123';
   public pet: string = "puppies";
   public Serach: string = "SerachPage";
-  public details: string = "ClientDetailspagePage";
-  public detailsInfo: string = "西八";
   constructor(public navCtrl: NavController) {
 
     this.clientList = [{
@@ -59,3 +66,4 @@ export class ContactPage {
   }
 
 }
+

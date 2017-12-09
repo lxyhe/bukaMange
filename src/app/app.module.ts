@@ -20,12 +20,13 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     BrowserModule,
     IonicModule.forRoot(MyApp, {
       tabsHideOnSubPages: true,
-      backButtonText: " ",
-      Mode: 'ios',
-      modalEnter: 'modal-slide-in',
-      modalLeave: 'modal-slide-out',
-      tabsPlacement: 'bottom',
-      pageTransition: 'ios-transition'
+      mode: 'ios',//android是'md'
+      backButtonText: ''
+      // iconMode: 'ios',
+      // modalEnter: 'modal-slide-in',
+      // modalLeave: 'modal-slide-out',
+      // tabsPlacement: 'bottom',
+      // pageTransition: 'ios-transition'
     })
   ],
   bootstrap: [IonicApp],

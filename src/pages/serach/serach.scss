@@ -1,4 +1,29 @@
-page-contact {
+page-serach {
+  .searchbar-input-container .searchbar-input {
+    border-radius: 22px;
+  }
+  .toolbar .searchbar-ios .searchbar-input {
+    background: #fff;
+  }
+  .searchbar-ios.searchbar-left-aligned .searchbar-search-icon {
+    margin-left: 3px;
+    margin-top: 1px
+  }
+  .item-ios p {
+    color: #666;
+  }
+  .scroll-content {
+    background-color: #F8F6F5;
+  }
+  .cancel {
+    padding-top: 3px;
+    height: 25px;
+    line-height: 30px;
+    font-size: 18px;
+    color: #fff;
+    position: relative;
+    top: 3px;
+  }
   ion-card {
     position: relative;
     margin-top: 10px;
@@ -84,6 +109,10 @@ page-contact {
   .item-ios ion-thumbnail[item-start] {
     margin: 0px 16px 8px 0;
   }
+  .searchbar-ios .searchbar-input {
+    height: 2.8rem;
+    margin-top: 0.3rem;
+  }
   .btnStyle {
     width: 70px;
     height: 26px;
@@ -116,14 +145,10 @@ page-contact {
   }
   .list-ios>.item-block:last-child,
   .list-ios>.item-wrapper:last-child .item-block {
-    border-top: 1rem solid #F8F6F5
+    border-bottom: 1rem solid #F8F6F5;
+    border-top: 0;
   }
-  .search {
-    font-size: 2.8rem;
-    margin-right: 1rem;
-    margin-top: 0.8rem
-  }
-  .item-ios p {
-    color: #666;
+  .searchNumber {
+    margin: 1.5rem;
   }
 }

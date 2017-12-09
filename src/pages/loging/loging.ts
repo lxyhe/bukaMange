@@ -21,8 +21,8 @@ export class LogingPage {
   public logingObJ: LogingObject;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.logingObJ = new LogingObject;
-    this.logingObJ.userName = "1";
-    this.logingObJ.passWord = "2";
+    // this.logingObJ.userName = "1";
+    // this.logingObJ.passWord = "2";
     console.log(this.logingObJ);
   }
   ionViewDidLoad() {
@@ -49,9 +49,6 @@ export class LogingPage {
   ionViewCanLeave() {
     console.log('ionViewCanLeave LogingPage');
   }
-  loginMange(): void {
-    console.log(this.username);
-    console.log(this.password);
-  }
+
 
 }

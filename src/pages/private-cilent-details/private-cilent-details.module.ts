@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { PrivateCilentDetailsPage } from './private-cilent-details';
+import { MultiPickerModule } from 'ion-multi-picker';
 
 @NgModule({
   declarations: [
@@ -8,6 +9,7 @@ import { PrivateCilentDetailsPage } from './private-cilent-details';
   ],
   imports: [
     IonicPageModule.forChild(PrivateCilentDetailsPage),
+    MultiPickerModule
   ],
 })
-export class PrivateCilentDetailsPageModule {}
+export class PrivateCilentDetailsPageModule { }

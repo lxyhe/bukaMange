@@ -32,7 +32,12 @@ $tabs-md-tab-text-color-active:color($colors, bukaRed);
 $segment-button-ios-background-color:#fff;
 $segment-button-ios-text-color: #666;
 $segment-button-ios-height:5.5rem;
-// App iOS Variables
+.alertStyle {
+  color: #333;
+}
+
+$alert-ios-button-text-color:#333; // App iOS Variables
+$picker-ios-button-text-color:#333;
 // --------------------------------------------------
 // iOS only Sass variables can go here
 // App Material Design Variables

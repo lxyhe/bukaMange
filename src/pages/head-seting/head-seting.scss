@@ -1,4 +1,4 @@
-page-private-cilent-details {
+page-head-seting {
   .scroll-content {
     background-color: #F8F6F5;
   }
@@ -31,26 +31,5 @@ page-private-cilent-details {
   }
   ion-item div {
     padding-left: 0.6rem;
-  }
-  .leftList {
-    font-size: 16px;
-    color: #333;
-    line-height: 35PX;
-    font-weight: bold;
-  }
-  .rightLsit {
-    float: right;
-    font-size: 15px;
-    color: #666666;
-    line-height: 35px;
-  }
-  .address {
-    padding-left: 0;
-    font-size: 15px;
-    color: #666666;
-    line-height: 40px;
-  }
-  .alert-ios .alert-button {
-    color: #333
   }
 }

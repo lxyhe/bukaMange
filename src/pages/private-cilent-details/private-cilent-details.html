@@ -35,39 +35,54 @@
   <ion-list>
     <button ion-item>
       <div>
-        <span class="leftList">联系人</span>
+        <span class="leftList textColor">联系人</span>
+
         <span class="rightLsit">领取可查看联系方式</span>
       </div>
     </button>
-      <button ion-item>
+      <button ion-item [navPush]="Privatedetails" [navParams]="privatedetailsInfo">
       <div>
         <span class="leftList">跟进情况</span>
         <span class="rightLsit">领取可查看联系方式</span>
       </div>
     </button>
       <button ion-item>
-      <div>
-        <span class="leftList">客户类型</span>
-        <span class="rightLsit">机构客户</span>
-      </div>
+        <!-- <span class="leftList">客户类型</span>
+        <span class="rightLsit">机构客户</span> -->
+        <ion-label class="leftList">客户类型</ion-label>
+        <ion-multi-picker  placeholder="请选择" showReset=true resetText="客户类型" item-content cancelText="取消"  item-content doneText="完成" [multiPickerColumns]="simpleColumns"></ion-multi-picker>
     </button>
       <button ion-item>
-      <div>
+      <!-- <div>
+        <span class="leftList">客户级别</span>
+        <span class="rightLsit">大班直播</span>
+      </div> -->
+      <ion-label class="leftList">客户级别</ion-label>
+      <ion-multi-picker  placeholder="请选择" showReset=true resetText="客户级别" item-content cancelText="取消"  item-content doneText="完成" [multiPickerColumns]="simpleColumns"></ion-multi-picker>
+    </button>
+      <button ion-item>
+      <!-- <div>
         <span class="leftList">客户需求</span>
         <span class="rightLsit">大班直播</span>
-      </div>
+      </div> -->
+      <ion-label class="leftList">客户需求</ion-label>
+      <ion-multi-picker  placeholder="请选择" showReset=true resetText="客户需求" item-content cancelText="取消"  item-content doneText="完成" [multiPickerColumns]="simpleColumns"></ion-multi-picker>
     </button>
       <button ion-item>
-      <div>
+      <!-- <div>
         <span class="leftList">客户来源</span>
         <span class="rightLsit">网站</span>
-      </div>
+      </div> -->
+      <ion-label class="leftList">客户来源</ion-label>
+      <ion-multi-picker  placeholder="请选择" showReset=true resetText="客户来源" item-content cancelText="取消"  item-content doneText="完成" [multiPickerColumns]="simpleColumns"></ion-multi-picker>
     </button>
       <button ion-item>
-      <div>
+      <!-- <div>
         <span class="leftList">客户状态</span>
         <span class="rightLsit">体验了解</span>
-      </div>
+      </div> -->
+      <ion-label class="leftList">客户状态</ion-label>
+      <ion-multi-picker  placeholder="请选择" showReset=true resetText="客户状态" item-content cancelText="取消"  item-content doneText="完成" [multiPickerColumns]="simpleColumns"></ion-multi-picker>
     </button>
       <button ion-item>
       <div>
@@ -90,6 +105,6 @@
 </ion-content>
 <ion-footer no-border>
 
-  <button color="bukaRed" block ion-button>移至公海</button>
+  <button color="bukaRed" block ion-button (click)="moveToHighSeas()">移至公海</button>
 
 </ion-footer>

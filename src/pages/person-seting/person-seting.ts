@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ActionSheetController, AlertController } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
+
 /**
- * Generated class for the HeadSetingPage page.
+ * Generated class for the PersonSetingPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -10,23 +11,31 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 
 @IonicPage()
 @Component({
-  selector: 'page-head-seting',
-  templateUrl: 'head-seting.html',
+  selector: 'page-person-seting',
+  templateUrl: 'person-seting.html',
 })
-export class HeadSetingPage {
-  public img: string = null;
-  constructor(
-    public navCtrl: NavController,
+export class PersonSetingPage {
+  public simpleColumns: any;
+  public img: any;
+  constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public actionSheetCtrl: ActionSheetController,
     private camera: Camera,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController) {
+    this.simpleColumns = [
+      {
+        name: 'col1',
+        options: [
+          { text: '男', value: '1' },
+          { text: '女', value: '2' },
 
-  ) {
+        ]
+      }
+    ];
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad HeadSetingPage');
+    console.log('ionViewDidLoad PersonSetingPage');
   }
   setingHead() {
     let actionSheet = this.actionSheetCtrl.create({
@@ -81,21 +90,17 @@ export class HeadSetingPage {
   }
   exit() {
     let alert = this.alertCtrl.create({
-      title: '退出APP',
-      message: '您确定要退出APP吗?',
+      message: '您确定退出CRM系统吗?',
       buttons: [
         {
           text: '取消',
           role: 'cancel',
           handler: () => {
-            console.log('Cancel clicked');
           }
         },
         {
           text: '确定',
           handler: () => {
-            console.log('Buy clicked');
-
           }
         }
       ]

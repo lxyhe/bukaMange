@@ -1,0 +1,42 @@
+<!--
+  Generated template for the PersonSetingPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>账户设置</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-card>
+    <ion-list>
+      <button (click)="setingHead()" style="border:1px solid #F5F5F8" ion-item>
+        <span>头像</span>
+              <ion-avatar item-end>
+                <img src="assets/imgs/timg1.jpg">
+              </ion-avatar>
+      </button >
+     <button style="border:1px solid #F5F5F8" ion-item>
+        <span>账号</span>
+              <span item-end>
+                13581911688
+              </span>
+     </button >
+    <button style="border:1px solid #F5F5F8"ion-item>
+        <span>姓名</span>
+        <span item-end>
+            陈龙
+          </span>
+     </button >
+     <button style="border:1px solid #F5F5F8" ion-item>
+        <ion-label class="leftList">性别</ion-label>
+        <ion-multi-picker  placeholder="请选择" showReset=true resetText="性别" item-content cancelText="取消"  item-content doneText="完成" [multiPickerColumns]="simpleColumns"></ion-multi-picker>
+      </button >
+          </ion-list>
+        </ion-card>
+        <div (click)="exit()" class="exit_Btn">
+          <span>退出</span>
+        </div>
+  </ion-content>

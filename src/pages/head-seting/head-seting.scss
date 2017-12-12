@@ -32,4 +32,21 @@ page-head-seting {
   ion-item div {
     padding-left: 0.6rem;
   }
+  .exit_Btn {
+    width: 90%;
+    height: 44px;
+    border-radius: 22px;
+    text-align: center;
+    margin-left: 5%;
+    margin-top: 3rem;
+    line-height: 44px;
+    background-color: #FB5651;
+  }
+  .exit_Btn span {
+    font-size: 18px;
+    color: #FFFFFF;
+  }
+  .action-sheet-ios .action-sheet-button .button-inner {
+    color: #333;
+  }
 }

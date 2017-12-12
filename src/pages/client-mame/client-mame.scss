@@ -1,0 +1,16 @@
+page-client-mame {
+  .searchbar-ios .searchbar-search-icon {
+    background-image: none //background: url('../assets/imgs/logoBuka.png') no-repeat left top;
+  }
+  .scroll-content {
+    background-color: #F8F6F5;
+  }
+  .input_name {
+    height: 44px;
+    margin-top: 2rem;
+    background: #FFFFFF;
+    border: 0;
+    padding-left: 1rem;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.10);
+  }
+}

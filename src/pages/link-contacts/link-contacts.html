@@ -1,0 +1,71 @@
+<!--
+  Generated template for the LinkContactsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-buttons start>
+      <button ion-button icon-only (click)="dismiss()">
+                <ion-icon name="arrow-back"></ion-icon>
+             </button>
+    </ion-buttons>
+    <ion-title>客户名称</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="dismiss()">
+                完成
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-list>
+      <ion-item>
+        <span>姓名</span>
+        <div style="float:right;">
+          <input style="border:0;text-align:right;font-size: 15px;
+          color: #999999;
+          line-height: 44px;" type="text" [(ngModel)]="linkName" placeholder="请输入联系人姓名">
+        </div>
+      </ion-item>
+      <ion-item>
+        <span>职位</span>
+        <div style="float:right;">
+          <input style="border:0;text-align:right;font-size: 15px;
+          color: #999999;
+          line-height: 44px;" type="text" [(ngModel)]="linkPost" placeholder="请输入联系人职位">
+        </div>
+      </ion-item>
+      <ion-item>
+        <span>电话</span>
+        <div style="float:right;">
+          <input style="border:0;text-align:right;font-size: 15px;
+          color: #999999;
+          line-height: 44px;" type="text" [(ngModel)]="linkPhone" placeholder="请输入联系电话号码">
+        </div>
+      </ion-item>
+      <ion-item>
+        <span>微信</span>
+        <div style="float:right;">
+          <input style="border:0;text-align:right;font-size: 15px;
+          color: #999999;
+          line-height: 44px;" type="text" [(ngModel)]="linkWechat" placeholder="请输入联系人微信号码">
+        </div>
+      </ion-item>
+      <ion-item>
+        <span>邮箱</span>
+        <div style="float:right;">
+          <input style="border:0;text-align:right;font-size: 15px;
+          color: #999999;
+          line-height: 44px;" type="text" [(ngModel)]="linkEmail" placeholder="请输入联系人邮箱">
+        </div>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+</ion-content>
+<ion-footer no-border>
+  <button color="bukaRed" block ion-button (click)="addlink()">添加联系人</button>
+</ion-footer>

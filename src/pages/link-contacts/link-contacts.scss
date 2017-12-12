@@ -1,0 +1,35 @@
+page-link-contacts {
+  .scroll-content {
+    background-color: #F8F6F5;
+  }
+  ion-card {
+    position: relative;
+    margin-top: 10px;
+  }
+  .titleBox {
+    width: 100%;
+    height: 168px;
+    overflow: hidden;
+  }
+  .backgroundImg {
+    width: 100%;
+    height: 168px;
+  }
+  .item-ios,
+  .item-md {
+    border-bottom: 1px solid #ECF0F1;
+  }
+  .card-ios,
+  .card-md {
+    margin: 10px 0px 10px;
+    width: 100%;
+  }
+  ion-item {
+    height: 44px;
+    line-height: 44px;
+    span {
+      display: inline-block;
+      padding-top: 10px;
+    }
+  }
+}

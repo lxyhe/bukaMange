@@ -66,5 +66,8 @@ export class HomePage {
     console.log(items);
     this.navCtrl.push('PrivateCilentDetailsPage', { data: items })
   }
+  goPensonSeting() {
+    this.navCtrl.push('PersonSetingPage');
+  }
 
 }

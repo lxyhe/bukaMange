@@ -11,13 +11,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 
-/**
- * Generated class for the ClientDetailspagePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-import { MultiPickerModule } from 'ion-multi-picker';
+
+
 @IonicPage()
 @Component({
   selector: 'page-private-cilent-details',
@@ -28,7 +23,7 @@ export class PrivateCilentDetailsPage {
   public default: any = 2;
   public Privatedetails: any = "PrivateFloowPage";
   public privatedetailsInfo: Object;
-  // <button ion-item [navPush]="Privatedetails" [navParams]="privatedetailsInfo">
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,

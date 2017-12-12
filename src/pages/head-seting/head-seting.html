@@ -12,13 +12,14 @@
 <ion-content>
   <ion-card>
     <ion-list>
-      <button ion-item>
+      <button (click)="setingHead()" ion-item>
             <ion-avatar item-start>
               <img src="assets/imgs/timg1.jpg">
             </ion-avatar>
-            <h2>阿里巴巴</h2>
-            <p> 发布时间: <span>2017-11-27</span> </p>
           </button >
         </ion-list>
       </ion-card>
+      <div (click)="exit()" class="exit_Btn">
+        <span>退出</span>
+      </div>
 </ion-content>

@@ -1,70 +1,74 @@
 
-import { Component } from '@angular/core';
-import { NavController, IonicPage } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { NavController, IonicPage, Refresher, Events } from 'ionic-angular';
 import { homeObj } from '../../providers/homeObj';
+import { HttpLodingService } from '../../providers/loadingServer';
+import { Storage } from '@ionic/storage';
+import { ajaxService } from '../../providers/ajaxServe';
 //import mickData from '../../providers/mickData';
-const mickData: homeObj[] = [
-  {
-    imgUrl: "assets/imgs/timg1.jpg",
-    clientName: "光大传媒",
-    clientType: "35人",
-    clinetDemand: "大班直播",
-    clientTime: "2017-11-27",
-    status: 1,
-    details: null
-  }, {
-    imgUrl: "assets/imgs/timg1.jpg",
-    clientName: "光大传媒",
-    clientType: "35人",
-    clinetDemand: "大班直播",
-    clientTime: "2017-11-27",
-    status: 2,
-    details: null
-  }, {
-    imgUrl: "assets/imgs/timg1.jpg",
-    clientName: "光大传媒",
-    clientType: "35人",
-    clinetDemand: "大班直播",
-    clientTime: "2017-11-27",
-    status: 2,
-    details: null
-  }, {
-    imgUrl: "assets/imgs/timg1.jpg",
-    clientName: "光大传媒",
-    clientType: "35人",
-    clinetDemand: "大班直播",
-    clientTime: "2017-11-27",
-    status: 1,
-    details: null
 
-  }, {
-    imgUrl: "assets/imgs/timg1.jpg",
-    clientName: "光大传媒",
-    clientType: "35人",
-    clinetDemand: "大班直播",
-    clientTime: "2017-11-27",
-    status: 1,
-    details: null
-  }
-];
 @IonicPage()
 @Component({
   selector: 'page-company',
   templateUrl: 'company.html',
 })
 export class CompanyPage {
+  @ViewChild(Refresher) public refresher: Refresher;
   public clientList: homeObj[];
   public pet: string = "puppies";
-  constructor(public navCtrl: NavController) {
+  public userid: any = "";
+  public tokenid: any = "";
 
-    this.clientList = mickData;
-    console.log(this.clientList);
+  public companyavatar: string = "";
+  public companyname: any = "";
+
+  constructor(
+    public navCtrl: NavController,
+    public httploading: HttpLodingService,
+    private storage: Storage,
+    public ajaxserve: ajaxService,
+    public event: Events
+
+  ) {
+
+    //this.clientList = mickData;
+    // console.log(this.clientList);
+  }
+  doRefresh(refresher) {
+    this.getcompanyList();
+    this.event.subscribe("request:success", () => {
+      this.refresher.complete();
+    })
+  }
+  getcompanyList() {
+    try {
+
+      this.storage.get('userInfo').then((data) => {
+        this.userid = data.userid;
+        this.tokenid = data.tokenid;
+        this.httploading.HttpServerLoading("加载中...")
+        this.ajaxserve.companyList({ tokenid: this.tokenid, userid: this.userid }).then((data) => {
+          console.log(data);
+          if (data.status.Code = "200") {
+            this.httploading.ColseServerLoding();
+            this.companyavatar = data.data.avatar;
+            this.companyname = data.data.name;
+            this.clientList = data.data.tlist;
+          }
+        }).catch((err) => {
+          console.log(err);
+        })
+      })
+    }
+    catch (err) {
+      console.log(err);
+    }
   }
   ionViewDidEnter() {
-
+    this.getcompanyList();
+    //this.doRefresh();
   }
   goGrounpPage(items) {
-    console.log(items);
     this.navCtrl.push('GrounpPage', { data: items })
   }
   goSteingPage(items) {

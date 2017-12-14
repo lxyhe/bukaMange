@@ -1,14 +1,88 @@
-// http://ionicframework.com/docs/theming/
-// App Global Sass
-// --------------------------------------------------
-// Put style rules here that you want to apply globally. These
-// styles are for the entire app and not just one component.
-// Additionally, this file can be also used as an entry point
-// to import other Sass files to be included in the output CSS.
-//
-// Shared Sass variables, which can be used to adjust Ionic's
-// default Sass variables, belong in "theme/variables.scss".
-//
-// To declare rules for a specific mode, create a child rule
-// for the .md, .ios, or .wp mode classes. The mode class is
-// automatically applied to the <body> element in the app.
+// apptemplate {
+//   @mixin makeIcon($arg, $val) {
+//     .ion-ios-#{$arg}:before,
+//     .ion-ios-#{$arg}-circle:before,
+//     .ion-ios-#{$arg}-circle-outline:before,
+//     .ion-ios-#{$arg}-outline:before,
+//     .ion-md-#{$arg}:before,
+//     .ion-md-#{$arg}-circle:before,
+//     .ion-md-#{$arg}-circle-outline:before,
+//     .ion-md-#{$arg}-outline:before {
+//       content: $val;
+//       font-size: 26px;
+//       position: relative;
+//       top: 10px;
+//       font-size: 30px;
+//       color: #fff;
+//     }
+//   }
+//   .ion-icon-publish:before {
+//     content: "\e900";
+//     color: #36CDC0;
+//   }
+//   .ion-icon-public:before {
+//     content: "\e901";
+//   }
+//   .ion-icon-private:before {
+//     content: "\e902";
+//   }
+//   .ion-icon-privateCeilnt:before {
+//     content: "\e903";
+//   }
+//   .ion-icon-grounp:before {
+//     content: "\e904";
+//   }
+//   .ion-icon-noFloow:before {
+//     content: "\e905";
+//   }
+//   .ion-icon-floowUp:before {
+//     content: "\e906";
+//   }
+//   @include makeIcon(icon-publish, '\e900');
+//   @include makeIcon(icon-public, '\e901');
+//   @include makeIcon(icon-private, '\e902');
+//   @include makeIcon(icon-privateCeilnt, '\e903');
+//   @include makeIcon(icon-grounp, '\e904');
+//   @include makeIcon(icon-noFloow, '\e905');
+//   @include makeIcon(icon-floowUp, '\e906');
+// }
+apptemplate {
+  .tabs-ios .tab-button[aria-selected=false] .ion-ios-tab1-outline {
+    content: url("../assets/tabs/private.png");
+    min-width: 17px;
+    padding: 2px;
+    min-height: 17px;
+    padding-top: 2px;
+    opacity: 0.8;
+  }
+  .tabs-ios .tab-button[aria-selected=true] .ion-ios-tab1 {
+    content: url("../assets/tabs/private-c.png");
+    min-width: 30px;
+    padding: 2px;
+    opacity: 0.8;
+  }
+  .tabs-ios .tab-button[aria-selected=false] .ion-ios-tab3-outline {
+    content: url("../assets/tabs/public.png");
+    min-width: 30px;
+    padding: 2px;
+    opacity: 0.8;
+  }
+  .tabs-ios .tab-button[aria-selected=true] .ion-ios-tab3 {
+    content: url("../assets/tabs/public-c.png");
+    min-width: 30px;
+    padding: 2px;
+    opacity: 0.8;
+  }
+  .tabs-ios .tab-button[aria-selected=false] .ion-ios-tab2-outline {
+    content: url("../assets/tabs/publish.png");
+    min-width: 30px;
+    padding: 2px;
+    opacity: 0.8;
+  }
+  .tabs-ios .tab-button[aria-selected=true] .ion-ios-tab2 {
+    content: url("../assets/tabs/publish.png");
+    min-width: 30px;
+    padding: 2px;
+    opacity: 0.8;
+  }
+}

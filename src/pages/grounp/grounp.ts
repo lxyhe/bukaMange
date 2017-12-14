@@ -1,8 +1,9 @@
 
 
-import { Component } from '@angular/core';
-import { NavController, IonicPage } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { NavController, IonicPage, NavParams, Events, Refresher } from 'ionic-angular';
 import { homeObj } from '../../providers/homeObj';
+import { Storage } from '@ionic/storage';
 //import mickData from '../../providers/mickData';
 
 /**
@@ -62,12 +63,50 @@ const mickData: homeObj[] = [
   templateUrl: 'grounp.html',
 })
 export class GrounpPage {
+  @ViewChild(Refresher) public refresher: Refresher;
   public clientList: homeObj[];
   public pet: string = "puppies";
-  constructor(public navCtrl: NavController) {
-
+  public tokenid: string = "";
+  public team_id: string = "";
+  public companyData: object = {};
+  constructor(
+    public navCtrl: NavController,
+    public navparam: NavParams,
+    public event: Events,
+    private storage: Storage,
+  ) {
     this.clientList = mickData;
-    console.log(this.clientList);
+    this.companyData = this.navparam.get('data');
+    console.log(this.companyData);
+    // this.team_id=this.companyData.team_id;
+  }
+  doRefresh(refresher) {
+    this.getcompanyList();
+    this.event.subscribe("request:success", () => {
+      this.refresher.complete();
+    })
+  }
+  getcompanyList() {
+    try {
+      this.storage.get('userInfo').then((data) => {
+        this.tokenid = data.tokenid;
+        this.httploading.HttpServerLoading("加载中...")
+        this.ajaxserve.companyList({ tokenid: this.tokenid, userid: this.userid }).then((data) => {
+          console.log(data);
+          if (data.status.Code = "200") {
+            this.httploading.ColseServerLoding();
+            this.companyavatar = data.data.avatar;
+            this.companyname = data.data.name;
+            this.clientList = data.data.tlist;
+          }
+        }).catch((err) => {
+          console.log(err);
+        })
+      })
+    }
+    catch (err) {
+      console.log(err);
+    }
   }
   ionViewDidEnter() {
 

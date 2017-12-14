@@ -50,6 +50,7 @@ page-private-floow {
   }
   .footer {
     height: 50px;
+    line-height: 50px;
     width: 100%;
     background: #F8F8F8;
     line-height: 50px;
@@ -62,7 +63,7 @@ page-private-floow {
     background-color: #F4544F;
     font-size: 16px;
     border-radius: 4px;
-    margin-left: 2%
+    margin-left: 2%;
   }
   .importInfo {
     background: #FFFFFF;
@@ -71,6 +72,78 @@ page-private-floow {
     height: 36px;
     padding-left: 8px;
     width: 80%;
-    margin-left: 1.5%
+    margin-left: 1.5%;
+  }
+  .spanbox {
+    display: inline-block;
+    height: 22px;
+    line-height: 22px;
+    font-size: 13px;
+    padding-left: 22px;
+    color: #666666;
+    padding-right: 10px;
+  }
+  .nickname {
+    background: url('../assets/imgs/linkcantas.png') no-repeat 0.2rem 0.4rem;
+  }
+  .phoneNumber {
+    background: url('../assets/imgs/phone.png') no-repeat 0.2rem 0.4rem;
+  }
+  .weChat {
+    background: url('../assets/imgs/wachat.png') no-repeat 0.2rem 0.4rem;
+  }
+  @media screen and (min-height:568px) {
+    .messge {
+      width: 70%;
+    }
+  }
+  .messge {
+    background: #FFFFFF;
+    border: 1px solid #EFEFF4;
+    border-radius: 5px;
+    padding: 0.8rem;
+    margin-right: 1rem;
+    font-size: 14px;
+    color: #333333;
+    line-height: 20px;
+    position: relative;
+    width: 72%;
+  }
+  .arraws {
+    position: absolute;
+    top: 20px;
+    left: -5px;
+    width: 10px;
+    height: 10px;
+    background-color: #fff;
+    transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    /* IE 9 */
+    -moz-transform: rotate(45deg);
+    /* Firefox */
+    -webkit-transform: rotate(45deg);
+    /* Safari 和 Chrome */
+    -o-transform: rotate(45deg);
+  }
+  .time {
+    font-size: 12px;
+    color: #999999;
+    margin-right: 0.5rem;
+  }
+  .Roundcake_Box {
+    // position: relative;
+    // top: 3.2rem;
+    // left: 0.8rem;
+    // width: 20%;
+    line-height: 60px;
+    padding-left: 1rem;
+  }
+  .Roundcake {
+    display: inline-block;
+    width: 13px;
+    height: 13px;
+    background: #DDDDDD;
+    border-radius: 50%;
+    position: relative;
   }
 }

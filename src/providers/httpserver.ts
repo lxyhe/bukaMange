@@ -1,5 +1,5 @@
-import {Injectable} from '@angular/core';
-import {Http, Response, Headers, RequestOptions} from '@angular/http';
+import { Injectable } from '@angular/core';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import { Events } from 'ionic-angular';
 
@@ -8,10 +8,10 @@ import { Events } from 'ionic-angular';
 
 export class HttpService {
 
-  constructor(public http: Http,public event:Events) {
+  constructor(public http: Http, public event: Events) {
   }
   public get(url: string, paramObj?: any) {
-    this.event.publish("request:before",url, paramObj);
+    this.event.publish("request:before", url, paramObj);
     return this.http.get(url + this.toQueryString(paramObj))
       .toPromise()
       .then(res => this.handleSuccess(res.json()))
@@ -26,8 +26,7 @@ export class HttpService {
   }
   private handleSuccess(result) {
     if (result && !result.success) {
-      this.event.publish('request:success',result);
-      console.log(result.msg);
+      this.event.publish('request:success', result.status);
     }
     return result;
   }
@@ -46,7 +45,7 @@ export class HttpService {
       console.error(msg + '，请检查路径是否正确');
     }
     console.log(error);
-    this.event.publish('request:error',error,msg)
+    this.event.publish('request:error', error, msg)
     console.log(msg);//这里使用ToastController
     return { success: false, msg: msg };
   }

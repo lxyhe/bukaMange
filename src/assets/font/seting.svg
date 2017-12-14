@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="21px" height="19px" viewBox="0 0 21 19" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
+    <title>设置</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="112.469792%" y1="-141.662598%" x2="-4.40208333%" y2="247.784424%" id="linearGradient-1">
+            <stop stop-color="#E7534D" offset="0%"></stop>
+            <stop stop-color="#F3544F" offset="48.9895209%"></stop>
+            <stop stop-color="#F3544F" offset="49.1677195%"></stop>
+            <stop stop-color="#FF5652" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="私海-公司" transform="translate(-339.000000, -32.000000)">
+            <g id="头部">
+                <g id="设置_export" transform="translate(339.000000, 31.000000)">
+                    <g id="设置" transform="translate(0.000000, 1.000000)">
+                        <path d="M5.87143018,1.01177387 C5.4818273,1.01220347 5.12794419,1.23887072 4.96463005,1.59259248 L1.30125529,9.52708811 C1.1731341,9.80458553 1.17895519,10.1254388 1.31705775,10.3981063 L4.88968209,17.4518374 C5.05998325,17.7880772 5.40487433,18 5.78178241,18 L15.2863491,18 C15.6668489,18 16.0143792,17.7840615 16.1829102,17.4429202 L19.6750556,10.3741034 C19.8067299,10.1075677 19.8129879,9.79626478 19.6921318,9.52465264 L16.1637229,1.59490248 C16.0029673,1.23362021 15.6444157,1.0009976 15.248983,1.00143363 L5.87143018,1.01177387 Z" id="Rectangle-13" stroke="#FFFFFF" stroke-width="2"></path>
+                        <rect id="Rectangle-3" fill="#FFFFFF" x="7" y="6" width="7" height="7" rx="3.5"></rect>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

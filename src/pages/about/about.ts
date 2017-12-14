@@ -11,7 +11,10 @@ export class linCantactsObj {
   wechat: string | number;
   email: string | number;
 }
-
+export class addressObj {
+  address: string;
+  addressDetails: string;
+}
 @IonicPage()
 @Component({
   selector: 'page-about',
@@ -34,6 +37,10 @@ export class AboutPage {
   public clientStatus: Array<object>;
   public CilentName: string = "未填写";
   public linkCantacts: linCantactsObj;
+  public ClientAddress: addressObj;
+  public ClientRemark: string = "未填写";
+  public isShowRemark: boolean = true;
+  public isShowAddress: boolean = true;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -43,8 +50,11 @@ export class AboutPage {
     public modalCtrl: ModalController
   ) {
     this.linkCantacts = new linCantactsObj();
-    console.log(this.linkCantacts);
+    this.ClientAddress = new addressObj();
     this.linkCantacts.name = "未填写";
+    this.ClientAddress.address = "未填写";
+    this.ClientAddress.addressDetails = "";
+    console.log(this.ClientAddress);
     this.clientType = [
       {
         name: 'col1',
@@ -103,7 +113,15 @@ export class AboutPage {
   goLinkContact() {
     let profileModal = this.modalCtrl.create('LinkContactsPage', { 'linkcontacts': this.linkCantacts });
     profileModal.onDidDismiss(data => {
-      console.log(data);
+      // console.log(data);
+      if (data.linkcontacts.name !== "" && data.linkcontacts.name !== 'undefined') {
+        this.linkCantacts.name = data.linkcontacts.name;
+
+      } else if (data.linkcontacts.name == 'undefined') {
+        this.linkCantacts.name = "未填写"
+      }
+
+
     });
     profileModal.present();
   }
@@ -121,68 +139,102 @@ export class AboutPage {
     });
     profileModal.present();
   }
+  // public ClientAddress:string="未填写";
+  // public ClientRemark:string="未填写";
+  goClientAddress() {
+    console.log(this.ClientAddress);
+    let profileModal = this.modalCtrl.create('ClientAddressPage', { 'address': this.ClientAddress });
+    profileModal.onDidDismiss(data => {
+      console.log(data);
+      if (data.address.address !== "" && data.address.address !== 'undefined') {
+        this.isShowAddress = false;
+        this.ClientAddress.address = data.address.address;
+        this.ClientAddress.addressDetails = data.address.addressDetails;
+      } else if (data.address.address == 'undefined') {
+        this.isShowAddress = true;
+        this.ClientAddress.address = "未填写";
+      }
+
+    });
+    profileModal.present();
+  }
+  goClientRemark() {
+    let profileModal = this.modalCtrl.create('ClientRemarksPage', { 'remark': this.ClientRemark });
+    profileModal.onDidDismiss(data => {
+      if (data !== "undefined") {
+        if (data.remark !== "" && data.remark !== 'undefined') {
+          this.isShowRemark = false;
+          this.ClientRemark = data.remark;
+        } else if (data.remark == 'undefined') {
+          this.isShowRemark = true;
+          this.ClientRemark = "未填写"
+        }
+      }
+    });
+    profileModal.present();
+  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad PrivateClientDetailspagePage');
   }
 
-  setingHead() {
-    let actionSheet = this.actionSheetCtrl.create({
-      buttons: [
-        {
-          text: '拍照',
-          role: 'camera',
-          handler: () => {
-            const options: CameraOptions = {
-              quality: 80,
-              allowEdit: true,
-              targetWidth: 800,
-              targetHeight: 800,
-              saveToPhotoAlbum: false,
-              correctOrientation: true,
-              destinationType: this.camera.DestinationType.FILE_URI,
-              sourceType: this.camera.PictureSourceType.CAMERA,
+  setingHead(e) {
+
+    if (e.target.nodeName == "IMG") {
+      console.log(e);
+      let actionSheet = this.actionSheetCtrl.create({
+        buttons: [
+          {
+            text: '拍照',
+            role: 'camera',
+            handler: () => {
+              const options: CameraOptions = {
+                quality: 80,
+                allowEdit: true,
+                targetWidth: 800,
+                targetHeight: 800,
+                saveToPhotoAlbum: false,
+                correctOrientation: true,
+                destinationType: this.camera.DestinationType.FILE_URI,
+                sourceType: this.camera.PictureSourceType.CAMERA,
+              }
+              this.camera.getPicture(options).then((imageData) => {
+                this.img = imageData;
+              }, (err) => {
+                console.log(err);
+              });
             }
-            this.camera.getPicture(options).then((imageData) => {
-              this.img = imageData;
-            }, (err) => {
-              console.log(err);
-            });
-          }
-        }, {
-          text: '从手机相册选择',
-          role: 'Photo',
-          handler: () => {
-            const options: CameraOptions = {
-              quality: 80,
-              allowEdit: true,
-              targetWidth: 800,
-              targetHeight: 800,
-              sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
+          }, {
+            text: '从手机相册选择',
+            role: 'Photo',
+            handler: () => {
+              const options: CameraOptions = {
+                quality: 80,
+                allowEdit: true,
+                targetWidth: 800,
+                targetHeight: 800,
+                sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
+              }
+              this.camera.getPicture(options).then((imageData) => {
+                this.img = imageData;
+              }, (err) => {
+                console.log(err);
+              });
             }
-            this.camera.getPicture(options).then((imageData) => {
-              this.img = imageData;
-            }, (err) => {
-              console.log(err);
-            });
+          }, {
+            text: '取消',
+            role: 'cancel',
+            handler: () => {
+              console.log('Cancel clicked');
+            }
           }
-        }, {
-          text: '取消',
-          role: 'cancel',
-          handler: () => {
-            console.log('Cancel clicked');
-          }
-        }
-      ]
-    });
-    actionSheet.present();
+        ]
+      });
+      actionSheet.present();
+    }
+
   }
   publish() {
-    console.log(this.clientTypeValue,
-      this.clientRankValue,
-      this.clientDemandValue,
-      this.clientSourceValue,
-      this.clientStatusValue,
-    )
+
   }
 
 }

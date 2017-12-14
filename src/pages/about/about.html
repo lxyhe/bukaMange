@@ -22,12 +22,12 @@
 <ion-content>
   <ion-card>
     <ion-list>
-      <button ion-item (click)="goClientName()">
-            <ion-avatar (click)="setingHead()" item-start>
+      <button ion-item>
+           <ion-avatar (click)="setingHead($event)" item-start>
               <img src="assets/imgs/timg1.jpg">
             </ion-avatar>
             <h2 >客户名称</h2>
-            <span class="rightLsit" item-right>{{CilentName}}</span>
+            <span (click)="goClientName()" class="rightLsit" item-right>{{CilentName}}</span>
           </button >
         </ion-list>
       </ion-card>
@@ -77,22 +77,27 @@
           <ion-label class="leftList">客户状态</ion-label>
           <ion-multi-picker class="rightLsit" [(ngModel)]="clientStatusValue"   placeholder="未填写" showReset=true resetText="客户状态" item-content cancelText="取消"  item-content doneText="完成" [multiPickerColumns]="clientStatus"></ion-multi-picker>
         </button>
-      <button ion-item>
+      <button ion-item (click)="goClientAddress()">
           <div>
             <span class="leftList">客户地址</span>
-            <span class="rightLsit">未填写</span>
-            <!-- <div class="address">
-              北京市海淀区星世界98号-阿里巴巴
-            </div> -->
+            <span *ngIf="isShowAddress" class="rightLsit">未填写</span>
+            <div *ngIf="!isShowAddress" class="address">
+              {{ClientAddress.address}}
+               <span>{{ClientAddress.addressDetails}}</span>
+            </div>
           </div>
         </button>
-      <button ion-item>
+      <button ion-item (click)="goClientRemark()">
           <div>
             <span class="leftList">备注</span>
-            <span class="rightLsit">未填写</span>
+
             <!-- <div class="address">
               好好的了解了解产品好好的了解了解产品好好的了解了解产品好好的了解了解产品
             </div> -->
+            <span *ngIf="isShowRemark" class="rightLsit">未填写</span>
+            <div *ngIf="!isShowRemark" class="address">
+              {{ClientRemark}}
+            </div>
           </div>
         </button>
     </ion-list>

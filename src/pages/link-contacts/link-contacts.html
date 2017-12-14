@@ -13,9 +13,12 @@
     </ion-buttons>
     <ion-title>客户名称</ion-title>
     <ion-buttons end>
-      <button ion-button icon-only (click)="dismiss()">
-                完成
+      <button *ngIf="!isDisabled" ion-button icon-only (click)="complete($event)">
+           {{compluted}}
       </button>
+      <button *ngIf="isDisabled" ion-button icon-only (click)="editodrfun($event)">
+          {{editodr}}
+   </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
@@ -27,45 +30,45 @@
         <span>姓名</span>
         <div style="float:right;">
           <input style="border:0;text-align:right;font-size: 15px;
-          color: #999999;
-          line-height: 44px;" type="text" [(ngModel)]="linkName" placeholder="请输入联系人姓名">
+          color: #999999;background:#fff;
+          line-height: 44px;" type="text" [disabled]="isDisabled" [(ngModel)]="linkCanobj.name" placeholder="请输入联系人姓名">
         </div>
       </ion-item>
       <ion-item>
         <span>职位</span>
         <div style="float:right;">
           <input style="border:0;text-align:right;font-size: 15px;
-          color: #999999;
-          line-height: 44px;" type="text" [(ngModel)]="linkPost" placeholder="请输入联系人职位">
+          color: #999999;background:#fff;
+          line-height: 44px;" type="text" [disabled]="isDisabled" [(ngModel)]="linkCanobj.post" placeholder="请输入联系人职位">
         </div>
       </ion-item>
       <ion-item>
         <span>电话</span>
         <div style="float:right;">
           <input style="border:0;text-align:right;font-size: 15px;
-          color: #999999;
-          line-height: 44px;" type="text" [(ngModel)]="linkPhone" placeholder="请输入联系电话号码">
+          color: #999999;background:#fff;
+          line-height: 44px;" type="text" [disabled]="isDisabled" [(ngModel)]="linkCanobj.phone" placeholder="请输入联系电话号码">
         </div>
       </ion-item>
       <ion-item>
         <span>微信</span>
         <div style="float:right;">
           <input style="border:0;text-align:right;font-size: 15px;
-          color: #999999;
-          line-height: 44px;" type="text" [(ngModel)]="linkWechat" placeholder="请输入联系人微信号码">
+          color: #999999;background:#fff;
+          line-height: 44px;" type="text" [disabled]="isDisabled" [(ngModel)]="linkCanobj.wechat" placeholder="请输入联系人微信号码">
         </div>
       </ion-item>
       <ion-item>
         <span>邮箱</span>
         <div style="float:right;">
           <input style="border:0;text-align:right;font-size: 15px;
-          color: #999999;
-          line-height: 44px;" type="text" [(ngModel)]="linkEmail" placeholder="请输入联系人邮箱">
+          color: #999999;background:#fff;
+          line-height: 44px;" type="text" [disabled]="isDisabled" [(ngModel)]="linkCanobj.email" placeholder="请输入联系人邮箱">
         </div>
       </ion-item>
     </ion-list>
   </ion-card>
 </ion-content>
 <ion-footer no-border>
-  <button color="bukaRed" block ion-button (click)="addlink()">添加联系人</button>
+  <button color="bukaRed" block ion-button *ngIf="isDisabled" (click)="dismiss()">添加联系人</button>
 </ion-footer>

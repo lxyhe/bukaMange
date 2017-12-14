@@ -17,14 +17,14 @@
     </div>
 
   </ion-navbar>
-  <ion-toolbar style="min-height: 68px;
-    background: #fff;border:1px solid #ddd">
+  <ion-toolbar style="min-height: 68px;background: #fff;">
     <div claas="tabsLsit">
       <ion-segment style="background: #fff;" [(ngModel)]="pet">
         <ion-segment-button style="color:#666;height: 68px;" value="puppies">
           <div class="tabContent">
             <div style="height: 2rem;">
-              <ion-icon name="cog" item-left></ion-icon>
+              <!-- <ion-icon name="cog" item-left></ion-icon> -->
+              <img src="assets/font/private.svg" alt="">
             </div>
             私海客户 <span>35</span>
           </div>
@@ -32,25 +32,25 @@
         <ion-segment-button style="color:#666;height: 68px;" value="kittens">
           <div class="tabContent">
             <div style="height: 2rem;">
-              <ion-icon name="cog" item-left></ion-icon>
+              <img src="assets/font/floowUp.svg" alt="">
             </div>
-            私海客户 <span>35</span>
+            已跟进 <span>35</span>
           </div>
         </ion-segment-button>
         <ion-segment-button style="color:#666;height: 68px;" value="SB">
           <div class="tabContent">
             <div style="height: 2rem;">
-              <ion-icon name="cog" item-left></ion-icon>
+              <img src="assets/font/nofllowUp.svg" alt="">
             </div>
-            私海客户 <span>35</span>
+            未跟进 <span>35</span>
           </div>
         </ion-segment-button>
         <ion-segment-button style="color:#666;height: 68px;width:25%" value="SB1">
           <div class="tabContent">
             <div style="height: 2rem;">
-              <ion-icon name="cog" item-left></ion-icon>
+              <img src="assets/font/group.svg" alt="">
             </div>
-            私海客户 <span>35</span>
+            团队成员 <span>35</span>
           </div>
         </ion-segment-button>
       </ion-segment>

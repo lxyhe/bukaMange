@@ -23,13 +23,71 @@ export class PrivateCilentDetailsPage {
   public default: any = 2;
   public Privatedetails: any = "PrivateFloowPage";
   public privatedetailsInfo: Object;
-
+  public clientType: Array<object>;
+  public clientRank: Array<object>;
+  public clientDemand: Array<object>;
+  public clientSource: Array<object>;
+  public clientStatus: Array<object>;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public alertCtrl: AlertController
 
   ) {
+    this.clientType = [
+      {
+        name: 'col1',
+        options: [
+          { text: '机构客户', value: '1' },
+          { text: '体制客户', value: '2' },
+          { text: '个人客户', value: '3' },
+          { text: '其他客户', value: '3' }
+        ]
+      }
+    ];
+    this.clientRank = [
+      {
+        name: 'col2',
+        options: [
+          { text: '刚需', value: '1' },
+          { text: '调研', value: '2' },
+          { text: '了解', value: '3' },
+        ]
+      }
+    ];
+    this.clientDemand = [
+      {
+        name: 'col3',
+        options: [
+          { text: '大班直播', value: '1' },
+          { text: '小班互动', value: '2' },
+          { text: '双师', value: '3' },
+          { text: 'SDK', value: '4' },
+          { text: '换LOGO', value: '5' },
+        ]
+      }
+    ]
+    this.clientSource = [
+      {
+        name: 'col4',
+        options: [
+          { text: '网站', value: '1' },
+          { text: '待激活', value: '2' },
+          { text: '活动', value: '3' },
+          { text: '其他', value: '4' },
+        ]
+      }
+    ]
+    this.clientStatus = [
+      {
+        name: 'col5',
+        options: [
+          { text: '体验了解', value: '1' },
+          { text: '已签约', value: '2' },
+          { text: '切换人', value: '3' },
+        ]
+      }
+    ]
     this.simpleColumns = [
       {
         name: 'col1',
@@ -66,6 +124,9 @@ export class PrivateCilentDetailsPage {
       ]
     });
     alert.present();
+  }
+  cilentType(e) {
+    console.log(e);
   }
 
 }

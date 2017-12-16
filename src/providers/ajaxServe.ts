@@ -22,11 +22,29 @@ export interface pravateclientList {
   account_login_id: string | number;
 }
 export interface publicclientinfoObj {
-
-
+  userid: any;
+  tokenid: any;
+  customer_avatar: any;
+  customer_name: any;
+  customer_type_id: any;
+  customer_level_id: any;
+  customer_needs_id: any;
+  customer_source_id: any;
+  customer_status_id: any;
+  customer_address1: any;
+  customer_address2: any;
+  customer_remarks: any;
+  customer_contact_name: any;
+  customer_contact_position: any;
+  customer_contact_email: any;
+  customer_contact_tell: any;
+  customer_contact_wechat: any;
 }
-
-
+export interface publicGetClientObj {
+  userid: any;
+  customer_id: any;
+  tokenid: string;
+}
 
 @Injectable()
 
@@ -72,6 +90,10 @@ export class ajaxService {
   //发布客户信息
   publicClientInfo(publicclientinfo: publicclientinfoObj) {
     return this.httpserve.post(api.publishclientInfo, publicclientinfo)
+  }
+  //领取公海客户
+  publicGetClient(publicgetclient: publicGetClientObj) {
+    return this.httpserve.get(api.publicGetCilent, publicgetclient)
   }
 
 }

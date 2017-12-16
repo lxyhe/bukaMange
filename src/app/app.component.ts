@@ -10,7 +10,7 @@ import { Storage } from '@ionic/storage';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  // rootPage: any = 'TabsPage';
+  //rootPage: any = 'TabsPage';
   rootPage: any = 'LogingPage';
 
   constructor(
@@ -24,7 +24,7 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
-      storage.get('tokenID').then(data => {
+      storage.get('userInfo').then(data => {
         // if (data !== "" && data !== null) {
         //   storage.get('roleID').then(data => {
         //     if (data == "1") {

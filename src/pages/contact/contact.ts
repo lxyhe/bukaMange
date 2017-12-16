@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { NavController, IonicPage, NavParams, Events } from 'ionic-angular';
+import { NavController, IonicPage, NavParams, Events, LoadingController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { HttpLodingService } from '../../providers/loadingServer';
 import { ajaxService } from '../../providers/ajaxServe';
@@ -27,6 +27,7 @@ export class ContactPage {
     private storage: Storage,
     public httploading: HttpLodingService,
     public ajaxserve: ajaxService,
+    public loadingCtrl: LoadingController,
 
   ) {
 
@@ -102,5 +103,13 @@ export class ContactPage {
     }
 
   }
-
+  goPublishDetails(item) {
+    let loading = this.loadingCtrl.create({
+      spinner: 'bubbles',
+      content: "加载中 ...",
+      dismissOnPageChange: true
+    });
+    loading.present();
+    this.navCtrl.push('ClientDetailspagePage', { details: item })
+  }
 }

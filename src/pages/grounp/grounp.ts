@@ -56,13 +56,9 @@ export class GrounpPage {
     this.grounpData = this.navparam.get('data');
     console.log(this.grounpData);
     this.team_id = this.grounpData['team_id'];
-    this.team_avater = this.grounpData['team_avater'];
-    this.team_name = this.grounpData['team_name'];
-    this.floowUpcount = this.grounpData['follow'];
     this.groupMember = this.grounpData['acount'];
-    this.privateclients = this.grounpData['cuscount'];
-    this.floowUpcount = this.grounpData['follow'];
-    this.nofollowUp = this.privateclients - this.floowUpcount;
+
+
   }
   doRefresh(refresher) {
     this.getGroupList();
@@ -88,6 +84,13 @@ export class GrounpPage {
             // public privateClientList:Array<object>;//私海客户list
             // public fllowClientList:Array<object>;//跟进客户list
             // public nofllowClientList:Array<object>;//未跟进客户list
+            //
+            this.team_avater = data.leader.account_login_avatar;
+            this.team_name = data.leader.account_login_name;
+            this.floowUpcount = data.leader.follow;
+            this.privateclients = data.leader.clicount;
+            //this.floowUpcount = data.leader.account_login_avatar;
+            this.nofollowUp = this.privateclients - this.floowUpcount;
           }
         }).catch((err) => {
           console.log(err);

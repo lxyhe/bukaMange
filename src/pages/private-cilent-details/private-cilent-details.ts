@@ -41,7 +41,7 @@ export class PrivateCilentDetailsPage {
           { text: '机构客户', value: '1' },
           { text: '体制客户', value: '2' },
           { text: '个人客户', value: '3' },
-          { text: '其他客户', value: '3' }
+          { text: '其他客户', value: '4' }
         ]
       }
     ];
@@ -64,6 +64,9 @@ export class PrivateCilentDetailsPage {
           { text: '双师', value: '3' },
           { text: 'SDK', value: '4' },
           { text: '换LOGO', value: '5' },
+          { text: '大监控', value: '6' },
+          { text: '个性定制', value: '7' },
+
         ]
       }
     ]
@@ -88,16 +91,7 @@ export class PrivateCilentDetailsPage {
         ]
       }
     ]
-    this.simpleColumns = [
-      {
-        name: 'col1',
-        options: [
-          { text: '1', value: '1' },
-          { text: '2', value: '2' },
-          { text: '3', value: '3' }
-        ]
-      }
-    ];
+
   }
 
   ionViewDidLoad() {

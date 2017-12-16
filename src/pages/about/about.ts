@@ -1,9 +1,11 @@
 
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, ActionSheetController, ModalController } from 'ionic-angular';
-
+import { IonicPage, NavController, NavParams, AlertController, ActionSheetController, ModalController, Events } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
-
+import { Storage } from '@ionic/storage';
+//import mickData from '../../providers/mickData';
+import { HttpLodingService } from '../../providers/loadingServer';
+import { ajaxService } from '../../providers/ajaxServe';
 export class linCantactsObj {
   name: string;
   post: string;
@@ -21,11 +23,11 @@ export class addressObj {
   templateUrl: 'about.html'
 })
 export class AboutPage {
-  public clientTypeValue: string;
-  public clientRankValue: string;
-  public clientDemandValue: string;
-  public clientSourceValue: string;
-  public clientStatusValue: string;
+  public clientTypeValue: string = "";
+  public clientRankValue: string = "";
+  public clientDemandValue: string = "";
+  public clientSourceValue: string = "";
+  public clientStatusValue: string = "";
   /* */
   public Privatedetails: any = "PrivateFloowPage";
   public privatedetailsInfo: Object;
@@ -42,22 +44,23 @@ export class AboutPage {
   public isShowRemark: boolean = true;
   public isShowAddress: boolean = true;
 
-  public linkArray: linCantactsObj[] = [
-    // {
-    //   name: this.linkCantacts.name,
-    //   post: this.linkCantacts.post,
-    //   phone: this.linkCantacts.phone,
-    //   wechat: this.linkCantacts.wechat,
-    //   email: this.linkCantacts.email
-    // }
-  ];
+  public userid: any;
+  public tokenid: string;
+
+  public customer_avatar: string = "";
+
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public alertCtrl: AlertController,
     private camera: Camera,
     public actionSheetCtrl: ActionSheetController,
-    public modalCtrl: ModalController
+    public modalCtrl: ModalController,
+    public event: Events,
+    private storage: Storage,
+    public httploading: HttpLodingService,
+    public ajaxserve: ajaxService,
   ) {
     this.linkCantacts = new linCantactsObj();
     this.ClientAddress = new addressObj();
@@ -76,7 +79,7 @@ export class AboutPage {
           { text: '机构客户', value: '1' },
           { text: '体制客户', value: '2' },
           { text: '个人客户', value: '3' },
-          { text: '其他客户', value: '3' }
+          { text: '其他客户', value: '4' }
         ]
       }
     ];
@@ -99,6 +102,9 @@ export class AboutPage {
           { text: '双师', value: '3' },
           { text: 'SDK', value: '4' },
           { text: '换LOGO', value: '5' },
+          { text: '大监控', value: '6' },
+          { text: '个性定制', value: '7' },
+
         ]
       }
     ]
@@ -124,6 +130,78 @@ export class AboutPage {
       }
     ]
   }
+  publish() {
+    if (this.linkCantacts.name == "未填写" || this.linkCantacts.name == "") {
+      this.httploading.alertServe("联系人不能为空")
+      return;
+    }
+    if (this.clientTypeValue == "") {
+      this.httploading.alertServe("客户类型不能为空")
+      return;
+    }
+    if (this.clientRankValue == "") {
+      this.httploading.alertServe("客户级别不能为空")
+      return;
+    }
+    if (this.clientDemandValue == "") {
+      this.httploading.alertServe("客户需求不能为空")
+      return;
+    }
+    try {
+      this.storage.get('userInfo').then((data) => {
+        this.tokenid = data.tokenid;
+        this.userid = data.userid;
+        this.httploading.HttpServerLoading("加载中...")
+        this.ajaxserve.publicClientInfo({
+          tokenid: this.tokenid,
+          userid: this.userid,
+          customer_avatar: this.customer_avatar,
+          customer_name: this.CilentName,
+          customer_type_id: this.clientTypeValue,
+          customer_level_id: this.clientRankValue,
+          customer_needs_id: this.clientDemandValue,
+          customer_source_id: this.clientSourceValue,
+          customer_status_id: this.clientStatusValue,
+          customer_address1: this.ClientAddress.address,
+          customer_address2: this.ClientAddress.addressDetails,
+          customer_remarks: this.ClientRemark,
+          customer_contact_name: this.linkCantacts.name,
+          customer_contact_position: this.linkCantacts.post,
+          customer_contact_email: this.linkCantacts.email,
+          customer_contact_tell: this.linkCantacts.phone,
+          customer_contact_wechat: this.linkCantacts.wechat,
+        }).then((data) => {
+          console.log(data);
+          if (data.status.Code = "200") {
+            this.httploading.ColseServerLoding();
+            //this.httploading.alertServe(data.status.Msg);
+            let alert = this.alertCtrl.create({
+              subTitle: data.status.Msg,
+              buttons: [
+                {
+                  text: "确定",
+                  handler: data => {
+                    setTimeout(() => {
+                      this.navCtrl.setRoot('ContactPage');
+                    }, 1500);
+                  }
+                }]
+
+            });
+            alert.present();
+
+
+          }
+        }).catch((err) => {
+          console.log(err);
+        })
+      })
+    }
+    catch (err) {
+      console.log(err);
+    }
+
+  }
   goLinkContact() {
     let profileModal = this.modalCtrl.create('LinkContactsPage', { 'linkcontacts': this.linkCantacts });
     profileModal.onDidDismiss(data => {
@@ -136,14 +214,21 @@ export class AboutPage {
         this.linkCantacts.post = data.linkcontacts.post;
       } else if (data.linkcontacts.name == 'undefined') {
         this.linkCantacts.name = "未填写"
+      } else if (data.linkcontacts.email == 'undefined') {
+        this.linkCantacts.email = "未填写";
       }
-      this.linkArray.push(this.linkCantacts);
-      console.log(this.linkArray);
-
+      else if (data.linkcontacts.phone == 'undefined') {
+        this.linkCantacts.phone = "未填写";
+      }
+      else if (data.linkcontacts.wechat == 'undefined') {
+        this.linkCantacts.wechat = "未填写";
+      }
+      else if (data.linkcontacts.post == 'undefined') {
+        this.linkCantacts.post = "未填写";
+      }
     });
     profileModal.present();
   }
-
   goClientName() {
     let profileModal = this.modalCtrl.create('ClientMamePage', { 'nickName': this.CilentName });
     profileModal.onDidDismiss(data => {
@@ -157,7 +242,6 @@ export class AboutPage {
     });
     profileModal.present();
   }
-
   goClientAddress() {
     console.log(this.ClientAddress);
     let profileModal = this.modalCtrl.create('ClientAddressPage', { 'address': this.ClientAddress });
@@ -170,6 +254,7 @@ export class AboutPage {
       } else if (data.address.address == 'undefined') {
         this.isShowAddress = true;
         this.ClientAddress.address = "未填写";
+        this.ClientAddress.addressDetails = "未填写";
       }
 
     });
@@ -193,7 +278,6 @@ export class AboutPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad PrivateClientDetailspagePage');
   }
-
   setingHead(e) {
 
     if (e.target.nodeName == "IMG") {
@@ -250,9 +334,7 @@ export class AboutPage {
     }
 
   }
-  publish() {
 
-  }
 
 }
 

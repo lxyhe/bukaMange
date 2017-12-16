@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ActionSheetController, AlertController } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
+import { Storage } from '@ionic/storage';
 /**
  * Generated class for the HeadSetingPage page.
  *
@@ -20,7 +21,8 @@ export class HeadSetingPage {
     public navParams: NavParams,
     public actionSheetCtrl: ActionSheetController,
     private camera: Camera,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    private storage: Storage,
 
   ) {
   }
@@ -81,20 +83,22 @@ export class HeadSetingPage {
   }
   exit() {
     let alert = this.alertCtrl.create({
-      title: '退出APP',
-      message: '您确定要退出APP吗?',
+      message: '您确定退出CRM系统吗?',
       buttons: [
         {
           text: '取消',
           role: 'cancel',
           handler: () => {
-            console.log('Cancel clicked');
           }
         },
         {
           text: '确定',
           handler: () => {
-            console.log('Buy clicked');
+            this.storage.clear().then((data) => {
+              setTimeout(() => {
+                this.navCtrl.push('LogingPage')
+              }, 1000)
+            })
 
           }
         }

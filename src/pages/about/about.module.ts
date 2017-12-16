@@ -6,6 +6,9 @@ import { IonicPageModule } from 'ionic-angular';
 import { AboutPage } from './about';
 import { MultiPickerModule } from 'ion-multi-picker';
 import { Camera } from '@ionic-native/camera';
+import { HttpService } from '../../providers/httpserver';
+import { HttpLodingService } from '../../providers/loadingServer';
+import { ajaxService } from '../../providers/ajaxServe';
 // @NgModule({
 //   declarations: [
 //     PrivateCilentDetailsPage,
@@ -27,7 +30,10 @@ import { Camera } from '@ionic-native/camera';
     AboutPage
   ],
   providers: [
-    Camera
+    Camera,
+    HttpService,
+    HttpLodingService,
+    ajaxService
   ]
 })
 export class AboutPageModule { }

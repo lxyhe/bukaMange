@@ -76,11 +76,11 @@ export class HomePage {
               this.fllowClientList = data.yfollow;
               this.nofllowClientList = data.nfollow;
               /** */
-              this.avatarUrl = data.team.team_avatar;
-              this.name = data.team.team_name;
-              this.follow = data.team.follow;
-              this.privateCilent = data.team.cuscount;
-              this.grounp = data.team.acount;
+              this.grounp = data.leader.count;
+              this.avatarUrl = data.leader.account_login_avatar;
+              this.name = data.leader.account_login_name;
+              this.follow = data.leader.follow;
+              this.privateCilent = data.leader.clicount;
               this.nofollow = this.privateCilent - this.follow;
 
             }
@@ -102,9 +102,10 @@ export class HomePage {
               this.fllowClientList = data.yfollow;
               this.nofllowClientList = data.nfollow;
 
+
+
               this.avatarUrl = data.account.account_login_avatar;
               this.name = data.account.account_login_name;
-
               this.follow = data.account.follow;
               this.privateCilent = data.account.clicount;
               this.nofollow = this.privateCilent - this.follow;
@@ -134,7 +135,7 @@ export class HomePage {
     this.navCtrl.push('PrivateCilentDetailsPage', { data: items })
   }
   goPensonSeting() {
-    this.navCtrl.push('PersonSetingPage');
+    this.navCtrl.push('PersonSetingPage', );
   }
   goMemberPage(items) {
     console.log(items);

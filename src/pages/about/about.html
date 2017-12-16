@@ -24,7 +24,7 @@
     <ion-list>
       <button ion-item>
            <ion-avatar (click)="setingHead($event)" item-start>
-              <img src="assets/imgs/timg1.jpg">
+              <img src="{{customer_avatar==''?'assets/imgs/timg1.jpg':customer_avatar}}">
             </ion-avatar>
             <h2 >客户名称</h2>
             <span (click)="goClientName()" class="rightLsit" item-right>{{CilentName}}</span>

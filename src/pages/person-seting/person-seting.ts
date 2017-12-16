@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ActionSheetController, AlertController } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
-
+import { Storage } from '@ionic/storage';
 /**
  * Generated class for the PersonSetingPage page.
  *
@@ -21,7 +21,9 @@ export class PersonSetingPage {
     public navParams: NavParams,
     public actionSheetCtrl: ActionSheetController,
     private camera: Camera,
-    private alertCtrl: AlertController) {
+    private alertCtrl: AlertController,
+    private storage: Storage,
+  ) {
     this.simpleColumns = [
       {
         name: 'col1',
@@ -101,6 +103,12 @@ export class PersonSetingPage {
         {
           text: '确定',
           handler: () => {
+            this.storage.clear().then((data) => {
+              setTimeout(() => {
+                this.navCtrl.push('LogingPage')
+              }, 1000)
+            })
+
           }
         }
       ]

@@ -11,11 +11,15 @@ import { IonicStorageModule } from '@ionic/storage';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-
+import { clientTypePipe, clientRankPipe, clientNeedPipe, clientSourePipe, clientStatusPipe } from '../pipes/clientTypeTransfrom';
 @NgModule({
   declarations: [
     MyApp,
-
+    clientTypePipe,
+    clientRankPipe,
+    clientNeedPipe,
+    clientSourePipe,
+    clientStatusPipe
   ],
   imports: [
     BrowserModule,

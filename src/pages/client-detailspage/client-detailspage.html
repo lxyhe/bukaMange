@@ -18,10 +18,11 @@
     <ion-list>
       <ion-item>
         <ion-avatar item-start>
-          <img src="assets/imgs/timg1.jpg">
+          <img src="{{publicDetails.avatar==null?'assets/imgs/timg1.jpg':publicDetails.avatar==''
+            ?'assets/imgs/timg1.jpg':publicDetails.avatar}}">
         </ion-avatar>
-        <h2>阿里巴巴</h2>
-        <p> 发布时间: <span>2017-11-27</span> </p>
+        <h2>{{publicDetails.name==null?'未填写':publicDetails.name}}</h2>
+        <p> 发布时间: <span>{{publicDetails.reliseTime==null?'未填写':publicDetails.reliseTime}}</span> </p>
       </ion-item>
     </ion-list>
   </ion-card>
@@ -42,32 +43,42 @@
     <ion-item>
       <div>
         <span class="leftList">客户类型</span>
-        <span class="rightLsit">机构客户</span>
+        <span class="rightLsit">{{publicDetails.clientType==null?'未填写':publicDetails.clientType}}</span>
       </div>
     </ion-item>
     <ion-item>
       <div>
         <span class="leftList">客户需求</span>
-        <span class="rightLsit">大班直播</span>
+        <span class="rightLsit">{{publicDetails.clientNeed==null?'未填写':publicDetails.clientNeed}}</span>
       </div>
     </ion-item>
     <ion-item>
       <div>
         <span class="leftList">客户来源</span>
-        <span class="rightLsit">网站</span>
+        <span class="rightLsit">{{publicDetails.clientsroure==null?'未填写':publicDetails.clientsroure}}</span>
       </div>
     </ion-item>
+    <!-- this.publicDetails.avatar = this.publicDetailsParmas['customer_avatar'];
+this.publicDetails.name = this.publicDetailsParmas['customer_name'];
+this.publicDetails.reliseTime = this.publicDetailsParmas['release_time'];
+this.publicDetails.clientType = this.publicDetailsParmas['customer_type_id'];
+this.publicDetails.clientNeed = this.publicDetailsParmas['customer_needs_id'];
+this.publicDetails.clientsroure = this.publicDetailsParmas['customer_source_id'];
+this.publicDetails.clientStatus = this.publicDetailsParmas['customer_status_id'];
+this.publicDetails.clientAddress1 = this.publicDetailsParmas['customer_address1'];
+this.publicDetails.clientAddress2 = this.publicDetailsParmas['customer_address2'];
+this.publicDetails.clientRemark = this.publicDetailsParmas['customer_remarks']; -->
     <ion-item>
       <div>
         <span class="leftList">客户状态</span>
-        <span class="rightLsit">体验了解</span>
+        <span class="rightLsit">{{publicDetails.clientStatus==null?'未填写':publicDetails.clientStatus}}</span>
       </div>
     </ion-item>
     <ion-item>
       <div>
         <span class="leftList">客户地址</span>
         <div class="address">
-          北京市海淀区星世界98号-阿里巴巴
+          {{publicDetails.clientAddress1==null?'未填写':publicDetails.clientAddress1}}{{publicDetails.clientAddress2==null?'未填写':publicDetails.clientAddress2}}
         </div>
       </div>
     </ion-item>
@@ -75,7 +86,7 @@
       <div>
         <span class="leftList">备注</span>
         <div class="address">
-          好好的了解了解产品好好的了解了解产品好好的了解了解产品好好的了解了解产品
+          {{publicDetails.clientRemark==null?'未填写':publicDetails.clientRemark}}
         </div>
       </div>
     </ion-item>
@@ -83,5 +94,5 @@
 
 </ion-content>
 <ion-footer no-border>
-  <button style="color:#E9EAEB" block ion-button>领取</button>
+  <button style="color:#E9EAEB" color="bukaRed" (click)="getClient()" block ion-button>领取</button>
 </ion-footer>

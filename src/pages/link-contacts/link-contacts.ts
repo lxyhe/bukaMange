@@ -22,25 +22,24 @@ export class linCantactsObj {
 export class LinkContactsPage {
   public isDisabled: boolean = false;
   public linkCanobj: linCantactsObj;
-  // public linkWechat: any = "";
-  // public linkName: any = "";
-  // public linkPost: any = "";
-  // public linkPhone: any = "";
-  // public linkEmail: any = "";
+
   public compluted: string = "完成";
   public editodr: string = "编辑";
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController) {
-    // if (navParams.get('linkcontacts') == "未填写") {
-    //   this.queryText = "";
-    // } else {
-    //   this.queryText = navParams.get('nickName');
-    // }
+
     this.linkCanobj = new linCantactsObj();
     let linkObj = navParams.get('linkcontacts');
     console.log(linkObj);
     if (linkObj.name == "未填写") {
       this.linkCanobj.name = "";
-
+    } else if (linkObj.email == "未填写") {
+      this.linkCanobj.email = "";
+    } else if (linkObj.phone == "未填写") {
+      this.linkCanobj.phone = "";
+    } else if (linkObj.wechat == "未填写") {
+      this.linkCanobj.wechat = "";
+    } else if (linkObj.post == "未填写") {
+      this.linkCanobj.post = "";
     } else {
       this.linkCanobj.name = linkObj.name;
       this.linkCanobj.phone = linkObj.phone;

@@ -41,6 +41,16 @@ export class AboutPage {
   public ClientRemark: string = "未填写";
   public isShowRemark: boolean = true;
   public isShowAddress: boolean = true;
+
+  public linkArray: linCantactsObj[] = [
+    // {
+    //   name: this.linkCantacts.name,
+    //   post: this.linkCantacts.post,
+    //   phone: this.linkCantacts.phone,
+    //   wechat: this.linkCantacts.wechat,
+    //   email: this.linkCantacts.email
+    // }
+  ];
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -52,6 +62,10 @@ export class AboutPage {
     this.linkCantacts = new linCantactsObj();
     this.ClientAddress = new addressObj();
     this.linkCantacts.name = "未填写";
+    this.linkCantacts.email = "";
+    this.linkCantacts.phone = "";
+    this.linkCantacts.post = "";
+    this.linkCantacts.wechat = "";
     this.ClientAddress.address = "未填写";
     this.ClientAddress.addressDetails = "";
     console.log(this.ClientAddress);
@@ -113,14 +127,18 @@ export class AboutPage {
   goLinkContact() {
     let profileModal = this.modalCtrl.create('LinkContactsPage', { 'linkcontacts': this.linkCantacts });
     profileModal.onDidDismiss(data => {
-      // console.log(data);
+      console.log(data);
       if (data.linkcontacts.name !== "" && data.linkcontacts.name !== 'undefined') {
         this.linkCantacts.name = data.linkcontacts.name;
-
+        this.linkCantacts.email = data.linkcontacts.email;
+        this.linkCantacts.phone = data.linkcontacts.phone;
+        this.linkCantacts.wechat = data.linkcontacts.wechat;
+        this.linkCantacts.post = data.linkcontacts.post;
       } else if (data.linkcontacts.name == 'undefined') {
         this.linkCantacts.name = "未填写"
       }
-
+      this.linkArray.push(this.linkCantacts);
+      console.log(this.linkArray);
 
     });
     profileModal.present();
@@ -139,8 +157,7 @@ export class AboutPage {
     });
     profileModal.present();
   }
-  // public ClientAddress:string="未填写";
-  // public ClientRemark:string="未填写";
+
   goClientAddress() {
     console.log(this.ClientAddress);
     let profileModal = this.modalCtrl.create('ClientAddressPage', { 'address': this.ClientAddress });

@@ -37,10 +37,16 @@ export class LinkContactsPage {
     // }
     this.linkCanobj = new linCantactsObj();
     let linkObj = navParams.get('linkcontacts');
+    console.log(linkObj);
     if (linkObj.name == "未填写") {
       this.linkCanobj.name = "";
+
     } else {
       this.linkCanobj.name = linkObj.name;
+      this.linkCanobj.phone = linkObj.phone;
+      this.linkCanobj.wechat = linkObj.wechat;
+      this.linkCanobj.post = linkObj.post;
+      this.linkCanobj.email = linkObj.email;
     }
   }
   ionViewDidLoad() {
@@ -48,6 +54,7 @@ export class LinkContactsPage {
   }
   dismiss() {
     let data = { 'linkcontacts': this.linkCanobj };
+    console.log(this.linkCanobj);
     this.viewCtrl.dismiss(data);
   }
   complete(e) {

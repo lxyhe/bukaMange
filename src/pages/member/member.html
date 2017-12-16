@@ -10,12 +10,11 @@
       <button class="cancelIcon" navPop></button>
       <img class="backgroundImg" src="assets/imgs/headbackground.png" />
       <div class="card-title">
-        <img class="headerImg" src="assets/imgs/timg1.jpg" alt="" />
-        <p>13453888888</p>
+        <img class="headerImg" src="{{account_login_avatar==null?'assets/imgs/timg1.jpg':account_login_avatar}}" alt="" />
+        <p>{{account_login_name}}</p>
       </div>
 
     </div>
-
   </ion-navbar>
   <ion-toolbar style="min-height: 68px;background: #fff;">
     <div claas="tabsLsit">
@@ -23,26 +22,28 @@
         <ion-segment-button style="color:#666;height: 68px;" value="puppies">
           <div class="tabContent">
             <div style="height: 2rem;">
-              <!-- <ion-icon name="cog" item-left></ion-icon> -->
+              <!-- public clicount: any = "";
+              public follow: any = "";
+              public nofollow: any = ""; -->
               <img src="assets/font/private.svg" alt="">
             </div>
-            私海客户 <span>35</span>
+            私海客户 <span>{{clicount}}</span>
           </div>
         </ion-segment-button>
-        <ion-segment-button style="color:#666;height: 68px;" value="kittens">
+        <ion-segment-button style="color:#666;height: 68px;" value="fllow">
           <div class="tabContent">
             <div style="height: 2rem;">
               <img src="assets/font/floowUp.svg" alt="">
             </div>
-            已跟进 <span>35</span>
+            已跟进 <span>{{follow}}</span>
           </div>
         </ion-segment-button>
-        <ion-segment-button style="color:#666;height: 68px;" value="SB">
+        <ion-segment-button style="color:#666;height: 68px;" value="nofllow">
           <div class="tabContent">
             <div style="height: 2rem;">
               <img src="assets/font/nofllowUp.svg" alt="">
             </div>
-            未跟进 <span>35</span>
+            未跟进 <span>{{nofollow}}</span>
           </div>
         </ion-segment-button>
       </ion-segment>
@@ -51,55 +52,55 @@
 </ion-header>
 
 <ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)" pullMax="500">
+    <ion-refresher-content pullingText="下拉刷新" refreshingText="加载数据中...">
+    </ion-refresher-content>
+  </ion-refresher>
   <div [ngSwitch]="pet">
     <ion-card *ngSwitchCase="'puppies'">
-      <ion-list *ngFor="let item of clientList">
+      <ion-list *ngFor="let item of memberList">
         <ion-item>
           <ion-avatar item-start>
-            <img [src]="item.imgUrl">
+            <img src="{{item.customer_avatar==null?'assets/imgs/timg1.jpg':item.customer_avatar}}">
           </ion-avatar>
-          <h2>{{item.clientName}}</h2>
-          <p> 客户类型: <span>{{item.clientType}}</span> </p>
-          <p> 客户需求:<span> {{item.clinetDemand}}</span> </p>
-          <p item-right class="time">{{item.clientTime}}</p>
-
-          <button class="btnStyle" [class.btnNotFollow]="item.status==1" [class.btnFollowUp]="item.status==2" ion-button>{{item.status==1?"未跟进":"继续跟进"}}</button>
+          <h2>{{item.customer_name}}</h2>
+          <p> 客户类型: <span>{{item.customer_type_id}}</span> </p>
+          <p> 客户需求:<span> {{item.customer_needs_id}}</span> </p>
+          <p item-right class="time">{{item.receive_time}}</p>
+          <button class="btnStyle" [class.btnNotFollow]="item.status==1" [class.btnFollowUp]="item.receive_time==2" ion-button>{{item.status==1?"未跟进":"继续跟进"}}</button>
         </ion-item>
       </ion-list>
     </ion-card>
-    <ion-card *ngSwitchCase="'kittens'">
-      <ion-list *ngFor="let item of clientList">
+    <ion-card *ngSwitchCase="'fllow'">
+      <ion-list *ngFor="let item of fllowList">
         <ion-item>
           <ion-avatar item-start>
-            <img [src]="item.imgUrl">
+            <img src="{{item.customer_avatar==null?'assets/imgs/timg1.jpg':item.customer_avatar}}">
           </ion-avatar>
-          <h2>{{item.clientName}}</h2>
-          <p> 客户类型: <span>{{item.clientType}}</span> </p>
-          <p> 客户需求:<span> {{item.clinetDemand}}</span> </p>
-          <p item-right class="time">{{item.clientTime}}</p>
-
-          <button class="btnStyle" [class.btnNotFollow]="item.status==1" [class.btnFollowUp]="item.status==2" ion-button>{{item.status==1?"未跟进":"继续跟进"}}</button>
+          <h2>{{item.customer_name}}</h2>
+          <p> 客户类型: <span>{{item.customer_type_id}}</span> </p>
+          <p> 客户需求:<span> {{item.customer_needs_id}}</span> </p>
+          <p item-right class="time">{{item.receive_time}}</p>
+          <button class="btnStyle" [class.btnNotFollow]="item.status==1" [class.btnFollowUp]="item.receive_time==2" ion-button>{{item.status==1?"未跟进":"继续跟进"}}</button>
         </ion-item>
       </ion-list>
     </ion-card>
-    <ion-list *ngSwitchCase="'SB'">
-      <ion-item>
-        <ion-thumbnail item-start>
-          <img src="assets/imgs/timg1.jpg">
-        </ion-thumbnail>
-        <h2>Luna</h2>
-      </ion-item>
+    <ion-card *ngSwitchCase="'nofllow'">
+      <ion-list *ngFor="let item of nofllowList">
+        <ion-item>
+          <ion-avatar item-start>
+            <img src="{{item.customer_avatar==null?'assets/imgs/timg1.jpg':item.customer_avatar}}">
+          </ion-avatar>
+          <h2>{{item.customer_name}}</h2>
+          <p> 客户类型: <span>{{item.customer_type_id}}</span> </p>
+          <p> 客户需求:<span> {{item.customer_needs_id}}</span> </p>
+          <p item-right class="time">{{item.receive_time}}</p>
+          <button class="btnStyle" [class.btnNotFollow]="item.status==1" [class.btnFollowUp]="item.receive_time==2" ion-button>{{item.status==1?"未跟进":"继续跟进"}}</button>
+        </ion-item>
+      </ion-list>
 
-    </ion-list>
-    <ion-list *ngSwitchCase="'SB1'">
-      <ion-item>
-        <ion-thumbnail item-start>
-          <img src="assets/imgs/timg1.jpg">
-        </ion-thumbnail>
-        <h2>Luna</h2>
-      </ion-item>
+    </ion-card>
 
-    </ion-list>
   </div>
 
 

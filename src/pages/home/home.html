@@ -6,8 +6,8 @@
                   </span>
       <img class="backgroundImg" src="assets/imgs/headbackground.png" />
       <div class="card-title">
-        <img class="headerImg" src="assets/imgs/timg1.jpg" alt="" />
-        <p>13453888888</p>
+        <img class="headerImg" src="{{avatarUrl==null?'assets/imgs/timg1.jpg':avatarUrl}}" alt="" />
+        <p>{{name}}</p>
       </div>
 
     </div>
@@ -16,37 +16,37 @@
   <ion-toolbar style="min-height: 68px;background: #fff;">
     <div claas="tabsLsit">
       <ion-segment style="background: #fff;" [(ngModel)]="pet">
-        <ion-segment-button style="color:#666;height: 68px;" value="puppies">
+        <ion-segment-button style="color:#666;height: 68px;" value="privateClient">
           <div class="tabContent">
             <div style="height: 2rem;">
               <!-- <ion-icon name="cog" item-left></ion-icon> -->
               <img src="assets/font/private.svg" alt="">
             </div>
-            私海客户 <span>35</span>
+            私海客户 <span>{{privateCilent}}</span>
           </div>
         </ion-segment-button>
-        <ion-segment-button style="color:#666;height: 68px;" value="kittens">
+        <ion-segment-button style="color:#666;height: 68px;" value="followUp">
           <div class="tabContent">
             <div style="height: 2rem;">
               <img src="assets/font/floowUp.svg" alt="">
             </div>
-            已跟进 <span>35</span>
+            已跟进 <span>{{follow}}</span>
           </div>
         </ion-segment-button>
-        <ion-segment-button style="color:#666;height: 68px;" value="SB">
+        <ion-segment-button style="color:#666;height: 68px;" value="nofollowUp">
           <div class="tabContent">
             <div style="height: 2rem;">
               <img src="assets/font/nofllowUp.svg" alt="">
             </div>
-            未跟进 <span>35</span>
+            未跟进 <span>{{nofollow}}</span>
           </div>
         </ion-segment-button>
-        <ion-segment-button style="color:#666;height: 68px;width:25%" value="SB1">
+        <ion-segment-button [hidden]="isRoleid" style="color:#666;height: 68px;width:25%" value="grounplist">
           <div class="tabContent">
             <div style="height: 2rem;">
               <img src="assets/font/group.svg" alt="">
             </div>
-            团队成员 <span>35</span>
+            团队成员 <span>{{grounp}}</span>
           </div>
         </ion-segment-button>
       </ion-segment>
@@ -56,55 +56,65 @@
 
 <ion-content>
   <div [ngSwitch]="pet">
-    <ion-card *ngSwitchCase="'puppies'">
-      <ion-list *ngFor="let item of clientList">
-        <ion-item (click)="goClientDetails(item)">
-          <ion-avatar item-start>
-            <img [src]="item.imgUrl">
-          </ion-avatar>
-          <h2>{{item.clientName}}</h2>
-          <p> 客户类型: <span>{{item.clientType}}</span> </p>
-          <p> 客户需求:<span> {{item.clinetDemand}}</span> </p>
-          <p item-right class="time">{{item.clientTime}}</p>
-
-          <button class="btnStyle" [class.btnNotFollow]="item.status==1" [class.btnFollowUp]="item.status==2" ion-button>{{item.status==1?"未跟进":"继续跟进"}}</button>
-        </ion-item>
-      </ion-list>
-    </ion-card>
-    <ion-card *ngSwitchCase="'kittens'">
-      <ion-list *ngFor="let item of clientList">
+    <ion-card *ngSwitchCase="'privateClient'">
+      <ion-list *ngFor="let item of privateClientList">
         <ion-item>
           <ion-avatar item-start>
-            <img [src]="item.imgUrl">
+            <img src="{{item.customer_avatar==null?'assets/imgs/timg1.jpg':item.customer_avatar}}">
           </ion-avatar>
-          <h2>{{item.clientName}}</h2>
-          <p> 客户类型: <span>{{item.clientType}}</span> </p>
-          <p> 客户需求:<span> {{item.clinetDemand}}</span> </p>
-          <p item-right class="time">{{item.clientTime}}</p>
-
-          <button class="btnStyle" [class.btnNotFollow]="item.status==1" [class.btnFollowUp]="item.status==2" ion-button>{{item.status==1?"未跟进":"继续跟进"}}</button>
+          <h2>{{item.customer_name}}</h2>
+          <p> 客户类型: <span>{{item.customer_type_id}}</span> </p>
+          <p> 客户需求:<span> {{item.customer_needs_id}}</span> </p>
+          <p item-right class="time">{{item.receive_time}}</p>
+          <button class="btnStyle" [class.btnNotFollow]="item.status==1" [class.btnFollowUp]="item.receive_time==2" ion-button>{{item.status==1?"未跟进":"继续跟进"}}</button>
         </ion-item>
       </ion-list>
     </ion-card>
-    <ion-list *ngSwitchCase="'SB'">
-      <ion-item>
-        <ion-thumbnail item-start>
-          <img src="assets/imgs/timg1.jpg">
-        </ion-thumbnail>
-        <h2>Luna</h2>
-      </ion-item>
+    <ion-card *ngSwitchCase="'followUp'">
+      <ion-list *ngFor="let item of fllowClientList">
+        <ion-item>
+          <ion-avatar item-start>
+            <img src="{{item.customer_avatar==null?'assets/imgs/timg1.jpg':item.customer_avatar}}">
+          </ion-avatar>
+          <h2>{{item.customer_name}}</h2>
+          <p> 客户类型: <span>{{item.customer_type_id}}</span> </p>
+          <p> 客户需求:<span> {{item.customer_needs_id}}</span> </p>
+          <p item-right class="time">{{item.receive_time}}</p>
+          <button class="btnStyle" [class.btnNotFollow]="item.status==1" [class.btnFollowUp]="item.receive_time==2" ion-button>{{item.status==1?"未跟进":"继续跟进"}}</button>
+        </ion-item>
+      </ion-list>
+    </ion-card>
+    <ion-card *ngSwitchCase="'nofollowUp'">
+      <ion-list *ngFor="let item of nofllowClientList">
+        <ion-item>
+          <ion-avatar item-start>
+            <img src="{{item.customer_avatar==null?'assets/imgs/timg1.jpg':item.customer_avatar}}">
+          </ion-avatar>
+          <h2>{{item.customer_name}}</h2>
+          <p> 客户类型: <span>{{item.customer_type_id}}</span> </p>
+          <p> 客户需求:<span> {{item.customer_needs_id}}</span> </p>
+          <p item-right class="time">{{item.receive_time}}</p>
+          <button class="btnStyle" [class.btnNotFollow]="item.status==1" [class.btnFollowUp]="item.receive_time==2" ion-button>{{item.status==1?"未跟进":"继续跟进"}}</button>
+        </ion-item>
+      </ion-list>
+    </ion-card>
+    <ion-card *ngSwitchCase="'grounplist'">
+      <ion-list *ngFor="let item of groupList">
+        <ion-item (click)="goMemberPage(item)">
+          <ion-avatar item-start>
+            <img src="{{item.account_login_avatar==null?'assets/imgs/timg1.jpg':team_avater}}">
+          </ion-avatar>
+          <h2>{{item.account_login_name}}</h2>
+          <p class="group">私海客户:{{item.clicount}}</p>
+        </ion-item>
+      </ion-list>
 
-    </ion-list>
-    <ion-list *ngSwitchCase="'SB1'">
-      <ion-item>
-        <ion-thumbnail item-start>
-          <img src="assets/imgs/timg1.jpg">
-        </ion-thumbnail>
-        <h2>Luna</h2>
-      </ion-item>
-
-    </ion-list>
+    </ion-card>
   </div>
-
+  <div *ngIf="isNoData" style="width:50%;margin:0 auto;text-align:center;margin-top:3rem">
+    <img style="width:50%;height:50%;margin-left: 10px;" src="assets/imgs/nodata.png" alt="">
+    <div class="nodataText">暂未领取客户信息</div>
+    <div class="nodataText">请至公海领取</div>
+  </div>
 
 </ion-content>

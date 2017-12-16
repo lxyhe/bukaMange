@@ -2,10 +2,10 @@
 
 import { Component, ViewChild } from '@angular/core';
 import { NavController, IonicPage, NavParams, Events, Refresher } from 'ionic-angular';
-import { homeObj } from '../../providers/homeObj';
 import { Storage } from '@ionic/storage';
 //import mickData from '../../providers/mickData';
-
+import { HttpLodingService } from '../../providers/loadingServer';
+import { ajaxService } from '../../providers/ajaxServe';
 /**
  * Generated class for the GrounpPage page.
  *
@@ -13,50 +13,7 @@ import { Storage } from '@ionic/storage';
  * Ionic pages and navigation.
  */
 
-const mickData: homeObj[] = [
-  {
-    imgUrl: "assets/imgs/timg1.jpg",
-    clientName: "光大传媒",
-    clientType: "35人",
-    clinetDemand: "大班直播",
-    clientTime: "2017-11-27",
-    status: 1,
-    details: null
-  }, {
-    imgUrl: "assets/imgs/timg1.jpg",
-    clientName: "光大传媒",
-    clientType: "35人",
-    clinetDemand: "大班直播",
-    clientTime: "2017-11-27",
-    status: 2,
-    details: null
-  }, {
-    imgUrl: "assets/imgs/timg1.jpg",
-    clientName: "光大传媒",
-    clientType: "35人",
-    clinetDemand: "大班直播",
-    clientTime: "2017-11-27",
-    status: 2,
-    details: null
-  }, {
-    imgUrl: "assets/imgs/timg1.jpg",
-    clientName: "光大传媒",
-    clientType: "35人",
-    clinetDemand: "大班直播",
-    clientTime: "2017-11-27",
-    status: 1,
-    details: null
 
-  }, {
-    imgUrl: "assets/imgs/timg1.jpg",
-    clientName: "光大传媒",
-    clientType: "35人",
-    clinetDemand: "大班直播",
-    clientTime: "2017-11-27",
-    status: 1,
-    details: null
-  }
-];
 @IonicPage()
 @Component({
   selector: 'page-grounp',
@@ -64,40 +21,73 @@ const mickData: homeObj[] = [
 })
 export class GrounpPage {
   @ViewChild(Refresher) public refresher: Refresher;
-  public clientList: homeObj[];
-  public pet: string = "puppies";
+
+  public pet: string = "privateClient";
   public tokenid: string = "";
   public team_id: string = "";
-  public companyData: object = {};
+  public team_avater: any = "";
+  public team_name: any = "";
+  public grounpData: object;//上个页面的参数
+
+  public privateClient: object;//私海客户
+  public noFoloowUp: object;//未跟进
+  public floowUp: object;//已跟进
+
+  public floowUpcount: any;//已跟进客户数量
+  public groupMember: any;//团队成员数量
+  public privateclients: any;//团队私海客户
+  public nofollowUp: any;//未跟进客户
+
+  public groupList: Array<object>;//团队成员
+  public privateClientList: Array<object>;//私海客户list
+  public fllowClientList: Array<object>;//跟进客户list
+  public nofllowClientList: Array<object>;//未跟进客户list
+
+
   constructor(
     public navCtrl: NavController,
     public navparam: NavParams,
     public event: Events,
     private storage: Storage,
+    public httploading: HttpLodingService,
+    public ajaxserve: ajaxService,
   ) {
-    this.clientList = mickData;
-    this.companyData = this.navparam.get('data');
-    console.log(this.companyData);
-    // this.team_id=this.companyData.team_id;
+
+    this.grounpData = this.navparam.get('data');
+    console.log(this.grounpData);
+    this.team_id = this.grounpData['team_id'];
+    this.team_avater = this.grounpData['team_avater'];
+    this.team_name = this.grounpData['team_name'];
+    this.floowUpcount = this.grounpData['follow'];
+    this.groupMember = this.grounpData['acount'];
+    this.privateclients = this.grounpData['cuscount'];
+    this.floowUpcount = this.grounpData['follow'];
+    this.nofollowUp = this.privateclients - this.floowUpcount;
   }
   doRefresh(refresher) {
-    this.getcompanyList();
+    this.getGroupList();
     this.event.subscribe("request:success", () => {
       this.refresher.complete();
     })
   }
-  getcompanyList() {
+  getGroupList() {
     try {
       this.storage.get('userInfo').then((data) => {
         this.tokenid = data.tokenid;
         this.httploading.HttpServerLoading("加载中...")
-        this.ajaxserve.companyList({ tokenid: this.tokenid, userid: this.userid }).then((data) => {
-          console.log(data);
+        this.ajaxserve.grounpList({ tokenid: this.tokenid, team_id: this.team_id }).then((data) => {
           if (data.status.Code = "200") {
             this.httploading.ColseServerLoding();
-            this.companyavatar = data.data.avatar;
-            this.companyname = data.data.name;
-            this.clientList = data.data.tlist;
+            // this.companyavatar = data.data.avatar;
+            // this.companyname = data.data.name;
+            this.groupList = data.data;
+            //console.log(this.groupList);
+            this.privateClientList = data.clist;
+            this.fllowClientList = data.yfollow;
+            this.nofllowClientList = data.nfollow;
+            // public privateClientList:Array<object>;//私海客户list
+            // public fllowClientList:Array<object>;//跟进客户list
+            // public nofllowClientList:Array<object>;//未跟进客户list
           }
         }).catch((err) => {
           console.log(err);
@@ -109,7 +99,11 @@ export class GrounpPage {
     }
   }
   ionViewDidEnter() {
-
+    this.getGroupList();
+  }
+  ionViewWillUnload() {
+    //console.log('ionViewWillUnload LogingPage');
+    this.event.unsubscribe("request:success");
   }
   goMemberPage(items) {
     console.log(items);

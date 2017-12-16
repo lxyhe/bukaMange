@@ -42,7 +42,6 @@ export class CompanyPage {
   }
   getcompanyList() {
     try {
-
       this.storage.get('userInfo').then((data) => {
         this.userid = data.userid;
         this.tokenid = data.tokenid;
@@ -51,9 +50,14 @@ export class CompanyPage {
           console.log(data);
           if (data.status.Code = "200") {
             this.httploading.ColseServerLoding();
-            this.companyavatar = data.data.avatar;
-            this.companyname = data.data.name;
-            this.clientList = data.data.tlist;
+            if (data.data.tlist.length !== 0) {
+              this.companyavatar = data.data.avatar;
+              this.companyname = data.data.name;
+              this.clientList = data.data.tlist;
+
+            } else {
+              console.log("list=0")
+            }
           }
         }).catch((err) => {
           console.log(err);
@@ -68,11 +72,15 @@ export class CompanyPage {
     this.getcompanyList();
     //this.doRefresh();
   }
+  ionViewWillUnload() {
+    //console.log('ionViewWillUnload LogingPage');
+    this.event.unsubscribe("request:success");
+  }
   goGrounpPage(items) {
     this.navCtrl.push('GrounpPage', { data: items })
   }
   goSteingPage(items) {
-    console.log(items);
+
     this.navCtrl.push('HeadSetingPage', { data: items })
   }
 }

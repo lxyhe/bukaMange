@@ -64,15 +64,19 @@ export class LogingPage {
               // this.storage.set('tokenid', data.data.tokenid);
               // this.storage.set('userid', data.data.userid);
               if (data.data.roleid == 1) {
-                console.log("公司");
                 this.navCtrl.setRoot('CompanyPage');
+              } else {
+                this.navCtrl.setRoot('TabsPage');
               }
-              if (data.data.roleid == 2) {
-                console.log("总监")
-              }
-              if (data.data.roleid == 3) {
-                console.log("个人")
-              }
+
+              // if (data.data.roleid == 2) {
+              //   console.log("总监");
+              //   this.navCtrl.setRoot('TabsPage');
+              // }
+              // if (data.data.roleid == 3) {
+              //   console.log("个人");
+              //   this.navCtrl.setRoot('TabsPage');
+              // }
             }
           }
         }

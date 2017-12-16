@@ -10,7 +10,7 @@ import { Storage } from '@ionic/storage';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  //rootPage: any = 'TabsPage';
+  // rootPage: any = 'TabsPage';
   rootPage: any = 'LogingPage';
 
   constructor(
@@ -33,6 +33,7 @@ export class MyApp {
         //   })
         // }
         //console.log(data);
+
       })
 
     });

@@ -9,6 +9,10 @@ export interface logingObj {
   username: string | number;
   password: string | number;
 }
+export interface fllowupObj {
+  tokenid: string | number;
+  customer_id: string | number;
+}
 export interface companylistObj {
   tokenid: string | number;
   userid: string | number;
@@ -45,7 +49,12 @@ export interface publicGetClientObj {
   customer_id: any;
   tokenid: string;
 }
-
+export interface setfoolowContentObj {
+  customer_id: any;
+  follow_up_name: any;
+  userid: number;
+  tokenid: string;
+}
 @Injectable()
 
 export class ajaxService {
@@ -95,5 +104,16 @@ export class ajaxService {
   publicGetClient(publicgetclient: publicGetClientObj) {
     return this.httpserve.get(api.publicGetCilent, publicgetclient)
   }
-
+  //获取客户详情
+  getClientDetails(getclientdetails: publicGetClientObj) {
+    return this.httpserve.get(api.getClientDetails, getclientdetails)
+  }
+  //获取跟进情况
+  getFollowupcandion(getfloowipcandion: fllowupObj) {
+    return this.httpserve.get(api.getFllowCondition, getfloowipcandion)
+  }
+  //记录
+  setRecord(setfollowContent: setfoolowContentObj) {
+    return this.httpserve.post(api.setfollow, setfollowContent)
+  }
 }

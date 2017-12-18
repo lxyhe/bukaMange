@@ -131,14 +131,14 @@ export class HomePage {
   //   })
   // }
   goClientDetails(items) {
-    console.log(items);
+
     this.navCtrl.push('PrivateCilentDetailsPage', { data: items })
   }
   goPensonSeting() {
     this.navCtrl.push('PersonSetingPage', );
   }
   goMemberPage(items) {
-    console.log(items);
+
     this.navCtrl.push('MemberPage', { data: items })
   }
 

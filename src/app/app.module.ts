@@ -11,28 +11,21 @@ import { IonicStorageModule } from '@ionic/storage';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { clientTypePipe, clientRankPipe, clientNeedPipe, clientSourePipe, clientStatusPipe } from '../pipes/clientTypeTransfrom';
+
+import { PipesModule } from '../pipes/pipe.module';
 @NgModule({
   declarations: [
     MyApp,
-    clientTypePipe,
-    clientRankPipe,
-    clientNeedPipe,
-    clientSourePipe,
-    clientStatusPipe
+
   ],
   imports: [
+    PipesModule,
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(MyApp, {
       tabsHideOnSubPages: true,
-      mode: 'ios',//android是'md'
+      mode: 'ios',
       backButtonText: ''
-      // iconMode: 'ios',
-      // modalEnter: 'modal-slide-in',
-      // modalLeave: 'modal-slide-out',
-      // tabsPlacement: 'bottom',
-      // pageTransition: 'ios-transition'
     }),
     IonicStorageModule.forRoot()
 

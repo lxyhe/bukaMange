@@ -41,37 +41,37 @@
       </div>
     </ion-item>
     <ion-item>
+      <!-- clientTypePipe,
+        clientRankPipe,
+        clientNeedPipe,
+        clientSourePipe,
+        clientStatusPipe -->
       <div>
         <span class="leftList">客户类型</span>
-        <span class="rightLsit">{{publicDetails.clientType==null?'未填写':publicDetails.clientType}}</span>
+        <span class="rightLsit">{{publicDetails.clientType==null?'未填写':publicDetails.clientType | clienttypepipe}}</span>
+        <!-- <span class="rightLsit">{{publicDetails.clientType }}</span> -->
       </div>
     </ion-item>
     <ion-item>
       <div>
         <span class="leftList">客户需求</span>
-        <span class="rightLsit">{{publicDetails.clientNeed==null?'未填写':publicDetails.clientNeed}}</span>
+        <span class="rightLsit">{{publicDetails.clientNeed==null?'未填写':publicDetails.clientNeed | clientneedpipe }}</span>
+        <!-- <span class="rightLsit">{{publicDetails.clientNeed==null?'未填写':publicDetails.clientNeed  }}</span> -->
       </div>
     </ion-item>
     <ion-item>
       <div>
         <span class="leftList">客户来源</span>
-        <span class="rightLsit">{{publicDetails.clientsroure==null?'未填写':publicDetails.clientsroure}}</span>
+        <span class="rightLsit">{{publicDetails.clientsroure==null?'未填写':publicDetails.clientsroure | clientsourepipe}}</span>
+        <!-- <span class="rightLsit">{{publicDetails.clientsroure==null?'未填写':publicDetails.clientsroure }}</span> -->
       </div>
     </ion-item>
-    <!-- this.publicDetails.avatar = this.publicDetailsParmas['customer_avatar'];
-this.publicDetails.name = this.publicDetailsParmas['customer_name'];
-this.publicDetails.reliseTime = this.publicDetailsParmas['release_time'];
-this.publicDetails.clientType = this.publicDetailsParmas['customer_type_id'];
-this.publicDetails.clientNeed = this.publicDetailsParmas['customer_needs_id'];
-this.publicDetails.clientsroure = this.publicDetailsParmas['customer_source_id'];
-this.publicDetails.clientStatus = this.publicDetailsParmas['customer_status_id'];
-this.publicDetails.clientAddress1 = this.publicDetailsParmas['customer_address1'];
-this.publicDetails.clientAddress2 = this.publicDetailsParmas['customer_address2'];
-this.publicDetails.clientRemark = this.publicDetailsParmas['customer_remarks']; -->
+
     <ion-item>
       <div>
         <span class="leftList">客户状态</span>
-        <span class="rightLsit">{{publicDetails.clientStatus==null?'未填写':publicDetails.clientStatus}}</span>
+        <span class="rightLsit">{{publicDetails.clientStatus==null?'未填写':publicDetails.clientStatus | clientstatuspipe }}</span>
+        <!-- <span class="rightLsit">{{publicDetails.clientStatus==null?'未填写':publicDetails.clientStatus  }}</span> -->
       </div>
     </ion-item>
     <ion-item>

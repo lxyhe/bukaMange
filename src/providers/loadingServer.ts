@@ -12,7 +12,6 @@ export class HttpLodingService {
   }
   HttpServerLoading(memo) {
     this.loader = this.loadingCtrl.create({
-      spinner: 'bubbles',
       content: memo,
       duration: 1000000
     });

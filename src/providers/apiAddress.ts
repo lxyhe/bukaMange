@@ -9,7 +9,10 @@ export const api = {
   inspectorlist: address + "director/getteammember",
   personclientlist: address + "personal/getcustomer",
   publishclientInfo: address + "customer/publish",
-  publicGetCilent: address + "customer/getcustomer"
+  publicGetCilent: address + "customer/getcustomer",
+  getClientDetails: address + "personal/cusinformation",
+  getFllowCondition: address + "personal/getfollow",
+  setfollow: address + "personal/setfollow",
   // http://192.168.10.186:8080/customer/publish
 }
 // http://192.168.10.186:8080/customer/common/{tokennid}?userid=1

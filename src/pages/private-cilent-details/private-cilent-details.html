@@ -14,9 +14,19 @@
 
   <ion-navbar>
     <ion-title>客户详情</ion-title>
+    <!-- <ion-buttons end>
+      <button *ngIf="isDisabled" ion-button icon-only (click)="complete($event)">
+             {{compluted}}
+        </button>
+      <button *ngIf="!isDisabled" ion-button icon-only (click)="editodrfun($event)">
+            {{editodr}}
+     </button>
+    </ion-buttons> -->
   </ion-navbar>
 
 </ion-header>
+
+
 
 
 <ion-content>
@@ -24,84 +34,74 @@
     <ion-list>
       <button ion-item>
         <ion-avatar item-start>
-          <img src="assets/imgs/timg1.jpg">
+          <img src="{{privateClientDetailsPageObj.customer_avatar==null?'assets/imgs/timg1.jpg':privateClientDetailsPageObj.customer_avatar}}">
         </ion-avatar>
-        <h2>阿里巴巴</h2>
-        <p> 发布时间: <span>2017-11-27</span> </p>
+        <h2>{{privateClientDetailsPageObj.customer_name }}</h2>
+        <p> 发布时间: <span>{{privateClientDetailsPageObj.release_time}}</span> </p>
       </button >
     </ion-list>
   </ion-card>
 
   <ion-list>
-    <button ion-item>
+    <button  ion-item>
       <div>
         <span class="leftList textColor">联系人</span>
-
-        <span class="rightLsit">领取可查看联系方式</span>
+        <span class="rightLsit">{{linkCantPageObj.customer_contact_name}}</span>
       </div>
     </button>
-      <button ion-item [navPush]="Privatedetails" [navParams]="privatedetailsInfo">
+      <button ion-item (click)="goFloowUP()">
       <div>
         <span class="leftList">跟进情况</span>
-        <span class="rightLsit">领取可查看联系方式</span>
+        <span class="rightLsit">{{privateClientDetailsPageObj.follow>0?"已跟进":"未跟进" }}</span>
       </div>
     </button>
+
       <button ion-item>
-        <!-- <span class="leftList">客户类型</span>
-        <span class="rightLsit">机构客户</span> -->
-        <!-- public clientType: Array<object>;
-            public clientRank: Array<object>;
-            public clientDemand: Array<object>;
-            public clientSource: Array<object>;
-            public clientStatus: Array<object>; -->
-        <ion-label class="leftList">客户类型</ion-label>
-        <ion-multi-picker  (ionChange)="cilentType($event)"  placeholder="请选择" showReset=true resetText="客户类型" item-content cancelText="取消"  item-content doneText="完成" [multiPickerColumns]="clientType"></ion-multi-picker>
-    </button>
+            <ion-label  class="leftList">客户类型</ion-label>
+            <ion-multi-picker    [(ngModel)]="privateClientDetailsPageObj.customer_type_id"   (ionChange)="cilentType($event)"  placeholder="请选择" showReset=true resetText="客户类型" item-content cancelText="取消"  item-content doneText="完成" [multiPickerColumns]="clientType"></ion-multi-picker>
+     </button>
       <button ion-item>
-      <!-- <div>
-        <span class="leftList">客户级别</span>
-        <span class="rightLsit">大班直播</span>
-      </div> -->
-      <ion-label class="leftList">客户级别</ion-label>
-      <ion-multi-picker  placeholder="请选择" showReset=true resetText="客户级别" item-content cancelText="取消"  item-content doneText="完成" [multiPickerColumns]="clientRank"></ion-multi-picker>
-    </button>
+        <ion-label class="leftList">客户级别</ion-label>
+        <ion-multi-picker class="rightLsit" [(ngModel)]="privateClientDetailsPageObj.customer_level_id"  (ionChange)="cilentRank($event)" placeholder="未填写" showReset=true resetText="客户级别" item-content cancelText="取消"  item-content doneText="完成" [multiPickerColumns]="clientRank"></ion-multi-picker>
+      </button>
       <button ion-item>
-      <!-- <div>
-        <span class="leftList">客户需求</span>
-        <span class="rightLsit">大班直播</span>
-      </div> -->
-      <ion-label class="leftList">客户需求</ion-label>
-      <ion-multi-picker  placeholder="请选择" showReset=true resetText="客户需求" item-content cancelText="取消"  item-content doneText="完成" [multiPickerColumns]="clientDemand"></ion-multi-picker>
-    </button>
+        <!-- <div>
+          <span class="leftList">客户需求</span>
+          <span class="rightLsit">大班直播</span>
+        </div> -->
+        <ion-label class="leftList">客户需求</ion-label>
+        <ion-multi-picker class="rightLsit" [(ngModel)]="privateClientDetailsPageObj.customer_needs_id"  (ionChange)="cilentNeed($event)"  placeholder="未填写" showReset=true resetText="客户需求" item-content cancelText="取消"  item-content doneText="完成" [multiPickerColumns]="clientDemand "></ion-multi-picker>
+      </button>
       <button ion-item>
-      <!-- <div>
-        <span class="leftList">客户来源</span>
-        <span class="rightLsit">网站</span>
-      </div> -->
-      <ion-label class="leftList">客户来源</ion-label>
-      <ion-multi-picker  placeholder="请选择" showReset=true resetText="客户来源" item-content cancelText="取消"  item-content doneText="完成" [multiPickerColumns]="clientSource"></ion-multi-picker>
-    </button>
+        <!-- <div>
+          <span class="leftList">客户来源</span>
+          <span class="rightLsit">网站</span>
+        </div> -->
+        <ion-label class="leftList">客户来源</ion-label>
+        <ion-multi-picker class="rightLsit" [(ngModel)]="privateClientDetailsPageObj.customer_source_id" (ionChange)="cilentSoure($event)"  placeholder="未填写" showReset=true resetText="客户来源" item-content cancelText="取消"  item-content doneText="完成" [multiPickerColumns]="clientSource"></ion-multi-picker>
+      </button>
       <button ion-item>
-      <!-- <div>
-        <span class="leftList">客户状态</span>
-        <span class="rightLsit">体验了解</span>
-      </div> -->
-      <ion-label class="leftList">客户状态</ion-label>
-      <ion-multi-picker  placeholder="请选择" showReset=true resetText="客户状态" item-content cancelText="取消"  item-content doneText="完成" [multiPickerColumns]="clientStatus"></ion-multi-picker>
-    </button>
-      <button ion-item>
+        <!-- <div>
+          <span class="leftList">客户状态</span>
+          <span class="rightLsit">体验了解</span>
+        </div> -->
+        <ion-label class="leftList">客户状态</ion-label>
+        <ion-multi-picker class="rightLsit" [(ngModel)]="privateClientDetailsPageObj.customer_status_id" (ionChange)="cilentStatus($event)"  placeholder="未填写" showReset=true resetText="客户状态" item-content cancelText="取消"  item-content doneText="完成" [multiPickerColumns]="clientStatus"></ion-multi-picker>
+      </button>
+      <button (click)="goClientAddress()" ion-item>
       <div>
         <span class="leftList">客户地址</span>
         <div class="address">
-          北京市海淀区星世界98号-阿里巴巴
+          {{privateClientDetailsPageObj.customer_address1==null?"未填写":privateClientDetailsPageObj.customer_address1}}
+          {{privateClientDetailsPageObj.customer_address2}}
         </div>
       </div>
     </button>
-      <button ion-item>
+      <button (click)="goClientRemark()" ion-item>
       <div>
         <span class="leftList">备注</span>
         <div class="address">
-          好好的了解了
+          {{privateClientDetailsPageObj.customer_remarks==null?"未填写":privateClientDetailsPageObj.customer_remarks}}
         </div>
       </div>
     </button>

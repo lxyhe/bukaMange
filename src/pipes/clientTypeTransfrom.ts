@@ -1,14 +1,18 @@
 import { Pipe, PipeTransform } from '@angular/core';
+//时间转化
 
+@Pipe({ name: 'timepipe' })
+export class timePipe implements PipeTransform {
+  transform(value): any {
+    if (value !== "") {
+      var v = value.split(' ')[0].split('-')[1];
+      var a = value.split(' ')[0].split('-')[2];
+      value = v + "-" + a;
+      return value
+    }
 
-
-
-
-
-
-
-
-
+  }
+}
 //客户类型
 @Pipe({ name: 'clienttypepipe' })
 export class clientTypePipe implements PipeTransform {
@@ -45,6 +49,7 @@ export class clientTypePipe implements PipeTransform {
     return value;
   }
 }
+
 //客户级别
 @Pipe({ name: 'clientrankpipe' })
 export class clientRankPipe implements PipeTransform {
@@ -189,6 +194,7 @@ export class clientStatusPipe implements PipeTransform {
     return value;
 
   }
+
 }
 
 

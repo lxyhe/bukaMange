@@ -63,8 +63,8 @@
             <img src="{{item.customer_avatar==null?'assets/imgs/timg1.jpg':item.customer_avatar}}">
           </ion-avatar>
           <h2>{{item.customer_name}}</h2>
-          <p> 客户类型: <span>{{item.customer_type_id  }}</span> </p>
-          <p> 客户需求:<span> {{item.customer_needs_id  }}</span> </p>
+          <p> 客户类型: <span>{{item.customer_type_id | clienttypepipe }}</span> </p>
+          <p> 客户需求:<span> {{item.customer_needs_id | clientneedpipe   }}</span> </p>
           <p item-right class="time">{{item.receive_time}}</p>
           <button class="btnStyle" [class.btnNotFollow]="item.status==1" [class.btnFollowUp]="item.receive_time==2" ion-button>{{item.status==1?"未跟进":"继续跟进"}}</button>
         </ion-item>
@@ -77,7 +77,7 @@
             <img src="{{item.customer_avatar==null?'assets/imgs/timg1.jpg':item.customer_avatar}}">
           </ion-avatar>
           <h2>{{item.customer_name}}</h2>
-          <p> 客户类型: <span>{{item.customer_type_id}}</span> </p>
+          <p> 客户类型: <span>{{item.customer_type_id }}</span> </p>
           <p> 客户需求:<span> {{item.customer_needs_id }}</span> </p>
           <p item-right class="time">{{item.receive_time}}</p>
           <button class="btnStyle" [class.btnNotFollow]="item.status==1" [class.btnFollowUp]="item.receive_time==2" ion-button>{{item.status==1?"未跟进":"继续跟进"}}</button>

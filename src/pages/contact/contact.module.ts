@@ -8,6 +8,7 @@ import { HttpService } from '../../providers/httpserver';
 import { HttpLodingService } from '../../providers/loadingServer';
 import { ajaxService } from '../../providers/ajaxServe';
 //import { clientTypePipe, clientRankPipe, clientNeedPipe, clientSourePipe, clientStatusPipe } from '../../pipes/clientTypeTransfrom';
+import { PipesModule } from '../../pipes/pipe.module';
 @NgModule({
   declarations: [
     ContactPage,
@@ -17,7 +18,11 @@ import { ajaxService } from '../../providers/ajaxServe';
     // clientSourePipe,
     // clientStatusPipe
   ],
-  imports: [IonicPageModule.forChild(ContactPage)],
+  imports: [
+    PipesModule,
+    IonicPageModule.forChild(ContactPage)
+
+  ],
   providers: [
     HttpService,
     HttpLodingService,

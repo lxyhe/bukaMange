@@ -1,7 +1,7 @@
 
 import { Component, ViewChild } from '@angular/core';
 import { NavController, IonicPage, NavParams, Events, Refresher } from 'ionic-angular';
-import { homeObj } from '../../providers/homeObj';
+//import { homeObj } from '../../providers/homeObj';
 //import mickData from '../../providers/mickData';
 import { Storage } from '@ionic/storage';
 //import mickData from '../../providers/mickData';

@@ -98,6 +98,7 @@ page-private-floow {
     }
   }
   .messge {
+    min-height: 30px;
     background: #FFFFFF;
     border: 1px solid #EFEFF4;
     border-radius: 5px;
@@ -111,7 +112,7 @@ page-private-floow {
   }
   .arraws {
     position: absolute;
-    top: 20px;
+    top: 2vh;
     left: -5px;
     width: 10px;
     height: 10px;
@@ -135,7 +136,7 @@ page-private-floow {
     // top: 3.2rem;
     // left: 0.8rem;
     // width: 20%;
-    line-height: 60px;
+    line-height: 40px;
     padding-left: 1rem;
   }
   .Roundcake {

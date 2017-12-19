@@ -9,16 +9,7 @@ import { Camera } from '@ionic-native/camera';
 import { HttpService } from '../../providers/httpserver';
 import { HttpLodingService } from '../../providers/loadingServer';
 import { ajaxService } from '../../providers/ajaxServe';
-import { PipesModule } from '../../pipes/pipe.module';
-// @NgModule({
-//   declarations: [
-//     PrivateCilentDetailsPage,
-//   ],
-//   imports: [
-//     IonicPageModule.forChild(PrivateCilentDetailsPage),
-//     MultiPickerModule
-//   ],
-// })
+
 @NgModule({
   declarations: [
     AboutPage,
@@ -26,7 +17,7 @@ import { PipesModule } from '../../pipes/pipe.module';
   imports: [
     IonicPageModule.forChild(AboutPage),
     MultiPickerModule,
-    PipesModule
+    //PipesModule
   ],
   exports: [
     AboutPage

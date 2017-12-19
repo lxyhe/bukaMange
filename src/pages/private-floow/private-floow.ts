@@ -3,12 +3,7 @@ import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angu
 import { Storage } from '@ionic/storage';
 import { HttpLodingService } from '../../providers/loadingServer';
 import { ajaxService } from '../../providers/ajaxServe';
-/**
- * Generated class for the PrivateFloowPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+
 
 @IonicPage()
 @Component({
@@ -47,9 +42,7 @@ export class PrivateFloowPage {
     this.followUpName = this.fllowUpObj['name'];
     this.followUpLinkCantact = this.fllowUpObj['linkCantact'];
   }
-  // ionViewDidLoad() {
-  //   console.log('ionViewDidLoad PrivateFloowPage');
-  // }
+
   ionViewDidEnter() {
     this.getFlowUpList();
   }

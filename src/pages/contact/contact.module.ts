@@ -7,16 +7,11 @@ import { IonicPageModule } from 'ionic-angular';
 import { HttpService } from '../../providers/httpserver';
 import { HttpLodingService } from '../../providers/loadingServer';
 import { ajaxService } from '../../providers/ajaxServe';
-//import { clientTypePipe, clientRankPipe, clientNeedPipe, clientSourePipe, clientStatusPipe } from '../../pipes/clientTypeTransfrom';
 import { PipesModule } from '../../pipes/pipe.module';
 @NgModule({
   declarations: [
     ContactPage,
-    // clientTypePipe,
-    // clientRankPipe,
-    // clientNeedPipe,
-    // clientSourePipe,
-    // clientStatusPipe
+
   ],
   imports: [
     PipesModule,

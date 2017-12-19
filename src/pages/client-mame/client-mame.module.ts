@@ -10,4 +10,4 @@ import { ClientMamePage } from './client-mame';
     IonicPageModule.forChild(ClientMamePage),
   ],
 })
-export class ClientMamePageModule {}
+export class ClientMamePageModule { }

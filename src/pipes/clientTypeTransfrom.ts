@@ -17,21 +17,6 @@ export class timePipe implements PipeTransform {
 @Pipe({ name: 'clienttypepipe' })
 export class clientTypePipe implements PipeTransform {
   transform(value): any {
-    // if (typeof (value) !== 'number' || typeof (value) !== 'string') {
-    //   throw 'keysPipe value must be number';
-    // }
-    // this.clientType = [
-    //   {
-    //     name: 'col1',
-    //     options: [
-    //       { text: '机构客户', value: '1' },
-    //       { text: '体制客户', value: '2' },
-    //       { text: '个人客户', value: '3' },
-    //       { text: '其他客户', value: '3' }
-    //     ]
-    //   }
-    // ];
-
     switch (value) {
       case 1:
         value = "机构客户"
@@ -54,20 +39,6 @@ export class clientTypePipe implements PipeTransform {
 @Pipe({ name: 'clientrankpipe' })
 export class clientRankPipe implements PipeTransform {
   transform(value): any {
-    // if (typeof (value) !== 'number' || typeof (value) !== 'string') {
-    //   throw 'keysPipe value must be number or string';
-    // }
-    // this.clientRank = [
-    //   {
-    //     name: 'col2',
-    //     options: [
-    //       { text: '刚需', value: '1' },
-    //       { text: '调研', value: '2' },
-    //       { text: '了解', value: '3' },
-    //     ]
-    //   }
-    // ];
-
     switch (value) {
       case 1:
         value = "刚需"
@@ -86,24 +57,7 @@ export class clientRankPipe implements PipeTransform {
 @Pipe({ name: 'clientneedpipe' })
 export class clientNeedPipe implements PipeTransform {
   transform(value): any {
-    // if (typeof (value) !== 'number' || typeof (value) !== 'string') {
-    //   throw 'keysPipe value must be number';
-    // }
-    // this.clientDemand = [
-    //   {
-    //     name: 'col3',
-    //     options: [
-    //       { text: '大班直播', value: '1' },
-    //       { text: '小班互动', value: '2' },
-    //       { text: '双师', value: '3' },
-    //       { text: 'SDK', value: '4' },
-    //       { text: '换LOGO', value: '5' },
-    //       { text: '大监控', value: '6' },
-    //       { text: '个性定制', value: '7' },
 
-    //     ]
-    //   }
-    // ]
     switch (value) {
       case 1:
         value = "大班直播"
@@ -131,20 +85,7 @@ export class clientNeedPipe implements PipeTransform {
 @Pipe({ name: 'clientsourepipe' })
 export class clientSourePipe implements PipeTransform {
   transform(value): any {
-    // if (typeof (value) !== 'number' || typeof (value) !== 'string') {
-    //   throw 'keysPipe value must be number';
-    // }
-    // this.clientSource = [
-    //   {
-    //     name: 'col4',
-    //     options: [
-    //       { text: '网站', value: '1' },
-    //       { text: '待激活', value: '2' },
-    //       { text: '活动', value: '3' },
-    //       { text: '其他', value: '4' },
-    //     ]
-    //   }
-    // ]
+
     switch (value) {
       case 1:
         value = "网站"
@@ -167,19 +108,7 @@ export class clientSourePipe implements PipeTransform {
 @Pipe({ name: 'clientstatuspipe' })
 export class clientStatusPipe implements PipeTransform {
   transform(value): any {
-    // if (typeof (value) !== 'number' || typeof (value) !== 'string') {
-    //   throw 'keysPipe value must be number';
-    // }
-    // this.clientStatus = [
-    //   {
-    //     name: 'col5',
-    //     options: [
-    //       { text: '体验了解', value: '1' },
-    //       { text: '已签约', value: '2' },
-    //       { text: '切换人', value: '3' },
-    //     ]
-    //   }
-    // ]
+
     switch (value) {
       case 1:
         value = "体验了解"

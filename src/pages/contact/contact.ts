@@ -105,7 +105,6 @@ export class ContactPage {
   }
   goPublishDetails(item) {
     let loading = this.loadingCtrl.create({
-      spinner: 'bubbles',
       content: "加载中 ...",
       dismissOnPageChange: true
     });

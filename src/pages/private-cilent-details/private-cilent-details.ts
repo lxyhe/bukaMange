@@ -251,47 +251,167 @@ export class PrivateCilentDetailsPage {
         {
           text: '确定',
           handler: () => {
-            console.log('Buy clicked');
+            this.moveTopublicSea();
           }
         }
       ]
     });
     alert.present();
   }
+  moveTopublicSea() {
+    try {
+      this.storage.get('userInfo').then((data) => {
+        this.tokenid = data.tokenid;
+        this.httploading.HttpServerLoading("移动中...")
+        this.ajaxserve.moveToPublish({ tokenid: this.tokenid, userid: this.userid, customer_id: this.customer_id }).then((data) => {
+          if (data.status.Code = "200") {
+            this.httploading.ColseServerLoding();
+            //console.log(data);
+            //this.httploading.alertServe(data.status.Msg);
+            let alert = this.alertCtrl.create({
+              subTitle: data.status.Msg,
+              buttons: [
+                {
+                  text: "确定",
+                  handler: data => {
+                    setTimeout(() => {
+                      this.navCtrl.pop();
+                    }, 800)
+                  }
+                }]
+
+            });
+            alert.present();
+
+          }
+        }).catch((err) => {
+          console.log(err);
+        })
+      })
+    }
+    catch (err) {
+      console.log(err);
+    }
+  }
   cilentType(event) {
-    console.log(event);
+    console.log(event.col1.value);
+    try {
+      this.storage.get('userInfo').then((data) => {
+        this.tokenid = data.tokenid;
+        this.httploading.HttpServerLoading("加载中...")
+        this.ajaxserve.modifiterClientType({ tokenid: this.tokenid, customer_type_id: event.col1.value, customer_id: this.customer_id }).then((data) => {
+          if (data.status.Code = "200") {
+            this.httploading.ColseServerLoding();
+            console.log(data);
+          }
+        }).catch((err) => {
+          console.log(err);
+        })
+      })
+    }
+    catch (err) {
+      console.log(err);
+    }
+
   }
   cilentRank(event) {
-    console.log(event);
+    console.log()
+    try {
+      this.storage.get('userInfo').then((data) => {
+        this.tokenid = data.tokenid;
+        this.httploading.HttpServerLoading("修改中...")
+        this.ajaxserve.modifiterClientLevel({ tokenid: this.tokenid, customer_level_id: event.col2.value, customer_id: this.customer_id }).then((data) => {
+          if (data.status.Code = "200") {
+            this.httploading.ColseServerLoding();
+            console.log(data);
+          }
+        }).catch((err) => {
+          console.log(err);
+        })
+      })
+    }
+    catch (err) {
+      console.log(err);
+    }
   }
   cilentNeed(event) {
-    console.log(event);
+    try {
+      this.storage.get('userInfo').then((data) => {
+        this.tokenid = data.tokenid;
+        this.httploading.HttpServerLoading("修改中...")
+        this.ajaxserve.modifiterClientNeed({ tokenid: this.tokenid, customer_needs_id: event.col3.value, customer_id: this.customer_id }).then((data) => {
+          if (data.status.Code = "200") {
+            this.httploading.ColseServerLoding();
+            console.log(data);
+          }
+        }).catch((err) => {
+          console.log(err);
+        })
+      })
+    }
+    catch (err) {
+      console.log(err);
+    }
   }
   cilentSoure(event) {
-    console.log(event);
+    try {
+      this.storage.get('userInfo').then((data) => {
+        this.tokenid = data.tokenid;
+        this.httploading.HttpServerLoading("修改中...")
+        this.ajaxserve.modifiterClientSource({ tokenid: this.tokenid, customer_source_id: event.col4.value, customer_id: this.customer_id }).then((data) => {
+          if (data.status.Code = "200") {
+            this.httploading.ColseServerLoding();
+            console.log(data);
+          }
+        }).catch((err) => {
+          console.log(err);
+        })
+      })
+    }
+    catch (err) {
+      console.log(err);
+    }
   }
   cilentStatus(event) {
-    console.log(event);
+    try {
+      this.storage.get('userInfo').then((data) => {
+        this.tokenid = data.tokenid;
+        this.httploading.HttpServerLoading("修改中...")
+        this.ajaxserve.modifiterClientStatus({ tokenid: this.tokenid, customer_type_id: event.col5.value, customer_id: this.customer_id }).then((data) => {
+          if (data.status.Code = "200") {
+            this.httploading.ColseServerLoding();
+            console.log(data);
+          }
+        }).catch((err) => {
+          console.log(err);
+        })
+      })
+    }
+    catch (err) {
+      console.log(err);
+    }
   }
+
   goClientRemark() {
     //let profileModal = this.modalCtrl.create('ClientRemarksPage', { 'remark': this.ClientRemark });
-    let profileModal = this.modalCtrl.create('ClientRemarksPage');
+    let profileModal = this.modalCtrl.create('PrivateClientRemarksPage',
+      { 'remark': this.privateClientDetailsPageObj.customer_remarks, 'customer': this.customer_id });
     profileModal.onDidDismiss(data => {
       console.log(data);
-      // if (data !== "undefined") {
-      //   if (data.remark !== "" && data.remark !== 'undefined') {
-      //     this.isShowRemark = false;
-      //     this.ClientRemark = data.remark;
-      //   } else if (data.remark == 'undefined') {
-      //     this.isShowRemark = true;
-      //     this.ClientRemark = "未填写"
-      //   }
-      // }
+      if (data !== "undefined") {
+        if (data.remark !== "" && data.remark !== 'undefined') {
+          //his.isShowRemark = false;
+          this.privateClientDetailsPageObj.customer_remarks = data.remark;
+        } else if (data.remark == 'undefined') {
+          // this.isShowRemark = true;
+          this.privateClientDetailsPageObj.customer_remarks = "未填写"
+        }
+      }
     });
     profileModal.present();
   }
   goClientAddress() {
-    let profileModal = this.modalCtrl.create('ClientAddressPage', { 'address': this.ClientAddress });
+    let profileModal = this.modalCtrl.create('PrivateClientRemarksPage', { 'address': this.ClientAddress });
     //  let profileModal = this.modalCtrl.create('ClientAddressPage');
     profileModal.onDidDismiss(data => {
       console.log(data);

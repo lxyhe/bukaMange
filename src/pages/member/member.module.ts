@@ -4,11 +4,13 @@ import { MemberPage } from './member';
 import { HttpService } from '../../providers/httpserver';
 import { HttpLodingService } from '../../providers/loadingServer';
 import { ajaxService } from '../../providers/ajaxServe';
+import { PipesModule } from '../../pipes/pipe.module';
 @NgModule({
   declarations: [
     MemberPage,
   ],
   imports: [
+    PipesModule,
     IonicPageModule.forChild(MemberPage),
   ],
   providers: [

@@ -34,7 +34,8 @@
     <ion-list>
       <button ion-item>
         <ion-avatar item-start>
-          <img src="{{privateClientDetailsPageObj.customer_avatar==null?'assets/imgs/timg1.jpg':privateClientDetailsPageObj.customer_avatar}}">
+          <img src="{{privateClientDetailsPageObj.customer_avatar==null?'assets/imgs/timg1.jpg':
+          privateClientDetailsPageObj.customer_avatar==''?'assets/imgs/timg1.jpg':privateClientDetailsPageObj.customer_avatar}}">
         </ion-avatar>
         <h2>{{privateClientDetailsPageObj.customer_name }}</h2>
         <p> 发布时间: <span>{{privateClientDetailsPageObj.release_time}}</span> </p>
@@ -110,6 +111,6 @@
 </ion-content>
 <ion-footer no-border>
 
-  <button color="bukaRed" block ion-button (click)="moveToHighSeas()">移至公海</button>
+  <button block ion-button color="publiSea" (click)="moveToHighSeas()">移至公海</button>
 
 </ion-footer>

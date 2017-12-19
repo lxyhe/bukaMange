@@ -17,6 +17,10 @@ export interface companylistObj {
   tokenid: string | number;
   userid: string | number;
 }
+export interface publicSearchObj {
+  tokenid: string | number;
+  cname: string | number;
+}
 export interface grounpList {
   tokenid: string | number;
   team_id: string | number;
@@ -115,5 +119,42 @@ export class ajaxService {
   //记录
   setRecord(setfollowContent: setfoolowContentObj) {
     return this.httpserve.post(api.setfollow, setfollowContent)
+  }
+  //搜索私海
+  publicSearch(publicsearch: publicSearchObj) {
+    return this.httpserve.post(api.publicSearch, publicsearch)
+  }
+  //移动到公海
+  moveToPublish(movetopublish: publicGetClientObj) {
+    return this.httpserve.get(api.movetoPublish, movetopublish)
+  }
+
+  // modifiterClientType: address + "personal/editctype",//修改客户类型 post
+  modifiterClientType(modclientType) {
+    return this.httpserve.post(api.modifiterClientType, modclientType)
+  }
+  // modifiterClientRemark: address + "personal/editremarks",//修改客户备注 post
+  modifiterClientRemark(modclientRemark) {
+    return this.httpserve.post(api.modifiterClientRemark, modclientRemark)
+  }
+  // modifiterClientSource: address + "personal/editsource",//修改客户来源 post
+  modifiterClientSource(modclientSource) {
+    return this.httpserve.post(api.modifiterClientSource, modclientSource)
+  }
+  // modifiterClientLevel: address + "personal/editlevel",//修改客户级别 post
+  modifiterClientLevel(modclientLevel) {
+    return this.httpserve.post(api.modifiterClientLevel, modclientLevel)
+  }
+  // modifiterClientNeed: address + "personal/editneeds",//修改客户需求 post
+  modifiterClientNeed(modclientNeed) {
+    return this.httpserve.post(api.modifiterClientNeed, modclientNeed)
+  }
+  // modifiterClientStatus: address + "personal/editstatus",//修改客户状态 post
+  modifiterClientStatus(modclientStatus) {
+    return this.httpserve.post(api.modifiterClientStatus, modclientStatus)
+  }
+  // modifiterClientAddress: address + "personal/editaddress",//修改客户状态 post
+  modifiterClientAddress(modclientAddress) {
+    return this.httpserve.post(api.modifiterClientAddress, modclientAddress)
   }
 }

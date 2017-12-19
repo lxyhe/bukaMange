@@ -5,7 +5,7 @@ import { MultiPickerModule } from 'ion-multi-picker';
 import { HttpService } from '../../providers/httpserver';
 import { HttpLodingService } from '../../providers/loadingServer';
 import { ajaxService } from '../../providers/ajaxServe';
-import { PipesModule } from '../../pipes/pipe.module';
+//import { PipesModule } from '../../pipes/pipe.module';
 
 @NgModule({
   declarations: [
@@ -14,7 +14,7 @@ import { PipesModule } from '../../pipes/pipe.module';
   imports: [
     IonicPageModule.forChild(PrivateCilentDetailsPage),
     MultiPickerModule,
-    PipesModule
+    //PipesModule
   ],
   providers: [
     HttpService,

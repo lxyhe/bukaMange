@@ -183,7 +183,7 @@ export class AboutPage {
                   handler: data => {
                     setTimeout(() => {
                       this.navCtrl.setRoot('ContactPage');
-                    }, 1500);
+                    }, 1000);
                   }
                 }]
 

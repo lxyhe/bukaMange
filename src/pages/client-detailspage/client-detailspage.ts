@@ -74,6 +74,7 @@ export class ClientDetailspagePage {
     try {
       this.storage.get('userInfo').then((data) => {
         this.tokenid = data.tokenid;
+        this.userid = data.userid;
         this.httploading.HttpServerLoading("领取中...")
         this.ajaxserve.publicGetClient({ userid: this.userid, tokenid: this.tokenid, customer_id: this.customer_id }).then((data) => {
           if (data.status.Code = "200") {

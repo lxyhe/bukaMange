@@ -52,7 +52,7 @@ export class ClientAddressPage {
 
     // this.code = event['region'].value
     var addres = "-"
-    let addressString = event.city.text + addres + event.province.text + addres + event.region.text
+    let addressString = event.province.text + addres + event.city.text + addres + event.region.text
 
     this.detailsAddress.address = addressString;
 

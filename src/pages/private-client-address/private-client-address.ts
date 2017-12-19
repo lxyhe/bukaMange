@@ -1,15 +1,11 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
-//import { CityPickerService } from "../../providers/getCityServer";
+import { privateCityPickerService } from "../../providers/privateCityPickerService";
+import { HttpLodingService } from '../../providers/loadingServer';
+import { ajaxService } from '../../providers/ajaxServe';
+import { Storage } from '@ionic/storage';
 
-/**
- * Generated class for the PrivateClientAddressPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
-export class addressObj {
+export class privateAddressObj {
   address: string = "";
   addressDetails: string = "";
 }
@@ -19,49 +15,73 @@ export class addressObj {
   templateUrl: 'private-client-address.html',
 })
 export class PrivateClientAddressPage {
-  // public queryText = "";
-  // public cityData: any[]; //城市数据
-  // public cityName: string = ''; //初始化城市名
-  // public code: string; //城市编码
-  // public detailsAddress: addressObj;
+  public privatequeryText = "";
+  public privatecityData: any[]; //城市数据
+  public privatedetailsAddress: privateAddressObj;
+  public tokenid: string = "";
+  public customer_id: string = "";
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController,
-    //public cityPickerSev: CityPickerService
+    public privatecityPickerSev: privateCityPickerService,
+    private storage: Storage,
+    public httploading: HttpLodingService,
+    public ajaxserve: ajaxService,
   ) {
 
-    // this.detailsAddress = new addressObj();
-    // let addresObj = navParams.get('address');
-
-    // if (addresObj.address == "未填写") {
-    //   this.detailsAddress.address = "";
-    //   this.detailsAddress.addressDetails = "";
-    // } else {
-    //   this.detailsAddress.address = addresObj.address;
-    //   this.detailsAddress.addressDetails = addresObj.addressDetails;
-    // }
-    // this.setCityPickerData();
+    this.privatedetailsAddress = new privateAddressObj();
+    let privateaddresObj = navParams.get('address');
+    console.log(privateaddresObj);
+    if (privateaddresObj.customer_address1 == "未填写") {
+      this.privatedetailsAddress.address = "";
+      this.privatedetailsAddress.addressDetails = "";
+    } else {
+      this.privatedetailsAddress.address = privateaddresObj.customer_address1;
+      this.privatedetailsAddress.addressDetails = privateaddresObj.customer_address2;
+      this.customer_id = privateaddresObj.customer_id;
+    }
+    this.privatesetCityPickerData();
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad ClientMamePage');
   }
 
-  // setCityPickerData() {
-  //   this.cityPickerSev.getCitiesData()
-  //     .then(data => {
-  //       this.cityData = data;
-  //     });
-  // }
-  // cityChange(event) {
+  privatesetCityPickerData() {
+    this.privatecityPickerSev.privateCityPickerService()
+      .then(data => {
+        this.privatecityData = data;
+      });
+  }
+  privatecityChange(event) {
+    var addres = "-"
+    let privateddressString = event.province.text + addres + event.city.text + addres + event.region.text
+    this.privatedetailsAddress.address = privateddressString;
+  }
+  dismiss() {
+    this.modofiAddress();
+    let data = { 'address': this.privatedetailsAddress };
+    this.viewCtrl.dismiss(data);
+  }
+  modofiAddress() {
+    try {
+      this.storage.get('userInfo').then((data) => {
+        this.tokenid = data.tokenid;
+        this.httploading.HttpServerLoading("修改中...")
+        this.ajaxserve.modifiterClientAddress({
+          tokenid: this.tokenid,
+          customer_address1: this.privatedetailsAddress.address,
+          customer_address2: this.privatedetailsAddress.addressDetails,
+          customer_id: this.customer_id
+        }).then((data) => {
+          if (data.status.Code = "200") {
+            this.httploading.ColseServerLoding();
 
-
-  //   // this.code = event['region'].value
-  //   var addres = "-"
-  //   let addressString = event.city.text + addres + event.province.text + addres + event.region.text
-
-  //   this.detailsAddress.address = addressString;
-
-  // }
-  // dismiss() {
-  //   let data = { 'address': this.detailsAddress };
-  //   this.viewCtrl.dismiss(data);
-  // }
+          }
+        }).catch((err) => {
+          console.log(err);
+        })
+      })
+    }
+    catch (err) {
+      console.log(err);
+    }
+  }
 }

@@ -4,21 +4,12 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
-export class CityPickerService {
+export class privateCityPickerService {
 
   constructor(public http: Http) {
     console.log('Hello CityPicker Provider');
   }
 
-  getCitiesData() {
-    return this.http.get('./assets/data/city-data.json')
-      .toPromise()
-      .then(response => response.json())
-      .catch(err => {
-        return Promise.reject(err)
-      })
-
-  }
   privateCityPickerService() {
     return this.http.get('./assets/data/city-data.json')
       .toPromise()

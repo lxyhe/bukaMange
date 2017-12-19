@@ -411,19 +411,19 @@ export class PrivateCilentDetailsPage {
     profileModal.present();
   }
   goClientAddress() {
-    let profileModal = this.modalCtrl.create('PrivateClientRemarksPage', { 'address': this.ClientAddress });
+    let profileModal = this.modalCtrl.create('PrivateClientAddressPage', { 'address': this.privateClientDetailsPageObj });
     //  let profileModal = this.modalCtrl.create('ClientAddressPage');
     profileModal.onDidDismiss(data => {
       console.log(data);
-      // if (data.address.address !== "" && data.address.address !== 'undefined') {
-      //   this.isShowAddress = false;
-      //   this.ClientAddress.address = data.address.address;
-      //   this.ClientAddress.addressDetails = data.address.addressDetails;
-      // } else if (data.address.address == 'undefined') {
-      //   this.isShowAddress = true;
-      //   this.ClientAddress.address = "未填写";
-      //   this.ClientAddress.addressDetails = "未填写";
-      // }
+      if (data.address.address !== "" && data.address.address !== 'undefined') {
+
+        this.privateClientDetailsPageObj.customer_address1 = data.address.address;
+        this.privateClientDetailsPageObj.customer_address2 = data.address.addressDetails;
+      } else if (data.address.address == 'undefined') {
+        //this.isShowAddress = true;
+        this.privateClientDetailsPageObj.customer_address1 = "未填写";
+        this.privateClientDetailsPageObj.customer_address2 = "未填写";
+      }
 
     });
     profileModal.present();

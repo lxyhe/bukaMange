@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
-
-import { NavController, IonicPage, NavParams, Events, LoadingController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { NavController, IonicPage, NavParams, Events, LoadingController, Refresher } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { HttpLodingService } from '../../providers/loadingServer';
 import { ajaxService } from '../../providers/ajaxServe';
@@ -11,6 +10,7 @@ import { ajaxService } from '../../providers/ajaxServe';
   templateUrl: 'contact.html'
 })
 export class ContactPage {
+  @ViewChild(Refresher) public refresher: Refresher;
   public clientList: Array<object> = [];
   public searcheMemo: string = '123';
   public pet: string = "puppies";
@@ -19,6 +19,7 @@ export class ContactPage {
   public detailsInfo: string = "西八";
   public tokenid: string = "";
   public userid: any = "";
+  public isNoData: boolean = true;
   public publicClientList: Array<object>;
   constructor(
     public navCtrl: NavController,
@@ -31,45 +32,15 @@ export class ContactPage {
 
   ) {
 
-    this.clientList = [{
-      imgUrl: "assets/imgs/timg1.jpg",
-      clientName: "光大传媒",
-      clientType: "机构客户",
-      clinetDemand: "大班直播",
-      clientTime: "2017-11-27",
-      status: "1"
-    }, {
-      imgUrl: "assets/imgs/timg1.jpg",
-      clientName: "光大传媒",
-      clientType: "机构客户",
-      clinetDemand: "大班直播",
-      clientTime: "2017-11-27",
-      status: "2"
-    }, {
-      imgUrl: "assets/imgs/timg1.jpg",
-      clientName: "光大传媒",
-      clientType: "机构客户",
-      clinetDemand: "大班直播",
-      clientTime: "2017-11-27",
-      status: "2"
-    }, {
-      imgUrl: "assets/imgs/timg1.jpg",
-      clientName: "光大传媒",
-      clientType: "机构客户",
-      clinetDemand: "大班直播",
-      clientTime: "2017-11-27",
-      status: "1"
-    }, {
-      imgUrl: "assets/imgs/timg1.jpg",
-      clientName: "光大传媒",
-      clientType: "机构客户",
-      clinetDemand: "大班直播",
-      clientTime: "2017-11-27",
-      status: "1"
-    }]
   }
   ionViewDidEnter() {
     this.getPublicList();
+  }
+  doRefresh(refresher) {
+    this.getPublicList();
+    this.event.subscribe("request:success", () => {
+      this.refresher.complete();
+    })
   }
   getPublicList() {
     try {
@@ -81,7 +52,12 @@ export class ContactPage {
           if (data.status.Code = "200") {
             this.httploading.ColseServerLoding();
             this.publicClientList = data.data;
-            console.log(data);
+            if (data.data.length == 0) {
+              this.isNoData = true;
+            } else {
+              this.isNoData = false;
+            }
+            //  console.log(data);
             // this.companyavatar = data.data.avatar;
             // this.companyname = data.data.name;
 

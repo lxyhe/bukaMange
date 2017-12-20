@@ -22,12 +22,16 @@
         <h2>{{item.customer_name}}</h2>
         <p> 客户类型: <span>{{item.customer_type_id  | clienttypepipe  }}</span> </p>
         <p> 客户需求:<span> {{item.customer_source_id  | clientneedpipe }}</span> </p>
-        <!-- <p> 客户类型: <span>{{item.customer_type_id    }}</span> </p>
-        <p> 客户需求:<span> {{item.customer_source_id  }}</span> </p> -->
+
         <p item-right class="time">{{item.release_time}}</p>
         <button class="btnStyle" color="bukaRed" ion-button>领取</button>
       </ion-item>
     </ion-list>
   </ion-card>
-
+  <div *ngIf="isNoData" style="width:50%;margin:0 auto;text-align:center;margin-top:13rem">
+    <img style="width:50%;height:50%;" src="assets/imgs/nochat.png" alt="">
+    <div style=" font-size: 16px;
+        color: #666666;
+        margin-top: 5px;">暂无客户信息</div>
+  </div>
 </ion-content>

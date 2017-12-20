@@ -10,7 +10,6 @@ import { PipesModule } from '../pipes/pipe.module';
 @NgModule({
   declarations: [
     MyApp,
-
   ],
   imports: [
     PipesModule,
@@ -26,7 +25,6 @@ import { PipesModule } from '../pipes/pipe.module';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-
   ],
   providers: [
     StatusBar,

@@ -81,8 +81,7 @@ export class LogingPage {
           }
         }
       }).catch(err => {
-        console.log(err);
-        this.httploading.alertServe(err);
+        this.httploading.alertServe("服务异常" + err);
         this.httploading.ColseServerLoding();
       })
 

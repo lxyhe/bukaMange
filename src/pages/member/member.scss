@@ -97,10 +97,24 @@ page-member {
     background: #F58623;
   }
   .btnNotFollow {
-    background: #F58623;
+    background: -webkit-linear-gradient(left, #F58523, #F59323);
+    /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(right, #F58523, #F59323);
+    /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(right, #F58523, #F59323);
+    /* Firefox 3.6 - 15 */
+    background: linear-gradient(to right, #F58523, #F59323);
+    /* 标准的语法 */
+    //background: #F58623;
   }
   .btnFollowUp {
-    background: #36CDBB;
+    background: -webkit-linear-gradient(left, #36CDBB, #36CDBD);
+    /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(right, #36CDBB, #36CDBD);
+    /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(right, #36CDBB, #36CDBD);
+    /* Firefox 3.6 - 15 */
+    background: linear-gradient(to right, #36CDBB, #36CDBD);
   }
   .tabContent {
     height: 44px;

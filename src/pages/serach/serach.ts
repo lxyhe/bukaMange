@@ -49,6 +49,7 @@ export class SerachPage {
   public customerObj: object;
   public customerObjLen: number = 0;
   public isShow: boolean = false;
+  public isNoData: boolean = false;
   constructor(
     public navCtrl: NavController,
     // public navparam: NavParams,
@@ -59,42 +60,7 @@ export class SerachPage {
     public loadingCtrl: LoadingController
   ) {
 
-    this.clientList = [{
-      imgUrl: "assets/imgs/timg1.jpg",
-      clientName: "光大传媒",
-      clientType: "机构客户",
-      clinetDemand: "大班直播",
-      clientTime: "2017-11-27",
-      status: "1"
-    }, {
-      imgUrl: "assets/imgs/timg1.jpg",
-      clientName: "光大传媒",
-      clientType: "机构客户",
-      clinetDemand: "大班直播",
-      clientTime: "2017-11-27",
-      status: "2"
-    }, {
-      imgUrl: "assets/imgs/timg1.jpg",
-      clientName: "光大传媒",
-      clientType: "机构客户",
-      clinetDemand: "大班直播",
-      clientTime: "2017-11-27",
-      status: "2"
-    }, {
-      imgUrl: "assets/imgs/timg1.jpg",
-      clientName: "光大传媒",
-      clientType: "机构客户",
-      clinetDemand: "大班直播",
-      clientTime: "2017-11-27",
-      status: "1"
-    }, {
-      imgUrl: "assets/imgs/timg1.jpg",
-      clientName: "光大传媒",
-      clientType: "机构客户",
-      clinetDemand: "大班直播",
-      clientTime: "2017-11-27",
-      status: "1"
-    }]
+
   }
   ionViewDidEnter() {
     document.onkeydown = (k) => {
@@ -115,7 +81,14 @@ export class SerachPage {
             console.log(data);
             this.customerObj = data.data;
             this.customerObjLen = data.data.length;
-            this.isShow = true;
+            if (data.data.length == 0) {
+              this.isNoData = true;
+              this.isShow = false;
+            } else {
+              this.isNoData = false;
+              this.isShow = true;
+            }
+
             // if (data.status.Msg = "未输入搜索内容") {
             //   this.customerObjLen = 0;
             // }

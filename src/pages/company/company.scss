@@ -103,4 +103,7 @@ page-company {
     padding-left: 2rem;
     background: url('../assets/imgs/grounp.png') no-repeat left 3px;
   }
+  .list-ios>.item-block:first-child {
+    border: 0.55 solid #EFEFF4;
+  }
 }

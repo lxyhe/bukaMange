@@ -30,7 +30,7 @@
         <h2>{{followUpName}}</h2>
         <p style="width:100%" class="client">
           <span *ngIf="followUpLinkCantact==null?false:true" class="nickname spanbox">{{followUpLinkCantact}}</span>
-          <span *ngIf="followUpPhone==null?false:true" class="phoneNumber spanbox ">{{followUpPhone}}</span>
+          <span (click)="link()" *ngIf="followUpPhone==null?false:true" class="phoneNumber spanbox ">{{followUpPhone}}</span>
           <span *ngIf="followUpWechat==null?false:true" class="weChat spanbox ">{{followUpWechat}}</span></p>
       </ion-item>
     </ion-list>
@@ -39,15 +39,18 @@
 
 
 <ion-content>
-  <div style="overflow:hidden" *ngFor="let item of followUpList">
+  <div style="overflow:hidden" *ngFor="let item of followUpList let i = index">
     <p style="text-align:center;font-size: 12px;
     color: #999999;
     line-height: 16px;">{{item.follow_up_time}}</p>
-    <div style="height:62px;line-height:62px;">
+    <div style="height:62px;line-height:62px;position:relative">
       <div class="Roundcake_Box" style="float:left">
         <span class="time">{{item.follow_up_time | timepipe }}</span>
-        <!-- <span class="time">{{item.follow_up_time  }}</span> -->
-        <span class="Roundcake"></span>
+
+        <span class="Roundcake">
+          <i *ngIf="i==0" class="redCicle"></i>
+        </span>
+
       </div>
 
       <div class="messge" style="float:right;">
@@ -57,7 +60,15 @@
     </div>
 
   </div>
-
+  <!-- <div>
+    <img src="assets/imgs/nosearch.png" alt="">
+  </div> -->
+  <div *ngIf="isNoData" style="width:50%;margin:0 auto;text-align:center;margin-top:13rem">
+    <img style="width:50%;height:50%;" src="assets/imgs/nochat.png" alt="">
+    <div style=" font-size: 16px;
+    color: #666666;
+    margin-top: 5px;">暂无跟进记录</div>
+  </div>
 </ion-content>
 <ion-footer class="footer">
   <input [(ngModel)]="message" class="importInfo" type="text" placeholder="记录当前跟进客户情况"><button (click)="setrecord()"> 记录</button>

@@ -10,7 +10,8 @@
       <button class="cancelIcon" navPop></button>
       <img class="backgroundImg" src="assets/imgs/headbackground.png" />
       <div class="card-title">
-        <img class="headerImg" src="{{account_login_avatar==null?'assets/imgs/timg1.jpg':account_login_avatar}}" alt="" />
+        <img class="headerImg" src="{{account_login_avatar==null?'assets/imgs/timg1.jpg':account_login_avatar==''?'assets/imgs/timg1.jpg':account_login_avatar}}"
+          alt="" />
         <p>{{account_login_name}}</p>
       </div>
 
@@ -61,7 +62,7 @@
       <ion-list *ngFor="let item of memberList">
         <ion-item>
           <ion-avatar item-start>
-            <img src="{{item.customer_avatar==null?'assets/imgs/timg1.jpg':item.customer_avatar}}">
+            <img src="{{account_login_avatar==null?'assets/imgs/timg1.jpg':account_login_avatar==''?'assets/imgs/timg1.jpg':account_login_avatar}}">
           </ion-avatar>
           <h2>{{item.customer_name}}</h2>
           <p> 客户类型: <span>{{item.customer_type_id | clienttypepipe }}</span> </p>
@@ -76,7 +77,7 @@
       <ion-list *ngFor="let item of fllowList">
         <ion-item>
           <ion-avatar item-start>
-            <img src="{{item.customer_avatar==null?'assets/imgs/timg1.jpg':item.customer_avatar}}">
+            <img src="{{account_login_avatar==null?'assets/imgs/timg1.jpg':account_login_avatar==''?'assets/imgs/timg1.jpg':account_login_avatar}}">
           </ion-avatar>
           <h2>{{item.customer_name}}</h2>
           <p> 客户类型: <span>{{item.customer_type_id}}</span> </p>
@@ -90,7 +91,7 @@
       <ion-list *ngFor="let item of nofllowList">
         <ion-item>
           <ion-avatar item-start>
-            <img src="{{item.customer_avatar==null?'assets/imgs/timg1.jpg':item.customer_avatar}}">
+            <img src="{{account_login_avatar==null?'assets/imgs/timg1.jpg':account_login_avatar==''?'assets/imgs/timg1.jpg':account_login_avatar}}">
           </ion-avatar>
           <h2>{{item.customer_name}}</h2>
           <p> 客户类型: <span>{{item.customer_type_id}}</span> </p>

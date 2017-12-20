@@ -6,6 +6,7 @@ import { privateCityPickerService } from "../../providers/privateCityPickerServi
 import { HttpService } from '../../providers/httpserver';
 import { HttpLodingService } from '../../providers/loadingServer';
 import { ajaxService } from '../../providers/ajaxServe';
+
 @NgModule({
   declarations: [
     PrivateClientAddressPage,

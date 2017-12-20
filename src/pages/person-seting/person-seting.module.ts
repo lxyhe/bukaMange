@@ -3,6 +3,10 @@ import { IonicPageModule } from 'ionic-angular';
 import { PersonSetingPage } from './person-seting';
 import { MultiPickerModule } from 'ion-multi-picker';
 import { Camera } from '@ionic-native/camera';
+import { HttpService } from '../../providers/httpserver';
+import { HttpLodingService } from '../../providers/loadingServer';
+import { ajaxService } from '../../providers/ajaxServe';
+
 @NgModule({
   declarations: [
     PersonSetingPage,
@@ -12,7 +16,10 @@ import { Camera } from '@ionic-native/camera';
     MultiPickerModule
   ],
   providers: [
-    Camera
+    Camera,
+    HttpService,
+    HttpLodingService,
+    ajaxService,
   ]
 })
 export class PersonSetingPageModule { }

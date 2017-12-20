@@ -5,6 +5,10 @@ import { HttpService } from '../../providers/httpserver';
 import { HttpLodingService } from '../../providers/loadingServer';
 import { ajaxService } from '../../providers/ajaxServe';
 import { PipesModule } from '../../pipes/pipe.module';
+import { Camera } from '@ionic-native/camera';
+import { Clipboard } from '@ionic-native/clipboard';
+import { Toast } from '@ionic-native/toast';
+import { Contacts } from '@ionic-native/contacts';
 @NgModule({
   declarations: [
     PrivateFloowPage,
@@ -14,9 +18,13 @@ import { PipesModule } from '../../pipes/pipe.module';
     IonicPageModule.forChild(PrivateFloowPage),
   ],
   providers: [
+    Camera,
     HttpService,
     HttpLodingService,
-    ajaxService
+    ajaxService,
+    Clipboard,
+    Toast,
+    Contacts
     // Storage
   ]
 })

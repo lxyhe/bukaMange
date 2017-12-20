@@ -32,7 +32,7 @@
      </button >
      <button style="border:1px solid #F5F5F8" ion-item>
         <ion-label class="leftList">性别</ion-label>
-        <ion-multi-picker  placeholder="请选择" showReset=true resetText="性别" item-content cancelText="取消"  item-content doneText="完成" [multiPickerColumns]="simpleColumns"></ion-multi-picker>
+        <ion-multi-picker  placeholder="请选择" (ionChange)="modSex($event)" showReset=true resetText="性别" item-content cancelText="取消"  item-content doneText="完成" [multiPickerColumns]="simpleColumns"></ion-multi-picker>
       </button >
           </ion-list>
         </ion-card>

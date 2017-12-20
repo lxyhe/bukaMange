@@ -18,6 +18,7 @@ page-home {
   .item-ios,
   .item-md {
     border-bottom: 1px solid #ECF0F1;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.10);
   }
   .notifications {
     position: absolute;
@@ -37,6 +38,10 @@ page-home {
   .card-md {
     margin: 0px 0px 10px;
     width: 100%;
+    background-color: #F8F6F5;
+  }
+  .card-ios ion-list {
+    margin-top: 12px;
   }
   .card-title {
     position: absolute;
@@ -97,10 +102,24 @@ page-home {
     background: #F58623;
   }
   .btnNotFollow {
-    background: #F58623;
+    background: -webkit-linear-gradient(left, #F58523, #F59323);
+    /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(right, #F58523, #F59323);
+    /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(right, #F58523, #F59323);
+    /* Firefox 3.6 - 15 */
+    background: linear-gradient(to right, #F58523, #F59323);
+    /* 标准的语法 */
+    //background: #F58623;
   }
   .btnFollowUp {
-    background: #36CDBB;
+    background: -webkit-linear-gradient(left, #36CDBB, #36CDBD);
+    /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(right, #36CDBB, #36CDBD);
+    /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(right, #36CDBB, #36CDBD);
+    /* Firefox 3.6 - 15 */
+    background: linear-gradient(to right, #36CDBB, #36CDBD);
   }
   .tabContent {
     height: 44px;
@@ -117,13 +136,22 @@ page-home {
     border: 0;
     max-width: 1000px;
   }
-  .list-ios>.item-block:last-child,
-  .list-ios>.item-wrapper:last-child .item-block {
-    border-top: 1rem solid #F8F6F5
-  }
+  .list-ios>.item-block:first-child {
+    border-top: none;
+  } // .card-ios .list-ios>.item-block:last-child,
+  // .list-ios>.item-wrapper:last-child .item-block {
+  //   border-top: none;
+  // }
   .nodataText {
     font-size: 16px;
     color: #666666;
     margin-top: 5px;
+  }
+  .group {
+    padding-left: 1.2rem;
+    background: url('../assets/imgs/private.png') no-repeat left 3px;
+  }
+  .segment-ios .segment-button {
+    border-bottom: rgba(0, 0, 0, 0.10);
   }
 }

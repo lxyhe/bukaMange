@@ -27,9 +27,6 @@ page-private-floow {
   .item-md {
     padding: 0;
   }
-  ion-item div {
-    padding-left: 0.6rem;
-  }
   .leftList {
     font-size: 16px;
     color: #333;
@@ -79,9 +76,9 @@ page-private-floow {
     height: 22px;
     line-height: 22px;
     font-size: 13px;
-    padding-left: 22px;
+    padding-left: 17px;
     color: #666666;
-    padding-right: 10px;
+    padding-right: 7px;
   }
   .nickname {
     background: url('../assets/imgs/linkcantas.png') no-repeat 0.2rem 0.4rem;
@@ -146,5 +143,30 @@ page-private-floow {
     background: #DDDDDD;
     border-radius: 50%;
     position: relative;
+    top: 2px;
   }
+  .redCicle {
+    width: 9px;
+    height: 9px;
+    display: inline-block;
+    background: #F75550;
+    border-radius: 50%;
+    top: 2px;
+    left: 2px;
+    position: absolute;
+  }
+  .nodataText {
+    font-size: 16px;
+    color: #666666;
+    margin-top: 5px;
+  } // .line {
+  //   // display: inline-block;
+  //   // width: 1px;
+  //   // height: 90px;
+  //   // background: #DDDDDD;
+  //   // border-radius: 50%;
+  //   // position: absolute;
+  //   // top: 63px;
+  //   // left: 60px;
+  // }
 }

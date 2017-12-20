@@ -24,5 +24,9 @@ export const api = {
   modifiterClientStatus: address + "personal/editstatus",//修改客户状态 post
   modifiterClientAddress: address + "personal/editaddress",//修改客户状态 post
 
+  modifiterSex: address + "personal/editpersex",
+  modifiterName: address + "personal/editperrname"
+
+
 }
 

@@ -29,6 +29,12 @@ export class GrounpPage {
   public team_name: any = "";
   public grounpData: object;//上个页面的参数
 
+  public privatenoData: boolean = false;
+  public nofollowUpdata: boolean = false;
+  public groupData: boolean = false;
+  public followData: boolean = false;
+
+
   public privateClient: object;//私海客户
   public noFoloowUp: object;//未跟进
   public floowUp: object;//已跟进

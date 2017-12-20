@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ActionSheetController, AlertController } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { Storage } from '@ionic/storage';
+import { HttpLodingService } from '../../providers/loadingServer';
+import { ajaxService } from '../../providers/ajaxServe';
+
 /**
  * Generated class for the PersonSetingPage page.
  *
@@ -17,13 +20,22 @@ import { Storage } from '@ionic/storage';
 export class PersonSetingPage {
   public simpleColumns: any;
   public img: any;
+  public tokenid: string;
+  public userid: string;
+  public penSetingData: string;
+
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public actionSheetCtrl: ActionSheetController,
     private camera: Camera,
     private alertCtrl: AlertController,
     private storage: Storage,
+    public httploading: HttpLodingService,
+    public ajaxserve: ajaxService,
+
   ) {
+    this.penSetingData = this.navParams.get('data');
+    console.log(this.penSetingData);
     this.simpleColumns = [
       {
         name: 'col1',
@@ -34,10 +46,31 @@ export class PersonSetingPage {
         ]
       }
     ];
+
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PersonSetingPage');
+  }
+  modSex(event) {
+    try {
+      this.storage.get('userInfo').then((data) => {
+        this.tokenid = data.tokenid;
+        this.userid = data.userid;
+        this.httploading.HttpServerLoading("修改中...")
+        this.ajaxserve.modifiterSex({ tokenid: this.tokenid, userid: this.userid, usersex: event.col1.value, }).then((data) => {
+          if (data.status.Code = "200") {
+            this.httploading.ColseServerLoding();
+            console.log(data);
+          }
+        }).catch((err) => {
+          console.log(err);
+        })
+      })
+    }
+    catch (err) {
+      console.log(err);
+    }
   }
   setingHead() {
     let actionSheet = this.actionSheetCtrl.create({

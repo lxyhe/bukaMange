@@ -157,5 +157,13 @@ export class ajaxService {
   modifiterClientAddress(modclientAddress) {
     return this.httpserve.post(api.modifiterClientAddress, modclientAddress)
   }
+  //修改性别
+  modifiterSex(modifiterSex) {
+    return this.httpserve.post(api.modifiterSex, modifiterSex)
+  }
+  //修改姓名
+  modifiterName(modifiterName) {
+    return this.httpserve.post(api.modifiterName, modifiterName)
+  }
 
 }

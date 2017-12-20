@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavController, IonicPage, NavParams, Events } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { NavController, IonicPage, NavParams, Events, Refresher } from 'ionic-angular';
 import { homeObj } from '../../providers/homeObj';
 import { Storage } from '@ionic/storage';
 //import mickData from '../../providers/mickData';
@@ -19,13 +19,18 @@ enum Direction {
   templateUrl: 'home.html'
 })
 export class HomePage {
+  @ViewChild(Refresher) public refresher: Refresher;
   public clientList: homeObj[];
   public pet: string = "privateClient";
   public tokenid: string = "";
   public userid: any = "";
   public roleid: any = "";
   public isRoleid: boolean = false;
-  public isNoData: boolean = false;
+
+  public privatenoData: boolean = false;
+  public nofollowUp: boolean = false;
+  public groupData: boolean = false;
+  public followData: boolean = false;
 
   public groupList: Array<object>;//团队成员
   public privateClientList: Array<object>;//私海客户list
@@ -38,6 +43,8 @@ export class HomePage {
   public privateCilent: any = "";
   public grounp: any = "";
   public nofollow: any = "";
+  public pensetingData: object;
+
   constructor(
     public navCtrl: NavController,
     public navparam: NavParams,
@@ -53,6 +60,12 @@ export class HomePage {
     //this.getUserType();
     this.getPrivateClientList();
   }
+  doRefresh(refresher) {
+    this.getPrivateClientList();
+    this.event.subscribe("request:success", () => {
+      this.refresher.complete();
+    })
+  }
   getPrivateClientList() {
     try {
       this.storage.get('userInfo').then((data) => {
@@ -66,16 +79,18 @@ export class HomePage {
             if (data.status.Code = "200") {
               console.log(data);
               this.httploading.ColseServerLoding();
-              this.groupList = data.member;
               this.privateClientList = data.clist;
               if (data.clist.length == 0) {
-                this.isNoData = true;
+                this.privatenoData = true;
               } else {
-                this.isNoData = false;
+                this.privatenoData = false;
               }
+
+              this.groupList = data.member;
               this.fllowClientList = data.yfollow;
               this.nofllowClientList = data.nfollow;
               /** */
+              this.pensetingData = data.leader
               this.grounp = data.leader.count;
               this.avatarUrl = data.leader.account_login_avatar;
               this.name = data.leader.account_login_name;
@@ -94,11 +109,7 @@ export class HomePage {
               this.httploading.ColseServerLoding();
               //this.groupList = data.customer;
               this.privateClientList = data.customer;
-              if (data.customer.length == 0) {
-                this.isNoData = true;
-              } else {
-                this.isNoData = false;
-              }
+
               this.fllowClientList = data.yfollow;
               this.nofllowClientList = data.nfollow;
 
@@ -135,7 +146,7 @@ export class HomePage {
     this.navCtrl.push('PrivateCilentDetailsPage', { data: items })
   }
   goPensonSeting() {
-    this.navCtrl.push('PersonSetingPage', );
+    this.navCtrl.push('PersonSetingPage', { 'data': this.pensetingData });
   }
   goMemberPage(items) {
 

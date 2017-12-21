@@ -21,20 +21,20 @@
      <button style="border:1px solid #F5F5F8" ion-item>
         <span>账号</span>
               <span item-end>
-                13581911688
+                {{username}}
               </span>
      </button >
-    <button style="border:1px solid #F5F5F8"ion-item>
+    <button (click)="setingName()" style="border:1px solid #F5F5F8"ion-item>
         <span>姓名</span>
         <span item-end>
-            陈龙
+            {{name==null?'未填写':name}}
           </span>
      </button >
      <button style="border:1px solid #F5F5F8" ion-item>
         <ion-label class="leftList">性别</ion-label>
-        <ion-multi-picker  placeholder="请选择" (ionChange)="modSex($event)" showReset=true resetText="性别" item-content cancelText="取消"  item-content doneText="完成" [multiPickerColumns]="simpleColumns"></ion-multi-picker>
+        <ion-multi-picker [(ngModel)]="userSex" placeholder="请选择" (ionChange)="modSex($event)" showReset=true resetText="性别" item-content cancelText="取消"  item-content doneText="完成" [multiPickerColumns]="simpleColumns"></ion-multi-picker>
       </button >
-          </ion-list>
+        </ion-list>
         </ion-card>
         <div (click)="exit()" class="exit_Btn">
           <span>退出</span>

@@ -48,39 +48,37 @@
 // }
 apptemplate {
   .tabs-ios .tab-button[aria-selected=false] .ion-ios-tab1-outline {
-    content: url("../assets/tabs/private.png");
-    min-width: 17px;
+    content: url("../assets/tabs/private.svg");
+    min-width: 30px;
     padding: 2px;
-    min-height: 17px;
-    padding-top: 2px;
     opacity: 0.8;
   }
   .tabs-ios .tab-button[aria-selected=true] .ion-ios-tab1 {
-    content: url("../assets/tabs/private-c.png");
+    content: url("../assets/tabs/private-c.svg");
     min-width: 30px;
     padding: 2px;
     opacity: 0.8;
   }
   .tabs-ios .tab-button[aria-selected=false] .ion-ios-tab3-outline {
-    content: url("../assets/tabs/public.png");
+    content: url("../assets/tabs/public.svg");
     min-width: 30px;
     padding: 2px;
     opacity: 0.8;
   }
   .tabs-ios .tab-button[aria-selected=true] .ion-ios-tab3 {
-    content: url("../assets/tabs/public-c.png");
+    content: url("../assets/tabs/public-c.svg");
     min-width: 30px;
     padding: 2px;
     opacity: 0.8;
   }
   .tabs-ios .tab-button[aria-selected=false] .ion-ios-tab2-outline {
-    content: url("../assets/tabs/publish.png");
+    content: url("../assets/tabs/publish.svg");
     min-width: 30px;
     padding: 2px;
     opacity: 0.8;
   }
   .tabs-ios .tab-button[aria-selected=true] .ion-ios-tab2 {
-    content: url("../assets/tabs/publish.png");
+    content: url("../assets/tabs/publish-c.svg");
     min-width: 30px;
     padding: 2px;
     opacity: 0.8;

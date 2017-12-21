@@ -21,6 +21,11 @@ export class ContactPage {
   public userid: any = "";
   public isNoData: boolean = true;
   public publicClientList: Array<object>;
+  public pageNumber: number;
+  public totalNumber: any;
+  public noMoreData: boolean = false;
+  public noLoading: boolean = true;
+
   constructor(
     public navCtrl: NavController,
     public navparam: NavParams,
@@ -52,22 +57,19 @@ export class ContactPage {
           if (data.status.Code = "200") {
             this.httploading.ColseServerLoding();
             this.publicClientList = data.data;
+            this.pageNumber = data.cpage;
+            this.totalNumber = data.total;
+
             if (data.data.length == 0) {
               this.isNoData = true;
+              this.noLoading = false;
+              this.noMoreData = false;
             } else {
               this.isNoData = false;
+              this.noLoading = true;
+              this.noMoreData = false;
             }
-            //  console.log(data);
-            // this.companyavatar = data.data.avatar;
-            // this.companyname = data.data.name;
 
-            //console.log(this.groupList);
-            // this.privateClientList = data.clist;
-            // this.fllowClientList = data.yfollow;
-            // this.nofllowClientList = data.nfollow;
-            // public privateClientList:Array<object>;//私海客户list
-            // public fllowClientList:Array<object>;//跟进客户list
-            // public nofllowClientList:Array<object>;//未跟进客户list
           }
         }).catch((err) => {
           console.log(err);
@@ -78,6 +80,42 @@ export class ContactPage {
       console.log(err);
     }
 
+  }
+  doInfinite(infiniteScroll) {
+    setTimeout(() => {
+      this.pageNumber++;
+      try {
+        this.storage.get('userInfo').then((data) => {
+          this.tokenid = data.tokenid;
+          this.userid = data.userid;
+          this.ajaxserve.publicClientList({ tokenid: this.tokenid, userid: this.userid, cpage: this.pageNumber }).then((data) => {
+            if (data.status.Code = "200") {
+
+              // this.publicClientList = data.data;
+              Array.prototype.push.apply(this.publicClientList, data.data);
+              this.pageNumber = data.cpage;
+              this.totalNumber = data.total;
+              if (this.pageNumber == this.totalNumber) {
+                this.noMoreData = true;
+                this.noLoading = false;
+              }
+              if (data.data.length == 0) {
+                this.isNoData = true;
+              } else {
+                this.isNoData = false;
+              }
+              infiniteScroll.complete();
+
+            }
+          }).catch((err) => {
+            console.log(err);
+          })
+        })
+      }
+      catch (err) {
+        console.log(err);
+      }
+    }, 1000)
   }
   goPublishDetails(item) {
     let loading = this.loadingCtrl.create({

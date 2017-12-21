@@ -7,12 +7,20 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>person-seting-name</ion-title>
+    <ion-buttons start>
+      <button ion-button icon-only (click)="dismiss()">
+                      <ion-icon name="arrow-back"></ion-icon>
+                 </button>
+    </ion-buttons>
+    <ion-title>修改姓名</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="dismiss()">
+                      完成
+                </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
-
-
-<ion-content padding>
-
+<ion-content>
+  <input class="input_name" type="text" col-12 color="light" [(ngModel)]="queryText" placeholder="请输入客户的名称">
 </ion-content>

@@ -3,11 +3,11 @@ export const address = "http://192.168.10.186:8080/";
 export const api = {
   logingapi: address + "login/islogin",
   companlist: address + "team/getteam",
-  grounplist: address + "team/getteammember",
-  prvateCilentlist: address + "team/getcustomer",
+  provateList: address + "team/getteamcus",
+
   publicClientlist: address + "customer/common",
-  inspectorlist: address + "director/getteammember",
-  personclientlist: address + "personal/getcustomer",
+
+  //personclientlist: address + "personal/getcustomer",
   publishclientInfo: address + "customer/publish",
   publicGetCilent: address + "customer/getcustomer",
   getClientDetails: address + "personal/cusinformation",
@@ -25,8 +25,27 @@ export const api = {
   modifiterClientAddress: address + "personal/editaddress",//修改客户状态 post
 
   modifiterSex: address + "personal/editpersex",
-  modifiterName: address + "personal/editperrname"
+  modifiterName: address + "personal/editperrname",
 
+
+  followupList: address + "team/getyfollow",
+  nofollowupList: address + "team/getnfollow",
+  grounplist: address + "team/getteammem",
+
+
+  prvateCilentlist: address + "team/getmembercustomer",
+  memberfollow: address + "team/getmemberyfollow",
+  membernofollow: address + "team/getmembernfollow",
+
+  inspectorlist: address + "director/getdircus",
+  inspectorfoloow: address + "director/getdiryfollow",
+  inspectornofoloow: address + "director/getdirnfollow",
+  inspectorGrouList: address + "director/getdirmmember",
+
+  //头像上传接口
+  headeUpload: "http://a.buka.tv/BaseCommon/upload/upload",
 
 }
+
+
 

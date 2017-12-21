@@ -22,7 +22,7 @@
               <!-- <ion-icon name="cog" item-left></ion-icon> -->
               <img src="assets/font/private.svg" alt="">
             </div>
-            私海客户 <span>{{privateCilent}}</span>
+            私海客户 <span>{{privateCilent==null?'0':privateCilent}}</span>
           </div>
         </ion-segment-button>
         <ion-segment-button style="color:#666;height: 68px;" value="followUp">
@@ -30,7 +30,7 @@
             <div style="height: 2rem;">
               <img src="assets/font/floowUp.svg" alt="">
             </div>
-            已跟进 <span>{{follow}}</span>
+            已跟进 <span>{{follow==null?'0':follow}}</span>
           </div>
         </ion-segment-button>
         <ion-segment-button style="color:#666;height: 68px;" value="nofollowUp">
@@ -38,7 +38,7 @@
             <div style="height: 2rem;">
               <img src="assets/font/nofllowUp.svg" alt="">
             </div>
-            未跟进 <span>{{nofollow}}</span>
+            未跟进 <span>{{nofollow==null?'0':nofollow}}</span>
           </div>
         </ion-segment-button>
         <ion-segment-button [hidden]="isRoleid" style="color:#666;height: 68px;width:25%" value="grounplist">
@@ -46,7 +46,7 @@
             <div style="height: 2rem;">
               <img src="assets/font/group.svg" alt="">
             </div>
-            团队成员 <span>{{grounp}}</span>
+            团队成员 <span>{{grounp==null?'0':grounp}}</span>
           </div>
         </ion-segment-button>
       </ion-segment>
@@ -74,8 +74,16 @@
             <button class="btnStyle" [class.btnNotFollow]="item.follow==0" [class.btnFollowUp]="item.follow>0" ion-button>{{item.follow==0?"未跟进":"继续跟进"}}</button>
           </ion-item>
         </ion-list>
+
       </ion-card>
-      <div *ngIf="privatenoData" style="width:50%;margin:0 auto;text-align:center;margin-top:8rem;">
+      <div class="nodata" style="text-align:center" *ngIf="noMoreData1">
+        没有更多数据显示了...
+      </div>
+      <ion-infinite-scroll (ionInfinite)="doInfinite1($event)">
+        <ion-infinite-scroll-content loadingIcon="arrow-dropdown" loadingText="加载更多..." *ngIf="noLoading1">
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+      <div *ngIf="privatenoData" style="width:50%;margin:0 auto;text-align:center;margin-top:0.5rem;">
         <img style="width:50%;height:50%;margin-left:5px" src="assets/imgs/nodata.png" alt="">
         <div style=" font-size: 16px;
                 color: #666666;
@@ -100,13 +108,21 @@
             <button class="btnStyle" [class.btnNotFollow]="item.follow==0" [class.btnFollowUp]="item.follow>=0" ion-button>{{item.follow==0?"未跟进":"继续跟进"}}</button>
           </ion-item>
         </ion-list>
+
+
       </ion-card>
-      <div *ngIf="followData" style="width:50%;margin:0 auto;text-align:center;margin-top:8rem;">
+      <div class="nodata" style="text-align:center" *ngIf="noMoreData2">
+        没有更多数据显示了...
+      </div>
+      <ion-infinite-scroll (ionInfinite)="doInfinite2($event)">
+        <ion-infinite-scroll-content loadingIcon="arrow-dropdown" loadingText="加载更多..." *ngIf="noLoading2">
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+      <div *ngIf="followData" style="width:50%;margin:0 auto;text-align:center;margin-top:0.5rem;">
         <img style="width:50%;height:50%;margin-left:5px" src="assets/imgs/nodata.png" alt="">
         <div style=" font-size: 16px;
                   color: #666666;
                   margin-top: 5px;">暂未跟进客户信息</div>
-
       </div>
 
     </div>
@@ -125,8 +141,17 @@
             <button class="btnStyle" [class.btnNotFollow]="item.follow==0" [class.btnFollowUp]="item.follow>0" ion-button>{{item.follow==0?"未跟进":"继续跟进"}}</button>
           </ion-item>
         </ion-list>
+
+
       </ion-card>
-      <div *ngIf="nofollowUp" style="width:50%;margin:0 auto;text-align:center;margin-top:8rem;">
+      <div class="nodata" style="text-align:center" *ngIf="noMoreData3">
+        没有更多数据显示了...
+      </div>
+      <ion-infinite-scroll (ionInfinite)="doInfinite3($event)">
+        <ion-infinite-scroll-content loadingIcon="arrow-dropdown" loadingText="加载更多..." *ngIf="noLoading3">
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+      <div *ngIf="nofollowUp" style="width:50%;margin:0 auto;text-align:center;margin-top:0.5rem;">
         <img style="width:50%;height:50%;margin-left:5px" src="assets/imgs/nodata.png" alt="">
         <div style=" font-size: 16px;
                   color: #666666;
@@ -143,17 +168,25 @@
               <img src="{{item.account_login_avatar==null?'assets/imgs/timg1.jpg':team_avater}}">
             </ion-avatar>
             <h2>{{item.account_login_name}}</h2>
-            <p class="group">私海客户:{{item.clicount}}</p>
+            <p class="group">私海客户:{{item.clicount==null?'0':item.clicount}}</p>
           </ion-item>
         </ion-list>
 
+
+
       </ion-card>
-      <div *ngIf="nofollowUp" style="width:50%;margin:0 auto;text-align:center;margin-top:8rem;">
+      <div class="nodata" style="text-align:center" *ngIf="noMoreData4">
+        没有更多数据显示了...
+      </div>
+      <ion-infinite-scroll (ionInfinite)="doInfinite4($event)">
+        <ion-infinite-scroll-content loadingIcon="arrow-dropdown" loadingText="加载更多..." *ngIf="noLoading4">
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+      <div *ngIf="groupData" style="width:50%;margin:0 auto;text-align:center;margin-top:0.5rem;">
         <img style="width:50%;height:50%;margin-left:5px" src="assets/imgs/nodata.png" alt="">
         <div style=" font-size: 16px;
                     color: #666666;
                     margin-top: 5px;">暂无未跟进客户信息</div>
-
       </div>
 
     </div>

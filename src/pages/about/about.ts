@@ -189,8 +189,6 @@ export class AboutPage {
 
             });
             alert.present();
-
-
           }
         }).catch((err) => {
           console.log(err);
@@ -299,7 +297,7 @@ export class AboutPage {
                 sourceType: this.camera.PictureSourceType.CAMERA,
               }
               this.camera.getPicture(options).then((imageData) => {
-                this.img = imageData;
+                this.customer_avatar = imageData;
               }, (err) => {
                 console.log(err);
               });
@@ -316,7 +314,7 @@ export class AboutPage {
                 sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
               }
               this.camera.getPicture(options).then((imageData) => {
-                this.img = imageData;
+                this.customer_avatar = imageData;
               }, (err) => {
                 console.log(err);
               });

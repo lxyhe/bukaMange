@@ -28,7 +28,7 @@
               public nofollow: any = ""; -->
               <img src="assets/font/private.svg" alt="">
             </div>
-            私海客户 <span>{{clicount}}</span>
+            私海客户 <span>{{clicount==null?'0':clicount}}</span>
           </div>
         </ion-segment-button>
         <ion-segment-button style="color:#666;height: 68px;" value="fllow">
@@ -36,7 +36,7 @@
             <div style="height: 2rem;">
               <img src="assets/font/floowUp.svg" alt="">
             </div>
-            已跟进 <span>{{follow}}</span>
+            已跟进 <span>{{follow==null?'0':follow}}</span>
           </div>
         </ion-segment-button>
         <ion-segment-button style="color:#666;height: 68px;" value="nofllow">
@@ -44,7 +44,7 @@
             <div style="height: 2rem;">
               <img src="assets/font/nofllowUp.svg" alt="">
             </div>
-            未跟进 <span>{{nofollow}}</span>
+            未跟进 <span>{{nofollow==null?'0':nofollow==0?'0':nofollow}}</span>
           </div>
         </ion-segment-button>
       </ion-segment>
@@ -58,50 +58,107 @@
     </ion-refresher-content>
   </ion-refresher>
   <div [ngSwitch]="pet">
-    <ion-card *ngSwitchCase="'puppies'">
-      <ion-list *ngFor="let item of memberList">
-        <ion-item>
-          <ion-avatar item-start>
-            <img src="{{account_login_avatar==null?'assets/imgs/timg1.jpg':account_login_avatar==''?'assets/imgs/timg1.jpg':account_login_avatar}}">
-          </ion-avatar>
-          <h2>{{item.customer_name}}</h2>
-          <p> 客户类型: <span>{{item.customer_type_id | clienttypepipe }}</span> </p>
-          <!-- <p> 客户类型: <span>{{item.customer_type_id  }}</span> </p> -->
-          <p> 客户需求:<span> {{item.customer_needs_id | clientneedpipe   }}</span> </p>
-          <p item-right class="time">{{item.receive_time}}</p>
-          <button class="btnStyle" [class.btnNotFollow]="item.status==1" [class.btnFollowUp]="item.receive_time==2" ion-button>{{item.status==1?"未跟进":"继续跟进"}}</button>
-        </ion-item>
-      </ion-list>
-    </ion-card>
-    <ion-card *ngSwitchCase="'fllow'">
-      <ion-list *ngFor="let item of fllowList">
-        <ion-item>
-          <ion-avatar item-start>
-            <img src="{{account_login_avatar==null?'assets/imgs/timg1.jpg':account_login_avatar==''?'assets/imgs/timg1.jpg':account_login_avatar}}">
-          </ion-avatar>
-          <h2>{{item.customer_name}}</h2>
-          <p> 客户类型: <span>{{item.customer_type_id}}</span> </p>
-          <p> 客户需求:<span> {{item.customer_needs_id}}</span> </p>
-          <p item-right class="time">{{item.receive_time}}</p>
-          <button class="btnStyle" [class.btnNotFollow]="item.status==1" [class.btnFollowUp]="item.receive_time==2" ion-button>{{item.status==1?"未跟进":"继续跟进"}}</button>
-        </ion-item>
-      </ion-list>
-    </ion-card>
-    <ion-card *ngSwitchCase="'nofllow'">
-      <ion-list *ngFor="let item of nofllowList">
-        <ion-item>
-          <ion-avatar item-start>
-            <img src="{{account_login_avatar==null?'assets/imgs/timg1.jpg':account_login_avatar==''?'assets/imgs/timg1.jpg':account_login_avatar}}">
-          </ion-avatar>
-          <h2>{{item.customer_name}}</h2>
-          <p> 客户类型: <span>{{item.customer_type_id}}</span> </p>
-          <p> 客户需求:<span> {{item.customer_needs_id}}</span> </p>
-          <p item-right class="time">{{item.receive_time}}</p>
-          <button class="btnStyle" [class.btnNotFollow]="item.status==1" [class.btnFollowUp]="item.receive_time==2" ion-button>{{item.status==1?"未跟进":"继续跟进"}}</button>
-        </ion-item>
-      </ion-list>
+    <div *ngSwitchCase="'puppies'">
+      <ion-card>
+        <ion-list *ngFor="let item of memberList">
+          <ion-item>
+            <ion-avatar item-start>
+              <img src="{{account_login_avatar==null?'assets/imgs/timg1.jpg':account_login_avatar==''?'assets/imgs/timg1.jpg':account_login_avatar}}">
+            </ion-avatar>
+            <h2>{{item.customer_name}}</h2>
+            <p> 客户类型: <span>{{item.customer_type_id | clienttypepipe }}</span> </p>
+            <!-- <p> 客户类型: <span>{{item.customer_type_id  }}</span> </p> -->
+            <p> 客户需求:<span> {{item.customer_needs_id | clientneedpipe   }}</span> </p>
+            <p item-right class="time">{{item.receive_time}}</p>
+            <button class="btnStyle" [class.btnNotFollow]="item.status==1" [class.btnFollowUp]="item.receive_time==2" ion-button>{{item.status==1?"未跟进":"继续跟进"}}</button>
+          </ion-item>
+        </ion-list>
+        <div class="nodata" style="text-align:center" *ngIf="noMoreData1">
+          没有更多数据显示了...
+        </div>
 
-    </ion-card>
+      </ion-card>
+      <ion-infinite-scroll (ionInfinite)="doInfinite1($event)">
+        <ion-infinite-scroll-content loadingIcon="arrow-dropdown" loadingText="加载更多..." *ngIf="noLoading1">
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+      <div *ngIf="privatenoData" style="width:50%;margin:0 auto;text-align:center;margin-top:0.5rem;">
+        <img style="width:50%;height:50%;margin-left:5px" src="assets/imgs/nodata.png" alt="">
+        <div style=" font-size: 16px;
+                    color: #666666;
+                    margin-top: 5px;">暂未领取客户信息</div>
+        <div style=" font-size: 16px;
+                    color: #666666;
+                    margin-top: 5px;">请至公海领取</div>
+      </div>
+    </div>
+    <div *ngSwitchCase="'fllow'">
+      <ion-card>
+        <ion-list *ngFor="let item of fllowList">
+          <ion-item>
+            <ion-avatar item-start>
+              <img src="{{account_login_avatar==null?'assets/imgs/timg1.jpg':account_login_avatar==''?'assets/imgs/timg1.jpg':account_login_avatar}}">
+            </ion-avatar>
+            <h2>{{item.customer_name}}</h2>
+            <p> 客户类型: <span>{{item.customer_type_id | clienttypepipe }}</span> </p>
+            <!-- <p> 客户类型: <span>{{item.customer_type_id  }}</span> </p> -->
+            <p> 客户需求:<span> {{item.customer_needs_id | clientneedpipe   }}</span> </p>
+            <p item-right class="time">{{item.receive_time}}</p>
+            <button class="btnStyle" [class.btnNotFollow]="item.status==1" [class.btnFollowUp]="item.receive_time==2" ion-button>{{item.status==1?"未跟进":"继续跟进"}}</button>
+          </ion-item>
+        </ion-list>
+        <div class="nodata" style="text-align:center" *ngIf="noMoreData2">
+          没有更多数据显示了...
+        </div>
+
+      </ion-card>
+      <ion-infinite-scroll (ionInfinite)="doInfinite2($event)">
+        <ion-infinite-scroll-content loadingIcon="arrow-dropdown" loadingText="加载更多..." *ngIf="noLoading2">
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+      <div *ngIf="followData" style="width:50%;margin:0 auto;text-align:center;margin-top:0.5rem;">
+        <img style="width:50%;height:50%;margin-left:5px" src="assets/imgs/nodata.png" alt="">
+        <div style=" font-size: 16px;
+                      color: #666666;
+                      margin-top: 5px;">暂未跟进客户信息</div>
+
+      </div>
+    </div>
+    <div *ngSwitchCase="'nofllow'">
+      <ion-card>
+        <ion-list *ngFor="let item of nofllowList">
+          <ion-item>
+            <ion-avatar item-start>
+              <img src="{{account_login_avatar==null?'assets/imgs/timg1.jpg':account_login_avatar==''?'assets/imgs/timg1.jpg':account_login_avatar}}">
+            </ion-avatar>
+            <h2>{{item.customer_name}}</h2>
+            <p> 客户类型: <span>{{item.customer_type_id | clienttypepipe }}</span> </p>
+            <!-- <p> 客户类型: <span>{{item.customer_type_id  }}</span> </p> -->
+            <p> 客户需求:<span> {{item.customer_needs_id | clientneedpipe   }}</span> </p>
+            <p item-right class="time">{{item.receive_time}}</p>
+            <button class="btnStyle" [class.btnNotFollow]="item.status==1" [class.btnFollowUp]="item.receive_time==2" ion-button>{{item.status==1?"未跟进":"继续跟进"}}</button>
+          </ion-item>
+        </ion-list>
+        <div class="nodata" style="text-align:center" *ngIf="noMoreData3">
+          没有更多数据显示了...
+        </div>
+
+      </ion-card>
+      <ion-infinite-scroll (ionInfinite)="doInfinite3($event)">
+        <ion-infinite-scroll-content loadingIcon="arrow-dropdown" loadingText="加载更多..." *ngIf="noLoading3">
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+      <div *ngIf="nofollowUpdata" style="width:50%;margin:0 auto;text-align:center;margin-top:0.5rem;">
+        <img style="width:50%;height:50%;margin-left:5px" src="assets/imgs/nodata.png" alt="">
+        <div style=" font-size: 16px;
+                      color: #666666;
+                      margin-top: 5px;">暂无未跟进客户信息</div>
+
+      </div>
+    </div>
+
+
+
 
   </div>
 

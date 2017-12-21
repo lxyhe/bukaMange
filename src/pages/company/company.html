@@ -42,6 +42,12 @@
       </ion-list>
     </ion-card>
   </div>
-
+  <ion-item style="text-align:center" *ngIf="noMoreData">
+    没有更多数据显示了...
+  </ion-item>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="isShowInfinite">
+    <ion-infinite-scroll-content loadingIcon="arrow-dropdown" loadingText="加载更多...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 
 </ion-content>

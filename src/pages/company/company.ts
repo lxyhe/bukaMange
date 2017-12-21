@@ -21,7 +21,9 @@ export class CompanyPage {
 
   public companyavatar: string = "";
   public companyname: any = "";
-
+  public pageNumber: any;
+  public noMoreData: boolean = false;
+  public isShowInfinite: boolean = true;
   constructor(
     public navCtrl: NavController,
     public httploading: HttpLodingService,
@@ -82,6 +84,48 @@ export class CompanyPage {
   goSteingPage(items) {
 
     this.navCtrl.push('HeadSetingPage', { data: items })
+  }
+  doInfinite(infiniteScroll) {
+    this.pageNumber++;
+    setTimeout(() => {
+      try {
+        this.storage.get('userInfo').then((data) => {
+          this.userid = data.userid;
+          this.tokenid = data.tokenid;
+          this.httploading.HttpServerLoading("加载中...")
+          this.ajaxserve.companyList({ tokenid: this.tokenid, userid: this.userid, cpage: this.pageNumber }).then((data) => {
+            console.log(data);
+            if (data.status.Code = "200") {
+              this.httploading.ColseServerLoding();
+              if (data.data.tlist.length !== 0) {
+                this.companyavatar = data.data.avatar;
+                this.companyname = data.data.name;
+
+                this.clientList = data.data.tlist;
+                if (data.isNext) {
+
+                  this.noMoreData = false;
+                  this.isShowInfinite = true;
+                  Array.prototype.push.apply(this.clientList, data.data.tlist);
+                } else if (!data.isNext) {
+                  Array.prototype.push.apply(this.clientList, data.data.tlist);
+                  this.isShowInfinite = false;
+                  this.noMoreData = true;
+                }
+
+              } else {
+                console.log("list=0")
+              }
+            }
+          }).catch((err) => {
+            console.log(err);
+          })
+        })
+      }
+      catch (err) {
+        console.log(err);
+      }
+    }, 1000)
   }
 }
 

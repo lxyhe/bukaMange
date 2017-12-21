@@ -16,6 +16,7 @@ export interface fllowupObj {
 export interface companylistObj {
   tokenid: string | number;
   userid: string | number;
+  cpage?: any;
 }
 export interface publicSearchObj {
   tokenid: string | number;
@@ -24,10 +25,12 @@ export interface publicSearchObj {
 export interface grounpList {
   tokenid: string | number;
   team_id: string | number;
+  cpage?: any;
 }
 export interface pravateclientList {
   tokenid: string | number;
   account_login_id: string | number;
+  cpage?: any;
 }
 export interface publicclientinfoObj {
   userid: any;
@@ -80,7 +83,16 @@ export class ajaxService {
   companyList(companylist: companylistObj) {
     return this.httpserve.get(api.companlist, companylist)
   }
-  //获取团队列表
+  // 总监 获取团队列表
+  getPrivateList(grounplist: grounpList) {
+    return this.httpserve.get(api.provateList, grounplist)
+  }
+  getfllowUplist(grounplist: grounpList) {
+    return this.httpserve.get(api.followupList, grounplist)
+  }
+  getnofllowUplist(grounplist: grounpList) {
+    return this.httpserve.get(api.nofollowupList, grounplist)
+  }
   grounpList(grounplist: grounpList) {
     return this.httpserve.get(api.grounplist, grounplist)
   }
@@ -88,18 +100,35 @@ export class ajaxService {
   PrivateClienList(pravateclientlist: pravateclientList) {
     return this.httpserve.get(api.prvateCilentlist, pravateclientlist)
   }
+  getMemberfollow(pravateclientlist: pravateclientList) {
+    return this.httpserve.get(api.memberfollow, pravateclientlist)
+  }
+  getMembernofollow(pravateclientlist: pravateclientList) {
+    return this.httpserve.get(api.membernofollow, pravateclientlist)
+  }
+  //获取总监接口
+  inspectorGroupprivateList(inspectorlist: companylistObj) {
+    return this.httpserve.get(api.inspectorlist, inspectorlist)
+  }
+  //总监查看界面接口
+  inspectorfoloow(inspectorlist: companylistObj) {
+    return this.httpserve.get(api.inspectorfoloow, inspectorlist)
+  }
+  inspectornofoloow(inspectorlist: companylistObj) {
+    return this.httpserve.get(api.inspectornofoloow, inspectorlist)
+  }
+  inspectorGrouList(inspectorlist: companylistObj) {
+    return this.httpserve.get(api.inspectorGrouList, inspectorlist)
+  }
   //获取公海列表
   publicClientList(publicclientlist: companylistObj) {
     return this.httpserve.get(api.publicClientlist, publicclientlist)
   }
-  //获取总监接口
-  inspectorGroupList(inspectorlist: companylistObj) {
-    return this.httpserve.get(api.inspectorlist, inspectorlist)
-  }
+
   //个人接口
-  personClientList(personclientlist: companylistObj) {
-    return this.httpserve.get(api.personclientlist, personclientlist)
-  }
+  // personClientList(personclientlist: companylistObj) {
+  //   return this.httpserve.get(api.personclientlist, personclientlist)
+  // }
   //发布客户信息
   publicClientInfo(publicclientinfo: publicclientinfoObj) {
     return this.httpserve.post(api.publishclientInfo, publicclientinfo)

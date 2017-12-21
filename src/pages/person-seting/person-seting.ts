@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ActionSheetController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ActionSheetController, AlertController, ModalController } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { Storage } from '@ionic/storage';
 import { HttpLodingService } from '../../providers/loadingServer';
@@ -23,7 +23,9 @@ export class PersonSetingPage {
   public tokenid: string;
   public userid: string;
   public penSetingData: string;
-
+  public userSex: string = "男";
+  public username: string;
+  public name: string;
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public actionSheetCtrl: ActionSheetController,
@@ -32,10 +34,15 @@ export class PersonSetingPage {
     private storage: Storage,
     public httploading: HttpLodingService,
     public ajaxserve: ajaxService,
+    public modalCtrl: ModalController,
 
   ) {
     this.penSetingData = this.navParams.get('data');
     console.log(this.penSetingData);
+    this.userSex = this.penSetingData['account_login_sex'];
+    this.username = this.penSetingData['account_login_name'];
+    this.name = this.penSetingData['real_name']
+
     this.simpleColumns = [
       {
         name: 'col1',
@@ -46,7 +53,12 @@ export class PersonSetingPage {
         ]
       }
     ];
-
+    console.log(this.userSex);
+    if (this.userSex == "1") {
+      this.userSex = "男"
+    } else {
+      this.userSex = "女"
+    }
   }
 
   ionViewDidLoad() {
@@ -147,5 +159,18 @@ export class PersonSetingPage {
       ]
     });
     alert.present();
+  }
+  setingName() {
+    let profileModal = this.modalCtrl.create('PersonSetingNamePage', { 'nickName': this.name });
+    profileModal.onDidDismiss(data => {
+      if (data !== "undefined") {
+        if (data.nickName !== "" && data.nickName !== 'undefined') {
+          this.name = data.nickName;
+        } else if (data.nickName == 'undefined') {
+          this.name = "未填写"
+        }
+      }
+    });
+    profileModal.present();
   }
 }

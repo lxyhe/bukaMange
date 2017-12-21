@@ -45,6 +45,28 @@ export class HomePage {
   public nofollow: any = "";
   public pensetingData: object;
 
+  /*分页参数*/
+  public pageNumber1: number;
+  public totalNumber1: any;
+  public noMoreData1: boolean = false;
+  public noLoading1: boolean = true;
+
+  public pageNumber2: number;
+  public totalNumber2: any;
+  public noMoreData2: boolean = false;
+  public noLoading2: boolean = true;
+
+
+  public pageNumber3: number;
+  public totalNumber3: any;
+  public noMoreData3: boolean = false;
+  public noLoading3: boolean = true;
+
+  public pageNumber4: number;
+  public totalNumber4: any;
+  public noMoreData4: boolean = false;
+  public noLoading4: boolean = true;
+
   constructor(
     public navCtrl: NavController,
     public navparam: NavParams,
@@ -62,70 +84,72 @@ export class HomePage {
   }
   doRefresh(refresher) {
     this.getPrivateClientList();
+
     this.event.subscribe("request:success", () => {
       this.refresher.complete();
     })
   }
   getPrivateClientList() {
+
+    this.storage.get('userInfo').then((data) => {
+      this.tokenid = data.tokenid;//token
+      this.userid = data.userid;//用户ID
+      if (data.roleid == Direction.grounpType) {
+        this.isRoleid = false;
+        this.getPrivateList();
+        this.getfollowList();
+        this.getnofollowList();
+        this.getGroupList();
+
+      } else if (data.roleid == Direction.personType) {
+        this.isRoleid = true;
+        this.getPrivateList();
+        this.getfollowList();
+        this.getnofollowList();
+
+        //this.getGroupList();
+        console.log(this.isRoleid);
+      }
+
+    }).catch(err => {
+      console.log(err);
+    })
+
+  }
+
+  getPrivateList() {
     try {
       this.storage.get('userInfo').then((data) => {
         this.httploading.HttpServerLoading("加载中...")
         this.tokenid = data.tokenid;//token
         this.userid = data.userid;//用户ID
 
-        if (data.roleid == Direction.grounpType) {
-          this.isRoleid = false;
-          this.ajaxserve.inspectorGroupList({ tokenid: this.tokenid, userid: this.userid }).then((data) => {
-            if (data.status.Code = "200") {
-              console.log(data);
-              this.httploading.ColseServerLoding();
-              this.privateClientList = data.clist;
-              if (data.clist.length == 0) {
-                this.privatenoData = true;
-              } else {
-                this.privatenoData = false;
-              }
+        this.ajaxserve.inspectorGroupprivateList({ tokenid: this.tokenid, userid: this.userid }).then((data) => {
+          if (data.status.Code = "200") {
+            console.log(data);
+            this.httploading.ColseServerLoding();
 
-              this.groupList = data.member;
-              this.fllowClientList = data.yfollow;
-              this.nofllowClientList = data.nfollow;
-              /** */
-              this.pensetingData = data.leader
-              this.grounp = data.leader.count;
-              this.avatarUrl = data.leader.account_login_avatar;
-              this.name = data.leader.account_login_name;
-              this.follow = data.leader.follow;
-              this.privateCilent = data.leader.clicount;
-              this.nofollow = this.privateCilent - this.follow;
-
+            this.privateClientList = data.data;
+            if (data.data.length == 0) {
+              this.privatenoData = true;
+            } else {
+              this.privatenoData = false;
             }
-          })
+            this.pageNumber1 = data.cpage;
+            this.totalNumber1 = data.total;
+            this.pensetingData = data.top;
 
-        } else if (data.roleid == Direction.personType) {
-          this.isRoleid = true;
-          this.ajaxserve.personClientList({ tokenid: this.tokenid, userid: this.userid }).then((data) => {
-            if (data.status.Code = "200") {
-              console.log(data);
-              this.httploading.ColseServerLoding();
-              //this.groupList = data.customer;
-              this.privateClientList = data.customer;
-
-              this.fllowClientList = data.yfollow;
-              this.nofllowClientList = data.nfollow;
+            this.avatarUrl = data.top.account_login_avatar;
+            this.name = data.top.account_login_name;
 
 
 
-              this.avatarUrl = data.account.account_login_avatar;
-              this.name = data.account.account_login_name;
-              this.follow = data.account.follow;
-              this.privateCilent = data.account.clicount;
-              this.nofollow = this.privateCilent - this.follow;
-            }
-          })
 
-        }
+            this.privateCilent = data.top.clicount;
 
 
+          }
+        })
 
       }).catch(err => {
         console.log(err);
@@ -135,12 +159,107 @@ export class HomePage {
       console.log(err);
     }
   }
-  //判断用户的角色
-  // getUserType() {
-  //   this.storage.get('userInfo').then((data) => {
 
-  //   })
-  // }
+  getfollowList() {
+    try {
+      this.storage.get('userInfo').then((data) => {
+
+        this.tokenid = data.tokenid;//token
+        this.userid = data.userid;//用户ID
+
+        this.ajaxserve.inspectorfoloow({ tokenid: this.tokenid, userid: this.userid }).then((data) => {
+          if (data.status.Code = "200") {
+            console.log(data);
+
+            //     this.groupList = data.customer;
+            //     this.privateClientList = data.customer;
+            //     this.fllowClientList = data.yfollow;
+            //     this.nofllowClientList = data.nfollow;
+            this.fllowClientList = data.data;
+            if (data.data.length == 0) {
+              this.followData = true;
+            } else {
+              this.followData = false;
+            }
+            this.pageNumber2 = data.cpage;
+            this.totalNumber2 = data.total;
+            this.follow = data.top;
+
+
+
+          }
+        })
+      }).catch(err => {
+        console.log(err);
+      })
+    }
+    catch (err) {
+      console.log(err);
+    }
+  }
+  getnofollowList() {
+    try {
+      this.storage.get('userInfo').then((data) => {
+
+        this.tokenid = data.tokenid;//token
+        this.userid = data.userid;//用户ID
+
+        this.ajaxserve.inspectornofoloow({ tokenid: this.tokenid, userid: this.userid }).then((data) => {
+          if (data.status.Code = "200") {
+            console.log(data);
+            this.nofllowClientList = data.data;
+            if (data.data.length == 0) {
+              this.nofollowUp = true;
+            } else {
+              this.nofollowUp = false;
+            }
+            this.pageNumber3 = data.cpage;
+            this.totalNumber3 = data.total;
+            // public privatenoData: boolean = false;
+            // public nofollowUp: boolean = false;
+            // public groupData: boolean = false;
+            // public followData: boolean = false;
+            this.nofollow = data.top;
+          }
+        })
+      }).catch(err => {
+        console.log(err);
+      })
+    }
+    catch (err) {
+      console.log(err);
+    }
+  }
+  getGroupList() {
+    try {
+      this.storage.get('userInfo').then((data) => {
+        this.tokenid = data.tokenid;//token
+        this.userid = data.userid;//用户ID
+
+        this.ajaxserve.inspectorGrouList({ tokenid: this.tokenid, userid: this.userid }).then((data) => {
+          if (data.status.Code = "200") {
+            console.log(data);
+            this.groupList = data.data;
+            if (data.data.length == 0) {
+              this.groupData = true;
+            } else {
+              this.groupData = false;
+            }
+            this.pageNumber4 = data.cpage;
+            this.totalNumber4 = data.total;
+            this.grounp = data.top;
+
+          }
+        })
+      }).catch(err => {
+        console.log(err);
+      })
+    }
+    catch (err) {
+      console.log(err);
+    }
+  }
+
   goClientDetails(items) {
 
     this.navCtrl.push('PrivateCilentDetailsPage', { data: items })
@@ -153,4 +272,125 @@ export class HomePage {
     this.navCtrl.push('MemberPage', { data: items })
   }
 
+  /**/
+  doInfinite1(infiniteScroll) {
+    setTimeout(() => {
+      this.pageNumber1++;
+      try {
+        this.storage.get('userInfo').then((data) => {
+          this.tokenid = data.tokenid;
+          this.userid = data.userid;
+          this.ajaxserve.inspectorGroupprivateList({ tokenid: this.tokenid, userid: this.userid, cpage: this.pageNumber1 }).then((data) => {
+            if (data.status.Code = "200") {
+
+              // this.publicClientList = data.data;
+              Array.prototype.push.apply(this.privateClientList, data.data);
+              this.pageNumber1 = data.cpage;
+              this.totalNumber1 = data.total;
+              if (this.pageNumber1 == this.totalNumber1) {
+                this.noMoreData1 = true;
+                this.noLoading1 = false;
+              }
+              infiniteScroll.complete();
+            }
+          }).catch((err) => {
+            console.log(err);
+          })
+        })
+      }
+      catch (err) {
+        console.log(err);
+      }
+    }, 1000)
+  }
+  doInfinite2(infiniteScroll) {
+    setTimeout(() => {
+      this.pageNumber2++;
+      try {
+        this.storage.get('userInfo').then((data) => {
+          this.tokenid = data.tokenid;
+          this.userid = data.userid;
+          this.ajaxserve.inspectorfoloow({ tokenid: this.tokenid, userid: this.userid, cpage: this.pageNumber2 }).then((data) => {
+            if (data.status.Code = "200") {
+
+              // this.publicClientList = data.data;
+              Array.prototype.push.apply(this.fllowClientList, data.data);
+              this.pageNumber2 = data.cpage;
+              this.totalNumber2 = data.total;
+              if (this.pageNumber2 == this.totalNumber2) {
+                this.noMoreData2 = true;
+                this.noLoading2 = false;
+              }
+              infiniteScroll.complete();
+            }
+          }).catch((err) => {
+            console.log(err);
+          })
+        })
+      }
+      catch (err) {
+        console.log(err);
+      }
+    }, 1000)
+  }
+  doInfinite3(infiniteScroll) {
+    setTimeout(() => {
+      this.pageNumber3++;
+      try {
+        this.storage.get('userInfo').then((data) => {
+          this.tokenid = data.tokenid;
+          this.userid = data.userid;
+          this.ajaxserve.inspectornofoloow({ tokenid: this.tokenid, userid: this.userid, cpage: this.pageNumber3 }).then((data) => {
+            if (data.status.Code = "200") {
+
+              // this.publicClientList = data.data;
+              Array.prototype.push.apply(this.nofllowClientList, data.data);
+              this.pageNumber3 = data.cpage;
+              this.totalNumber3 = data.total;
+              if (this.pageNumber3 == this.totalNumber3) {
+                this.noMoreData3 = true;
+                this.noLoading3 = false;
+              }
+              infiniteScroll.complete();
+            }
+          }).catch((err) => {
+            console.log(err);
+          })
+        })
+      }
+      catch (err) {
+        console.log(err);
+      }
+    }, 1000)
+  }
+  doInfinite4(infiniteScroll) {
+    setTimeout(() => {
+      this.pageNumber4++;
+      try {
+        this.storage.get('userInfo').then((data) => {
+          this.tokenid = data.tokenid;
+          this.userid = data.userid;
+          this.ajaxserve.inspectorGrouList({ tokenid: this.tokenid, userid: this.userid, cpage: this.pageNumber4 }).then((data) => {
+            if (data.status.Code = "200") {
+
+              // this.publicClientList = data.data;
+              Array.prototype.push.apply(this.groupList, data.data);
+              this.pageNumber4 = data.cpage;
+              this.totalNumber4 = data.total;
+              if (this.pageNumber4 == this.totalNumber4) {
+                this.noMoreData4 = true;
+                this.noLoading4 = false;
+              }
+              infiniteScroll.complete();
+            }
+          }).catch((err) => {
+            console.log(err);
+          })
+        })
+      }
+      catch (err) {
+        console.log(err);
+      }
+    }, 1000)
+  }
 }

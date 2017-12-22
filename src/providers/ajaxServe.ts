@@ -188,11 +188,15 @@ export class ajaxService {
   }
   //修改性别
   modifiterSex(modifiterSex) {
-    return this.httpserve.post(api.modifiterSex, modifiterSex)
+    return this.httpserve.post(api.modifiterSex, modifiterSex);
   }
   //修改姓名
   modifiterName(modifiterName) {
-    return this.httpserve.post(api.modifiterName, modifiterName)
+    return this.httpserve.post(api.modifiterName, modifiterName);
+  }
+  //修改头像
+  modifiterHeadImg(modifiterimg) {
+    return this.httpserve.post(api.modifiterimg, modifiterimg)
   }
 
 }

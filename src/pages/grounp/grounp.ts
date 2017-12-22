@@ -114,7 +114,10 @@ export class GrounpPage {
             }
             this.pageNumber1 = data.cpage;
             this.totalNumber1 = data.total;
-
+            if (this.pageNumber1 == this.totalNumber1) {
+              this.noMoreData1 = true;
+              this.noLoading1 = false;
+            }
             this.team_avater = data.top.account_login_avatar;
             this.team_name = data.top.account_login_name;
 
@@ -132,8 +135,6 @@ export class GrounpPage {
       console.log(err);
     }
   }
-
-
   getfoollowup() {
     try {
       this.storage.get('userInfo').then((data) => {

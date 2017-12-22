@@ -4,7 +4,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 import { Storage } from '@ionic/storage';
 import { HttpLodingService } from '../../providers/loadingServer';
 import { ajaxService } from '../../providers/ajaxServe';
-
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 /**
  * Generated class for the PersonSetingPage page.
  *
@@ -19,11 +19,11 @@ import { ajaxService } from '../../providers/ajaxServe';
 })
 export class PersonSetingPage {
   public simpleColumns: any;
-  public img: any;
+  public img: any = null;
   public tokenid: string;
   public userid: string;
   public penSetingData: string;
-  public userSex: string = "男";
+  public userSex: number;
   public username: string;
   public name: string;
   constructor(public navCtrl: NavController,
@@ -35,14 +35,16 @@ export class PersonSetingPage {
     public httploading: HttpLodingService,
     public ajaxserve: ajaxService,
     public modalCtrl: ModalController,
+    private transfer: FileTransfer
 
   ) {
     this.penSetingData = this.navParams.get('data');
     console.log(this.penSetingData);
     this.userSex = this.penSetingData['account_login_sex'];
     this.username = this.penSetingData['account_login_name'];
-    this.name = this.penSetingData['real_name']
-
+    this.name = this.penSetingData['real_name'];
+    this.img = this.penSetingData['account_login_avatar'];
+    console.log(this.userSex);
     this.simpleColumns = [
       {
         name: 'col1',
@@ -53,12 +55,12 @@ export class PersonSetingPage {
         ]
       }
     ];
-    console.log(this.userSex);
-    if (this.userSex == "1") {
-      this.userSex = "男"
-    } else {
-      this.userSex = "女"
-    }
+    // console.log(this.userSex);
+    // if (this.userSex == "1") {
+    //   this.userSex = "男"
+    // } else {
+    //   this.userSex = "女"
+    // }
   }
 
   ionViewDidLoad() {
@@ -93,7 +95,6 @@ export class PersonSetingPage {
           handler: () => {
             const options: CameraOptions = {
               quality: 80,
-              allowEdit: true,
               targetWidth: 800,
               targetHeight: 800,
               saveToPhotoAlbum: false,
@@ -103,6 +104,8 @@ export class PersonSetingPage {
             }
             this.camera.getPicture(options).then((imageData) => {
               this.img = imageData;
+
+              this.upload(this.img)
             }, (err) => {
               console.log(err);
             });
@@ -113,13 +116,14 @@ export class PersonSetingPage {
           handler: () => {
             const options: CameraOptions = {
               quality: 80,
-              allowEdit: true,
+
               targetWidth: 800,
               targetHeight: 800,
               sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
             }
             this.camera.getPicture(options).then((imageData) => {
               this.img = imageData;
+              this.upload(this.img)
             }, (err) => {
               console.log(err);
             });
@@ -134,6 +138,24 @@ export class PersonSetingPage {
       ]
     });
     actionSheet.present();
+  }
+  upload(path) {
+    var filname = path.substr(path.lastIndexOf('/') + 1);
+    //filname = filname.substr(0, filname.indexOf('?'));
+    const fileTransfer: FileTransferObject = this.transfer.create();
+    let options: FileUploadOptions = {
+      fileKey: 'file',
+      fileName: filname,
+    }
+    fileTransfer.upload(path, "http://a.buka.tv/BaseCommon/upload/upload", options, true)
+      .then((data) => {
+        var imgurl = JSON.stringify(data);
+        imgurl = JSON.parse(imgurl);
+        this.img = data.response;
+        this.setingHeadimg(data.response)
+      }, (err) => {
+        alert(err + "错误");
+      })
   }
   exit() {
     let alert = this.alertCtrl.create({
@@ -151,7 +173,7 @@ export class PersonSetingPage {
             this.storage.clear().then((data) => {
               setTimeout(() => {
                 this.navCtrl.push('LogingPage')
-              }, 1000)
+              }, 500)
             })
 
           }
@@ -172,5 +194,23 @@ export class PersonSetingPage {
       }
     });
     profileModal.present();
+  }
+  setingHeadimg(img) {
+    try {
+      this.storage.get('userInfo').then((data) => {
+        this.tokenid = data.tokenid;
+        this.userid = data.userid;
+        this.ajaxserve.modifiterHeadImg({ userid: this.userid, tokenid: this.tokenid, useravatar: img }).then((data) => {
+          if (data.status.Code = "200") {
+            this.httploading.alertServe('修改成功');
+          }
+        }).catch((err) => {
+          console.log(err);
+        })
+      })
+    }
+    catch (err) {
+      console.log(err);
+    }
   }
 }

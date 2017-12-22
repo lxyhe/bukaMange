@@ -60,6 +60,7 @@ export class PersonSetingNamePage {
       console.log(err);
     }
   }
+
   dismiss() {
     this.setingName();
     let data = { 'nickName': this.queryText };

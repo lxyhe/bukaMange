@@ -41,6 +41,8 @@ export const api = {
   inspectorfoloow: address + "director/getdiryfollow",
   inspectornofoloow: address + "director/getdirnfollow",
   inspectorGrouList: address + "director/getdirmmember",
+  //修改头像
+  modifiterimg: address + "personal/editperavatar",
 
   //头像上传接口
   headeUpload: "http://a.buka.tv/BaseCommon/upload/upload",

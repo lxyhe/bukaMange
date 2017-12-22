@@ -25,14 +25,12 @@ export class MyApp {
       statusBar.styleDefault();
       splashScreen.hide();
       storage.get('userInfo').then(data => {
-        // if (data !== "" && data !== null) {
-        //   storage.get('roleID').then(data => {
-        //     if (data == "1") {
-        //       // navCtrl.setRoot('CompanyPage');
-        //     }
-        //   })
-        // }
         //console.log(data);
+        // if (data.tokenid) {
+        //   this.rootPage = 'TabsPage'
+        // } else {
+        //   this.rootPage = 'LogingPage';
+        // }
 
       })
 

@@ -137,6 +137,16 @@ export class HomePage {
             }
             this.pageNumber1 = data.cpage;
             this.totalNumber1 = data.total;
+            // if (data.isNext) {
+            //   this.noMoreData1 = false;
+            //   this.noLoading1 = true;
+            // } else {
+            //   this.noMoreData1 = true;
+            //   this.noLoading1 = false;
+
+            // }
+
+
             this.pensetingData = data.top;
 
             this.avatarUrl = data.top.account_login_avatar;
@@ -287,7 +297,8 @@ export class HomePage {
               Array.prototype.push.apply(this.privateClientList, data.data);
               this.pageNumber1 = data.cpage;
               this.totalNumber1 = data.total;
-              if (this.pageNumber1 == this.totalNumber1) {
+
+              if (!data.isNext) {
                 this.noMoreData1 = true;
                 this.noLoading1 = false;
               }
@@ -317,7 +328,11 @@ export class HomePage {
               Array.prototype.push.apply(this.fllowClientList, data.data);
               this.pageNumber2 = data.cpage;
               this.totalNumber2 = data.total;
-              if (this.pageNumber2 == this.totalNumber2) {
+              // if (this.pageNumber2 == this.totalNumber2) {
+              //   this.noMoreData2 = true;
+              //   this.noLoading2 = false;
+              // }
+              if (!data.isNext) {
                 this.noMoreData2 = true;
                 this.noLoading2 = false;
               }
@@ -347,7 +362,11 @@ export class HomePage {
               Array.prototype.push.apply(this.nofllowClientList, data.data);
               this.pageNumber3 = data.cpage;
               this.totalNumber3 = data.total;
-              if (this.pageNumber3 == this.totalNumber3) {
+              // if (this.pageNumber3 == this.totalNumber3) {
+              //   this.noMoreData3 = true;
+              //   this.noLoading3 = false;
+              // }
+              if (!data.isNext) {
                 this.noMoreData3 = true;
                 this.noLoading3 = false;
               }
@@ -377,7 +396,11 @@ export class HomePage {
               Array.prototype.push.apply(this.groupList, data.data);
               this.pageNumber4 = data.cpage;
               this.totalNumber4 = data.total;
-              if (this.pageNumber4 == this.totalNumber4) {
+              // if (this.pageNumber4 == this.totalNumber4) {
+              //   this.noMoreData4 = true;
+              //   this.noLoading4 = false;
+              // }
+              if (!data.isNext) {
                 this.noMoreData4 = true;
                 this.noLoading4 = false;
               }

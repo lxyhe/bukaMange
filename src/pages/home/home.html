@@ -165,7 +165,7 @@
         <ion-list style="margin-top:0" *ngFor="let item of groupList">
           <ion-item style="border:none" (click)="goMemberPage(item)">
             <ion-avatar item-start>
-              <img src="{{item.account_login_avatar==null?'assets/imgs/timg1.jpg':team_avater}}">
+              <img src="{{item.account_login_avatar==null?'assets/imgs/timg1.jpg':item.account_login_avatar==''?'assets/imgs/timg1.jpg':item.account_login_avatar}}">
             </ion-avatar>
             <h2>{{item.account_login_name}}</h2>
             <p class="group">私海客户:{{item.clicount==null?'0':item.clicount}}</p>

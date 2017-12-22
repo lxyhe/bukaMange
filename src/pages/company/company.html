@@ -41,7 +41,15 @@
         </ion-item>
       </ion-list>
     </ion-card>
+    <div *ngIf="groudData" style="width:50%;margin:0 auto;text-align:center;margin-top:0.5rem;">
+      <img style="width:50%;height:50%;margin-left:5px" src="assets/imgs/nodata.png" alt="">
+      <div style=" font-size: 16px;
+                      color: #666666;
+                      margin-top: 5px;">暂无团队信息</div>
+
+    </div>
   </div>
+
   <ion-item style="text-align:center" *ngIf="noMoreData">
     没有更多数据显示了...
   </ion-item>

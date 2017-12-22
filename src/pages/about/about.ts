@@ -6,6 +6,7 @@ import { Storage } from '@ionic/storage';
 //import mickData from '../../providers/mickData';
 import { HttpLodingService } from '../../providers/loadingServer';
 import { ajaxService } from '../../providers/ajaxServe';
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 export class linCantactsObj {
   name: string;
   post: string;
@@ -23,6 +24,9 @@ export class addressObj {
   templateUrl: 'about.html'
 })
 export class AboutPage {
+  //图片上传
+
+
   public clientTypeValue: string = "";
   public clientRankValue: string = "";
   public clientDemandValue: string = "";
@@ -61,7 +65,9 @@ export class AboutPage {
     private storage: Storage,
     public httploading: HttpLodingService,
     public ajaxserve: ajaxService,
+    private transfer: FileTransfer
   ) {
+
     this.linkCantacts = new linCantactsObj();
     this.ClientAddress = new addressObj();
     this.linkCantacts.name = "未填写";
@@ -288,7 +294,7 @@ export class AboutPage {
             handler: () => {
               const options: CameraOptions = {
                 quality: 80,
-                allowEdit: true,
+
                 targetWidth: 800,
                 targetHeight: 800,
                 saveToPhotoAlbum: false,
@@ -298,6 +304,8 @@ export class AboutPage {
               }
               this.camera.getPicture(options).then((imageData) => {
                 this.customer_avatar = imageData;
+
+                this.upload(this.customer_avatar);
               }, (err) => {
                 console.log(err);
               });
@@ -308,13 +316,14 @@ export class AboutPage {
             handler: () => {
               const options: CameraOptions = {
                 quality: 80,
-                allowEdit: true,
+
                 targetWidth: 800,
                 targetHeight: 800,
                 sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
               }
               this.camera.getPicture(options).then((imageData) => {
                 this.customer_avatar = imageData;
+                this.upload(this.customer_avatar);
               }, (err) => {
                 console.log(err);
               });
@@ -330,9 +339,24 @@ export class AboutPage {
       });
       actionSheet.present();
     }
-
   }
-
+  upload(path) {
+    // console.log(path);
+    var filname = path.substr(path.lastIndexOf('/') + 1);
+    // filname = filname.substr(0, filname.indexOf('?'));
+    //console.log(filname)
+    const fileTransfer: FileTransferObject = this.transfer.create();
+    let options: FileUploadOptions = {
+      fileKey: 'file',
+      fileName: filname,
+    }
+    fileTransfer.upload(path, "http://a.buka.tv/BaseCommon/upload/upload", options, true)
+      .then((data) => {
+        this.customer_avatar = data.response;
+      }, (err) => {
+        alert(err);
+      })
+  }
 
 }
 

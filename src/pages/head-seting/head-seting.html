@@ -14,7 +14,7 @@
     <ion-list>
       <button (click)="setingHead()" ion-item>
             <ion-avatar item-start>
-              <img src="assets/imgs/timg1.jpg">
+              <img src="{{imgUrl==null?'assets/imgs/timg1.jpg':imgUrl}}">
             </ion-avatar>
           </button >
         </ion-list>

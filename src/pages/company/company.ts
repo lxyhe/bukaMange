@@ -24,6 +24,7 @@ export class CompanyPage {
   public pageNumber: any;
   public noMoreData: boolean = false;
   public isShowInfinite: boolean = true;
+  public groudData: boolean = false;
   constructor(
     public navCtrl: NavController,
     public httploading: HttpLodingService,
@@ -81,9 +82,8 @@ export class CompanyPage {
   goGrounpPage(items) {
     this.navCtrl.push('GrounpPage', { data: items })
   }
-  goSteingPage(items) {
-
-    this.navCtrl.push('HeadSetingPage', { data: items })
+  goSteingPage() {
+    this.navCtrl.push('HeadSetingPage', { 'data': this.companyavatar })
   }
   doInfinite(infiniteScroll) {
     this.pageNumber++;
@@ -98,6 +98,7 @@ export class CompanyPage {
             if (data.status.Code = "200") {
               this.httploading.ColseServerLoding();
               if (data.data.tlist.length !== 0) {
+                this.groudData = false;
                 this.companyavatar = data.data.avatar;
                 this.companyname = data.data.name;
 
@@ -113,9 +114,12 @@ export class CompanyPage {
                   this.noMoreData = true;
                 }
 
+
               } else {
                 console.log("list=0")
+                this.groudData = true;
               }
+
             }
           }).catch((err) => {
             console.log(err);

@@ -15,7 +15,7 @@
       <button (click)="setingHead()" style="border:1px solid #F5F5F8" ion-item>
         <span>头像</span>
               <ion-avatar item-end>
-                <img src="assets/imgs/timg1.jpg">
+                  <img src="{{img==null?'assets/imgs/timg1.jpg':img}}">
               </ion-avatar>
       </button >
      <button style="border:1px solid #F5F5F8" ion-item>

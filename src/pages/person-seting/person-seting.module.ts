@@ -6,7 +6,7 @@ import { Camera } from '@ionic-native/camera';
 import { HttpService } from '../../providers/httpserver';
 import { HttpLodingService } from '../../providers/loadingServer';
 import { ajaxService } from '../../providers/ajaxServe';
-
+import { FileTransfer } from '@ionic-native/file-transfer';
 @NgModule({
   declarations: [
     PersonSetingPage,
@@ -20,6 +20,7 @@ import { ajaxService } from '../../providers/ajaxServe';
     HttpService,
     HttpLodingService,
     ajaxService,
+    FileTransfer
   ]
 })
 export class PersonSetingPageModule { }

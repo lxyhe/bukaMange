@@ -95,7 +95,7 @@ export class ContactPage {
               Array.prototype.push.apply(this.publicClientList, data.data);
               this.pageNumber = data.cpage;
               this.totalNumber = data.total;
-              if (this.pageNumber == this.totalNumber) {
+              if (!data.isNext) {
                 this.noMoreData = true;
                 this.noLoading = false;
               }

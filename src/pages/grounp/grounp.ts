@@ -114,10 +114,10 @@ export class GrounpPage {
             }
             this.pageNumber1 = data.cpage;
             this.totalNumber1 = data.total;
-            if (this.pageNumber1 == this.totalNumber1) {
-              this.noMoreData1 = true;
-              this.noLoading1 = false;
-            }
+            // if (this.pageNumber1 == this.totalNumber1) {
+            //   this.noMoreData1 = true;
+            //   this.noLoading1 = false;
+            // }
             this.team_avater = data.top.account_login_avatar;
             this.team_name = data.top.account_login_name;
 
@@ -248,7 +248,7 @@ export class GrounpPage {
               Array.prototype.push.apply(this.privateClientList, data.data);
               this.pageNumber1 = data.cpage;
               this.totalNumber1 = data.total;
-              if (this.pageNumber1 == this.totalNumber1) {
+              if (!data.isNext) {
                 this.noMoreData1 = true;
                 this.noLoading1 = false;
               }
@@ -278,7 +278,7 @@ export class GrounpPage {
               Array.prototype.push.apply(this.fllowClientList, data.data);
               this.pageNumber2 = data.cpage;
               this.totalNumber2 = data.total;
-              if (this.pageNumber2 == this.totalNumber2) {
+              if (!data.isNext) {
                 this.noMoreData2 = true;
                 this.noLoading2 = false;
               }
@@ -308,7 +308,7 @@ export class GrounpPage {
               Array.prototype.push.apply(this.nofllowClientList, data.data);
               this.pageNumber3 = data.cpage;
               this.totalNumber3 = data.total;
-              if (this.pageNumber3 == this.totalNumber3) {
+              if (!data.isNext) {
                 this.noMoreData3 = true;
                 this.noLoading3 = false;
               }
@@ -336,7 +336,7 @@ export class GrounpPage {
               Array.prototype.push.apply(this.groupList, data.data);
               this.pageNumber4 = data.cpage;
               this.totalNumber4 = data.total;
-              if (this.pageNumber4 == this.totalNumber4) {
+              if (!data.isNext) {
                 this.noMoreData4 = true;
                 this.noLoading4 = false;
               }

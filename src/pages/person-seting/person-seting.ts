@@ -140,8 +140,13 @@ export class PersonSetingPage {
     actionSheet.present();
   }
   upload(path) {
+    console.log(path);
+    this.httploading.HttpServerLoading("上传中...")
     var filname = path.substr(path.lastIndexOf('/') + 1);
-    //filname = filname.substr(0, filname.indexOf('?'));
+    if (filname.indexOf('?') != -1) {
+      filname = filname.substr(0, filname.indexOf('?'));
+    }
+    console.log(filname);
     const fileTransfer: FileTransferObject = this.transfer.create();
     let options: FileUploadOptions = {
       fileKey: 'file',
@@ -149,6 +154,7 @@ export class PersonSetingPage {
     }
     fileTransfer.upload(path, "http://a.buka.tv/BaseCommon/upload/upload", options, true)
       .then((data) => {
+        this.httploading.ColseServerLoding();
         var imgurl = JSON.stringify(data);
         imgurl = JSON.parse(imgurl);
         this.img = data.response;

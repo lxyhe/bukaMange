@@ -121,7 +121,9 @@ export class HeadSetingPage {
   upload(path) {
     this.httploading.HttpServerLoading("上传中...")
     var filname = path.substr(path.lastIndexOf('/') + 1);
-    filname = filname.substr(0, filname.indexOf('?'));
+    if (filname.indexOf('?') != -1) {
+      filname = filname.substr(0, filname.indexOf('?'));
+    }
     const fileTransfer: FileTransferObject = this.transfer.create();
     let options: FileUploadOptions = {
       fileKey: 'file',

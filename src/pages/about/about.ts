@@ -304,7 +304,6 @@ export class AboutPage {
               }
               this.camera.getPicture(options).then((imageData) => {
                 this.customer_avatar = imageData;
-
                 this.upload(this.customer_avatar);
               }, (err) => {
                 console.log(err);
@@ -341,10 +340,11 @@ export class AboutPage {
     }
   }
   upload(path) {
-    // console.log(path);
+    this.httploading.HttpServerLoading("上传中...")
     var filname = path.substr(path.lastIndexOf('/') + 1);
-    // filname = filname.substr(0, filname.indexOf('?'));
-    //console.log(filname)
+    if (filname.indexOf('?') != -1) {
+      filname = filname.substr(0, filname.indexOf('?'));
+    }
     const fileTransfer: FileTransferObject = this.transfer.create();
     let options: FileUploadOptions = {
       fileKey: 'file',
@@ -352,6 +352,7 @@ export class AboutPage {
     }
     fileTransfer.upload(path, "http://a.buka.tv/BaseCommon/upload/upload", options, true)
       .then((data) => {
+        this.httploading.ColseServerLoding();
         this.customer_avatar = data.response;
       }, (err) => {
         alert(err);

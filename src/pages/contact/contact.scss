@@ -113,6 +113,10 @@ page-contact {
     /* Firefox 3.6 - 15 */
     background: linear-gradient(to right, #36CDBB, #36CDBD);
   }
+  .card-ios,
+  .card-md {
+    box-shadow: none;
+  }
   .tabContent {
     height: 40px;
     position: relative;
@@ -124,14 +128,22 @@ page-contact {
     border-bottom: 2px solid #FF5652;
     color: #666;
   }
+  .card-ios ion-list {
+    margin-top: 12px;
+  }
+  .card-ios,
+  .card-md {
+    margin: 0px 0px 0px;
+    width: 100%;
+    background-color: #F8F6F5;
+  }
   .segment-ios .segment-button {
     border: 0;
     max-width: 1000px;
-  }
-  .list-ios>.item-block:last-child,
-  .list-ios>.item-wrapper:last-child .item-block {
-    border-top: 1rem solid #F8F6F5
-  }
+  } // .list-ios>.item-block:last-child,
+  // .list-ios>.item-wrapper:last-child .item-block {
+  //   border-top: 1rem solid #F8F6F5
+  // }
   .search {
     font-size: 2.8rem;
     margin-right: 1rem;

@@ -1,4 +1,4 @@
-export const address = "http://192.168.10.186:8080/";
+export const address = "http://a.buka.tv/crm/";
 
 export const api = {
   logingapi: address + "login/islogin",

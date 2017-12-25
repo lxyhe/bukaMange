@@ -12,7 +12,7 @@
 <ion-content>
   <ion-card>
     <ion-list>
-      <button (click)="setingHead()" style="border:1px solid #F5F5F8" ion-item>
+      <button tappable (click)="setingHead()" style="border:1px solid #F5F5F8" ion-item>
         <span>头像</span>
               <ion-avatar item-end>
                   <img src="{{img==null?'assets/imgs/timg1.jpg':img}}">
@@ -24,7 +24,7 @@
                 {{username}}
               </span>
      </button >
-    <button (click)="setingName()" style="border:1px solid #F5F5F8"ion-item>
+    <button tappable (click)="setingName()" style="border:1px solid #F5F5F8"ion-item>
         <span>姓名</span>
         <span item-end>
             {{name==null?'未填写':name}}

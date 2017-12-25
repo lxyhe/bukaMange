@@ -61,7 +61,7 @@
     <div *ngSwitchCase="'puppies'">
       <ion-card>
         <ion-list *ngFor="let item of memberList">
-          <ion-item>
+          <ion-item style="border:none;border-bottom:1px solid #ddd">
             <ion-avatar item-start>
               <img src="{{account_login_avatar==null?'assets/imgs/timg1.jpg':account_login_avatar==''?'assets/imgs/timg1.jpg':account_login_avatar}}">
             </ion-avatar>
@@ -76,6 +76,7 @@
         <div class="nodata" style="text-align:center" *ngIf="noMoreData1">
           没有更多数据显示了...
         </div>
+
 
       </ion-card>
       <ion-infinite-scroll (ionInfinite)="doInfinite1($event)">

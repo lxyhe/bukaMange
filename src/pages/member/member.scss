@@ -127,13 +127,30 @@ page-member {
     border-bottom: 2px solid #FF5652;
     color: #666;
   }
+  .card-ios,
+  .card-md {
+    margin: 0px 0px 10px;
+    width: 100%;
+    background-color: #F8F6F5;
+  }
+  .card-ios,
+  .card-md {
+    box-shadow: none;
+  }
   .segment-ios .segment-button {
     border: 0;
     max-width: 1000px;
+  } // .list-ios>.item-block:last-child,
+  // .list-ios>.item-wrapper:last-child .item-block {
+  //   border-top: 1rem solid #F8F6F5
+  // }
+  .item-ios,
+  .item-md {
+    border-bottom: 1px solid #ECF0F1;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.10);
   }
-  .list-ios>.item-block:last-child,
-  .list-ios>.item-wrapper:last-child .item-block {
-    border-top: 1rem solid #F8F6F5
+  .card-ios ion-list {
+    margin-top: 12px;
   }
   .cancelIcon {
     display: inline-block;

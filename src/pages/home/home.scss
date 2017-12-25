@@ -36,7 +36,7 @@ page-home {
   }
   .card-ios,
   .card-md {
-    margin: 0px 0px 10px;
+    margin: 0px 0px 0px;
     width: 100%;
     background-color: #F8F6F5;
   }
@@ -52,6 +52,10 @@ page-home {
     font-weight: bold;
     color: #fff;
     text-align: center;
+  }
+  .card-ios,
+  .card-md {
+    box-shadow: none;
   }
   .card-title>p {
     width: 100%;

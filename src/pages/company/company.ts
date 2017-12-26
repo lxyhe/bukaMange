@@ -63,7 +63,8 @@ export class CompanyPage {
             }
           }
         }).catch((err) => {
-          console.log(err);
+          this.httploading.ColseServerLoding();
+          alert(err);
         })
       })
     }
@@ -122,7 +123,8 @@ export class CompanyPage {
 
             }
           }).catch((err) => {
-            console.log(err);
+            this.httploading.ColseServerLoding();
+            alert(err);
           })
         })
       }

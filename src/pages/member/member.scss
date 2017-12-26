@@ -159,6 +159,7 @@ page-member {
     position: absolute;
     top: 2rem;
     left: 1rem;
+    z-index: 100;
     background: url('../assets/imgs/cancel.png') no-repeat left top;
   }
   .nodata {

@@ -15,6 +15,10 @@ page-home {
   .scroll-content {
     background-color: #F8F6F5;
   }
+  .gosteing {
+    position: relative;
+    z-index: 100;
+  }
   .item-ios,
   .item-md {
     border-bottom: 1px solid #ECF0F1;

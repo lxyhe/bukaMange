@@ -127,7 +127,8 @@ export class GrounpPage {
 
           }
         }).catch((err) => {
-          console.log(err);
+          this.httploading.ColseServerLoding();
+          alert(err);
         })
       })
     }
@@ -154,7 +155,8 @@ export class GrounpPage {
 
           }
         }).catch((err) => {
-          console.log(err);
+          this.httploading.ColseServerLoding();
+          alert(err);
         })
       })
     }
@@ -183,7 +185,8 @@ export class GrounpPage {
 
           }
         }).catch((err) => {
-          console.log(err);
+          this.httploading.ColseServerLoding();
+          alert(err);
         })
       })
     }
@@ -210,7 +213,8 @@ export class GrounpPage {
             //this.groupMember = data.top;
           }
         }).catch((err) => {
-          console.log(err);
+          this.httploading.ColseServerLoding();
+          alert(err);
         })
       })
     }
@@ -255,7 +259,8 @@ export class GrounpPage {
               infiniteScroll.complete();
             }
           }).catch((err) => {
-            console.log(err);
+            this.httploading.ColseServerLoding();
+            alert(err);
           })
         })
       }
@@ -285,7 +290,8 @@ export class GrounpPage {
               infiniteScroll.complete();
             }
           }).catch((err) => {
-            console.log(err);
+            this.httploading.ColseServerLoding();
+            alert(err);
           })
         })
       }
@@ -315,7 +321,8 @@ export class GrounpPage {
               infiniteScroll.complete();
             }
           }).catch((err) => {
-            console.log(err);
+            this.httploading.ColseServerLoding();
+            alert(err);
           })
         })
       }
@@ -343,7 +350,8 @@ export class GrounpPage {
               infiniteScroll.complete();
             }
           }).catch((err) => {
-            console.log(err);
+            this.httploading.ColseServerLoding();
+            alert(err);
           })
         })
       }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ActionSheetController, AlertController, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ActionSheetController, AlertController, ModalController, App } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { Storage } from '@ionic/storage';
 import { HttpLodingService } from '../../providers/loadingServer';
@@ -35,7 +35,8 @@ export class PersonSetingPage {
     public httploading: HttpLodingService,
     public ajaxserve: ajaxService,
     public modalCtrl: ModalController,
-    private transfer: FileTransfer
+    private transfer: FileTransfer,
+    public app: App
 
   ) {
     this.penSetingData = this.navParams.get('data');
@@ -160,6 +161,7 @@ export class PersonSetingPage {
         this.img = data.response;
         this.setingHeadimg(data.response)
       }, (err) => {
+        this.httploading.ColseServerLoding();
         alert(err + "错误");
       })
   }
@@ -178,7 +180,7 @@ export class PersonSetingPage {
           handler: () => {
             this.storage.clear().then((data) => {
               setTimeout(() => {
-                this.navCtrl.push('LogingPage')
+                this.app.getRootNav().setRoot('LogingPage')
               }, 500)
             })
 
@@ -211,12 +213,13 @@ export class PersonSetingPage {
             this.httploading.alertServe('修改成功');
           }
         }).catch((err) => {
-          console.log(err);
+          this.httploading.ColseServerLoding();
+          alert(err);
         })
       })
     }
     catch (err) {
-      console.log(err);
+      alert(err);
     }
   }
 }

@@ -8,6 +8,9 @@ import { HttpService } from '../../providers/httpserver';
 import { HttpLodingService } from '../../providers/loadingServer';
 import { ajaxService } from '../../providers/ajaxServe';
 //import { Storage } from '@ionic/storage';
+import { Toast } from '@ionic-native/toast';
+import { BackButtonService } from '../../providers/backbuttonServe';
+
 @NgModule({
   declarations: [
     LogingPage,
@@ -22,6 +25,8 @@ import { ajaxService } from '../../providers/ajaxServe';
     HttpService,
     HttpLodingService,
     ajaxService,
+    BackButtonService,
+    Toast
     // Storage
   ]
 })

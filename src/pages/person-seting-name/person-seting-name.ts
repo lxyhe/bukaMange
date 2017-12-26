@@ -52,11 +52,13 @@ export class PersonSetingNamePage {
             console.log(data);
           }
         }).catch((err) => {
-          console.log(err);
+          this.httploading.ColseServerLoding();
+          alert(err);
         })
       })
     }
     catch (err) {
+      this.httploading.ColseServerLoding();
       console.log(err);
     }
   }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ActionSheetController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ActionSheetController, AlertController, App } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { Storage } from '@ionic/storage';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
@@ -32,6 +32,7 @@ export class HeadSetingPage {
     private transfer: FileTransfer,
     public httploading: HttpLodingService,
     public ajaxserve: ajaxService,
+    public app: App
 
   ) {
     this.imgUrl = this.navParams.get('data');
@@ -61,7 +62,8 @@ export class HeadSetingPage {
               this.imgUrl = imageData;
               this.upload(this.imgUrl);
             }, (err) => {
-              console.log(err);
+              alert(err);
+
             });
           }
         }, {
@@ -79,7 +81,7 @@ export class HeadSetingPage {
               this.imgUrl = imageData;
               this.upload(this.imgUrl);
             }, (err) => {
-              console.log(err);
+              alert(err);
             });
           }
         }, {
@@ -108,8 +110,9 @@ export class HeadSetingPage {
           handler: () => {
             this.storage.clear().then((data) => {
               setTimeout(() => {
-                this.navCtrl.push('LogingPage')
-              }, 1000)
+                // this.navCtrl.setRoot('LogingPage')
+                this.app.getRootNav().setRoot('LogingPage')
+              }, 500)
             })
 
           }
@@ -153,7 +156,8 @@ export class HeadSetingPage {
             this.httploading.alertServe('修改成功');
           }
         }).catch((err) => {
-          console.log(err);
+          this.httploading.ColseServerLoding();
+          alert(err);
         })
       })
     }

@@ -162,7 +162,8 @@ export class HomePage {
         })
 
       }).catch(err => {
-        console.log(err);
+        this.httploading.ColseServerLoding();
+        alert(err);
       })
     }
     catch (err) {
@@ -200,7 +201,8 @@ export class HomePage {
           }
         })
       }).catch(err => {
-        console.log(err);
+        this.httploading.ColseServerLoding();
+        alert(err);
       })
     }
     catch (err) {
@@ -233,7 +235,8 @@ export class HomePage {
           }
         })
       }).catch(err => {
-        console.log(err);
+        this.httploading.ColseServerLoding();
+        alert(err);
       })
     }
     catch (err) {
@@ -262,7 +265,8 @@ export class HomePage {
           }
         })
       }).catch(err => {
-        console.log(err);
+        this.httploading.ColseServerLoding();
+        alert(err);
       })
     }
     catch (err) {
@@ -305,7 +309,8 @@ export class HomePage {
               infiniteScroll.complete();
             }
           }).catch((err) => {
-            console.log(err);
+            this.httploading.ColseServerLoding();
+            alert(err);
           })
         })
       }
@@ -339,7 +344,8 @@ export class HomePage {
               infiniteScroll.complete();
             }
           }).catch((err) => {
-            console.log(err);
+            this.httploading.ColseServerLoding();
+            alert(err);
           })
         })
       }
@@ -373,7 +379,8 @@ export class HomePage {
               infiniteScroll.complete();
             }
           }).catch((err) => {
-            console.log(err);
+            this.httploading.ColseServerLoding();
+            alert(err);
           })
         })
       }
@@ -407,7 +414,8 @@ export class HomePage {
               infiniteScroll.complete();
             }
           }).catch((err) => {
-            console.log(err);
+            this.httploading.ColseServerLoding();
+            alert(err);
           })
         })
       }

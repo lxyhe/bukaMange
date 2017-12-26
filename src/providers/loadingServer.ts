@@ -13,7 +13,7 @@ export class HttpLodingService {
   HttpServerLoading(memo) {
     this.loader = this.loadingCtrl.create({
       content: memo,
-      duration: 1000000
+      duration: 20000
     });
     this.loader.present();
   }

@@ -100,7 +100,7 @@ export class MemberPage {
         this.tokenid = data.tokenid;
         this.httploading.HttpServerLoading("加载中...")
         this.ajaxserve.PrivateClienList({ tokenid: this.tokenid, account_login_id: this.account_login_id }).then((data) => {
-          if (data.status.Code = "200") {
+          if (data.status.Code == "200") {
             console.log(data);
             this.httploading.ColseServerLoding();
             if (data.data.length !== 0) {
@@ -133,7 +133,7 @@ export class MemberPage {
         this.tokenid = data.tokenid;
 
         this.ajaxserve.getMemberfollow({ tokenid: this.tokenid, account_login_id: this.account_login_id }).then((data) => {
-          if (data.status.Code = "200") {
+          if (data.status.Code == "200") {
             console.log(data);
             if (data.data.length !== 0) {
               // this.memberList = data.data;
@@ -167,7 +167,7 @@ export class MemberPage {
         this.tokenid = data.tokenid;
 
         this.ajaxserve.getMembernofollow({ tokenid: this.tokenid, account_login_id: this.account_login_id }).then((data) => {
-          if (data.status.Code = "200") {
+          if (data.status.Code == "200") {
             console.log(data);
 
             if (data.data.length !== 0) {
@@ -203,7 +203,7 @@ export class MemberPage {
           this.tokenid = data.tokenid;
 
           this.ajaxserve.PrivateClienList({ tokenid: this.tokenid, account_login_id: this.account_login_id, cpage: this.pageNumber1 }).then((data) => {
-            if (data.status.Code = "200") {
+            if (data.status.Code == "200") {
               // this.publicClientList = data.data;
               Array.prototype.push.apply(this.memberList, data.data);
               this.pageNumber1 = data.cpage;
@@ -232,7 +232,7 @@ export class MemberPage {
           this.tokenid = data.tokenid;
 
           this.ajaxserve.getMemberfollow({ tokenid: this.tokenid, account_login_id: this.account_login_id, cpage: this.pageNumber2 }).then((data) => {
-            if (data.status.Code = "200") {
+            if (data.status.Code == "200") {
 
               // this.publicClientList = data.data;
               Array.prototype.push.apply(this.fllowList, data.data);
@@ -261,7 +261,7 @@ export class MemberPage {
         this.storage.get('userInfo').then((data) => {
           this.tokenid = data.tokenid;
           this.ajaxserve.getMembernofollow({ tokenid: this.tokenid, account_login_id: this.account_login_id, cpage: this.pageNumber3 }).then((data) => {
-            if (data.status.Code = "200") {
+            if (data.status.Code == "200") {
               // this.publicClientList = data.data;
               Array.prototype.push.apply(this.nofllowList, data.data);
               this.pageNumber3 = data.cpage;

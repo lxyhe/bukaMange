@@ -1,6 +1,6 @@
 
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, ActionSheetController, ModalController, Events } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, ActionSheetController, ModalController, Events, App } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { Storage } from '@ionic/storage';
 //import mickData from '../../providers/mickData';
@@ -65,7 +65,8 @@ export class AboutPage {
     private storage: Storage,
     public httploading: HttpLodingService,
     public ajaxserve: ajaxService,
-    private transfer: FileTransfer
+    private transfer: FileTransfer,
+    private app: App
   ) {
 
     this.linkCantacts = new linCantactsObj();
@@ -178,7 +179,7 @@ export class AboutPage {
           customer_contact_wechat: this.linkCantacts.wechat,
         }).then((data) => {
           console.log(data);
-          if (data.status.Code = "200") {
+          if (data.status.Code == "200") {
             this.httploading.ColseServerLoding();
             //this.httploading.alertServe(data.status.Msg);
             let alert = this.alertCtrl.create({
@@ -188,7 +189,7 @@ export class AboutPage {
                   text: "确定",
                   handler: data => {
                     setTimeout(() => {
-                      this.navCtrl.setRoot('ContactPage');
+                      this.app.getRootNav().setRoot('LogingPage')
                     }, 1000);
                   }
                 }]
@@ -355,7 +356,7 @@ export class AboutPage {
         this.httploading.ColseServerLoding();
         this.customer_avatar = data.response;
       }, (err) => {
-        alert(err);
+        console.log(err);
       })
   }
 

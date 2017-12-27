@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, IonicPage, NavParams, Events, LoadingController, Refresher } from 'ionic-angular';
+import { NavController, IonicPage, NavParams, Events, LoadingController, Refresher, AlertController, App } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { HttpLodingService } from '../../providers/loadingServer';
 import { ajaxService } from '../../providers/ajaxServe';
@@ -27,6 +27,7 @@ export class ContactPage {
   public noLoading: boolean = true;
 
   constructor(
+    public alertCtrl: AlertController,
     public navCtrl: NavController,
     public navparam: NavParams,
     public event: Events,
@@ -34,6 +35,7 @@ export class ContactPage {
     public httploading: HttpLodingService,
     public ajaxserve: ajaxService,
     public loadingCtrl: LoadingController,
+    private app: App
 
   ) {
 
@@ -54,7 +56,7 @@ export class ContactPage {
         this.userid = data.userid;
         this.httploading.HttpServerLoading("加载中...")
         this.ajaxserve.publicClientList({ tokenid: this.tokenid, userid: this.userid }).then((data) => {
-          if (data.status.Code = "200") {
+          if (data.status.Code == "200") {
             this.httploading.ColseServerLoding();
             this.publicClientList = data.data;
             this.pageNumber = data.cpage;
@@ -70,8 +72,38 @@ export class ContactPage {
               this.noMoreData = false;
             }
 
+          } else if (data.status.Code == "405") {
+            this.httploading.ColseServerLoding();
+            let alert = this.alertCtrl.create({
+              subTitle: data.status.Msg,
+              buttons: [
+                {
+                  text: "确定",
+                  handler: data => {
+                    setTimeout(() => {
+                      this.app.getRootNav().setRoot('LogingPage')
+                    }, 1000);
+                  }
+                }]
+
+            });
+            alert.present();
           }
         }).catch((err) => {
+          let alert = this.alertCtrl.create({
+            subTitle: err.status.Msg,
+            buttons: [
+              {
+                text: "确定",
+                handler: data => {
+                  setTimeout(() => {
+                    this.app.getRootNav().setRoot('LogingPage')
+                  }, 1000);
+                }
+              }]
+
+          });
+          alert.present();
           console.log(err);
         })
       })
@@ -89,7 +121,7 @@ export class ContactPage {
           this.tokenid = data.tokenid;
           this.userid = data.userid;
           this.ajaxserve.publicClientList({ tokenid: this.tokenid, userid: this.userid, cpage: this.pageNumber }).then((data) => {
-            if (data.status.Code = "200") {
+            if (data.status.Code == "200") {
 
               // this.publicClientList = data.data;
               Array.prototype.push.apply(this.publicClientList, data.data);

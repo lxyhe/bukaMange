@@ -171,7 +171,7 @@ export class PrivateCilentDetailsPage {
         this.userid = data.userid;
         this.httploading.HttpServerLoading("加载中...")
         this.ajaxserve.getClientDetails({ tokenid: this.tokenid, userid: this.userid, customer_id: this.customer_id }).then((data) => {
-          if (data.status.Code = "200") {
+          if (data.status.Code == "200") {
             this.httploading.ColseServerLoding();
 
             this.privateClientDetailsPageObj.customer_id = data.data.customer_id;
@@ -264,7 +264,7 @@ export class PrivateCilentDetailsPage {
         this.tokenid = data.tokenid;
         this.httploading.HttpServerLoading("移动中...")
         this.ajaxserve.moveToPublish({ tokenid: this.tokenid, userid: this.userid, customer_id: this.customer_id }).then((data) => {
-          if (data.status.Code = "200") {
+          if (data.status.Code == "200") {
             this.httploading.ColseServerLoding();
             //console.log(data);
             //this.httploading.alertServe(data.status.Msg);
@@ -300,7 +300,7 @@ export class PrivateCilentDetailsPage {
         this.tokenid = data.tokenid;
         this.httploading.HttpServerLoading("加载中...")
         this.ajaxserve.modifiterClientType({ tokenid: this.tokenid, customer_type_id: event.col1.value, customer_id: this.customer_id }).then((data) => {
-          if (data.status.Code = "200") {
+          if (data.status.Code == "200") {
             this.httploading.ColseServerLoding();
             console.log(data);
           }
@@ -321,7 +321,7 @@ export class PrivateCilentDetailsPage {
         this.tokenid = data.tokenid;
         this.httploading.HttpServerLoading("修改中...")
         this.ajaxserve.modifiterClientLevel({ tokenid: this.tokenid, customer_level_id: event.col2.value, customer_id: this.customer_id }).then((data) => {
-          if (data.status.Code = "200") {
+          if (data.status.Code == "200") {
             this.httploading.ColseServerLoding();
             console.log(data);
           }
@@ -340,7 +340,7 @@ export class PrivateCilentDetailsPage {
         this.tokenid = data.tokenid;
         this.httploading.HttpServerLoading("修改中...")
         this.ajaxserve.modifiterClientNeed({ tokenid: this.tokenid, customer_needs_id: event.col3.value, customer_id: this.customer_id }).then((data) => {
-          if (data.status.Code = "200") {
+          if (data.status.Code == "200") {
             this.httploading.ColseServerLoding();
             console.log(data);
           }
@@ -359,7 +359,7 @@ export class PrivateCilentDetailsPage {
         this.tokenid = data.tokenid;
         this.httploading.HttpServerLoading("修改中...")
         this.ajaxserve.modifiterClientSource({ tokenid: this.tokenid, customer_source_id: event.col4.value, customer_id: this.customer_id }).then((data) => {
-          if (data.status.Code = "200") {
+          if (data.status.Code == "200") {
             this.httploading.ColseServerLoding();
             console.log(data);
           }
@@ -378,7 +378,7 @@ export class PrivateCilentDetailsPage {
         this.tokenid = data.tokenid;
         this.httploading.HttpServerLoading("修改中...")
         this.ajaxserve.modifiterClientStatus({ tokenid: this.tokenid, customer_type_id: event.col5.value, customer_id: this.customer_id }).then((data) => {
-          if (data.status.Code = "200") {
+          if (data.status.Code == "200") {
             this.httploading.ColseServerLoding();
             console.log(data);
           }

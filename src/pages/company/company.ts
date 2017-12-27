@@ -1,6 +1,6 @@
 
 import { Component, ViewChild } from '@angular/core';
-import { NavController, IonicPage, Refresher, Events } from 'ionic-angular';
+import { NavController, IonicPage, Refresher, Events, AlertController, App } from 'ionic-angular';
 import { homeObj } from '../../providers/homeObj';
 import { HttpLodingService } from '../../providers/loadingServer';
 import { Storage } from '@ionic/storage';
@@ -30,8 +30,9 @@ export class CompanyPage {
     public httploading: HttpLodingService,
     private storage: Storage,
     public ajaxserve: ajaxService,
-    public event: Events
-
+    public event: Events,
+    public alertCtrl: AlertController,
+    private app: App
   ) {
 
     //this.clientList = mickData;
@@ -51,7 +52,7 @@ export class CompanyPage {
         this.httploading.HttpServerLoading("加载中...")
         this.ajaxserve.companyList({ tokenid: this.tokenid, userid: this.userid }).then((data) => {
           console.log(data);
-          if (data.status.Code = "200") {
+          if (data.status.Code == "200") {
             this.httploading.ColseServerLoding();
             if (data.data.tlist.length !== 0) {
               this.companyavatar = data.data.avatar;
@@ -63,8 +64,22 @@ export class CompanyPage {
             }
           }
         }).catch((err) => {
+
           this.httploading.ColseServerLoding();
-          alert(err);
+          let alert = this.alertCtrl.create({
+            subTitle: err.status.Msg,
+            buttons: [
+              {
+                text: "确定",
+                handler: data => {
+                  setTimeout(() => {
+                    this.app.getRootNav().setRoot('LogingPage')
+                  }, 1000);
+                }
+              }]
+
+          });
+          alert.present();
         })
       })
     }
@@ -96,7 +111,7 @@ export class CompanyPage {
           this.httploading.HttpServerLoading("加载中...")
           this.ajaxserve.companyList({ tokenid: this.tokenid, userid: this.userid, cpage: this.pageNumber }).then((data) => {
             console.log(data);
-            if (data.status.Code = "200") {
+            if (data.status.Code == "200") {
               this.httploading.ColseServerLoding();
               if (data.data.tlist.length !== 0) {
                 this.groudData = false;
@@ -124,7 +139,7 @@ export class CompanyPage {
             }
           }).catch((err) => {
             this.httploading.ColseServerLoding();
-            alert(err);
+            console.log(err);
           })
         })
       }

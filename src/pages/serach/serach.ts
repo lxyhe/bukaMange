@@ -76,7 +76,7 @@ export class SerachPage {
         this.tokenid = data.tokenid;
         this.httploading.HttpServerLoading("搜索中...")
         this.ajaxserve.publicSearch({ tokenid: this.tokenid, cname: this.queryText }).then((data) => {
-          if (data.status.Code = "200") {
+          if (data.status.Code == "200") {
             this.httploading.ColseServerLoding();
             console.log(data);
             this.customerObj = data.data;

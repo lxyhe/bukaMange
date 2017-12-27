@@ -47,7 +47,7 @@ export class PersonSetingNamePage {
         console.log(data);
         this.httploading.HttpServerLoading("修改中...")
         this.ajaxserve.modifiterName({ tokenid: this.tokenid, userid: this.userid, userrname: this.queryText }).then((data) => {
-          if (data.status.Code = "200") {
+          if (data.status.Code == "200") {
             this.httploading.ColseServerLoding();
             console.log(data);
           }

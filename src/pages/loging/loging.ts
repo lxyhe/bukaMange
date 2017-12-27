@@ -57,8 +57,8 @@ export class LogingPage {
           }, 1000)
           return;
         }
-        if (data.status.Code = "200") {
-          if (data.status.Msg = "成功") {
+        if (data.status.Code == "200") {
+          if (data.status.Msg == "成功") {
             this.httploading.ColseServerLoding();
             if (data.data != null) {
               let userInfo = {

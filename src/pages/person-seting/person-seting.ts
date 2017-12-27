@@ -162,7 +162,8 @@ export class PersonSetingPage {
         this.setingHeadimg(data.response)
       }, (err) => {
         this.httploading.ColseServerLoding();
-        alert(err + "错误");
+        this.httploading.alertServe('上传失败!,请稍后再试')
+        console.log(err);
       })
   }
   exit() {
@@ -178,11 +179,15 @@ export class PersonSetingPage {
         {
           text: '确定',
           handler: () => {
-            this.storage.clear().then((data) => {
+            this.storage.remove('userInfo').then((data) => {
+              console.log(data);
               setTimeout(() => {
+                // this.navCtrl.setRoot('LogingPage')
+
                 this.app.getRootNav().setRoot('LogingPage')
               }, 500)
             })
+
 
           }
         }
@@ -209,17 +214,18 @@ export class PersonSetingPage {
         this.tokenid = data.tokenid;
         this.userid = data.userid;
         this.ajaxserve.modifiterHeadImg({ userid: this.userid, tokenid: this.tokenid, useravatar: img }).then((data) => {
-          if (data.status.Code = "200") {
+          if (data.status.Code == "200") {
             this.httploading.alertServe('修改成功');
           }
         }).catch((err) => {
           this.httploading.ColseServerLoding();
-          alert(err);
+          this.httploading.alertServe('头像修改失败');
+          console.log(err);
         })
       })
     }
     catch (err) {
-      alert(err);
+      console.log(err);
     }
   }
 }

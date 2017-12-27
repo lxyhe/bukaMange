@@ -71,7 +71,7 @@ export class PrivateClientAddressPage {
           customer_address2: this.privatedetailsAddress.addressDetails,
           customer_id: this.customer_id
         }).then((data) => {
-          if (data.status.Code = "200") {
+          if (data.status.Code == "200") {
             this.httploading.ColseServerLoding();
 
           }

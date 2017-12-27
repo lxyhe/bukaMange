@@ -103,7 +103,7 @@ export class GrounpPage {
         this.tokenid = data.tokenid;
         this.httploading.HttpServerLoading("加载中...")
         this.ajaxserve.getPrivateList({ tokenid: this.tokenid, team_id: this.team_id }).then((data) => {
-          if (data.status.Code = "200") {
+          if (data.status.Code == "200") {
             this.httploading.ColseServerLoding();
 
             this.privateClientList = data.data;
@@ -128,7 +128,7 @@ export class GrounpPage {
           }
         }).catch((err) => {
           this.httploading.ColseServerLoding();
-          alert(err);
+          console.log(err);
         })
       })
     }
@@ -141,7 +141,7 @@ export class GrounpPage {
       this.storage.get('userInfo').then((data) => {
         this.tokenid = data.tokenid;
         this.ajaxserve.getfllowUplist({ tokenid: this.tokenid, team_id: this.team_id }).then((data) => {
-          if (data.status.Code = "200") {
+          if (data.status.Code == "200") {
 
             this.fllowClientList = data.data;
             this.pageNumber2 = data.cpage;
@@ -156,7 +156,7 @@ export class GrounpPage {
           }
         }).catch((err) => {
           this.httploading.ColseServerLoding();
-          alert(err);
+          console.log(err);
         })
       })
     }
@@ -170,7 +170,7 @@ export class GrounpPage {
         this.tokenid = data.tokenid;
 
         this.ajaxserve.getnofllowUplist({ tokenid: this.tokenid, team_id: this.team_id }).then((data) => {
-          if (data.status.Code = "200") {
+          if (data.status.Code == "200") {
 
 
             this.nofllowClientList = data.data;
@@ -186,7 +186,7 @@ export class GrounpPage {
           }
         }).catch((err) => {
           this.httploading.ColseServerLoding();
-          alert(err);
+          console.log(err);
         })
       })
     }
@@ -200,7 +200,7 @@ export class GrounpPage {
         this.tokenid = data.tokenid;
 
         this.ajaxserve.grounpList({ tokenid: this.tokenid, team_id: this.team_id }).then((data) => {
-          if (data.status.Code = "200") {
+          if (data.status.Code == "200") {
 
             this.groupList = data.data;
             this.pageNumber4 = data.cpage;
@@ -214,7 +214,7 @@ export class GrounpPage {
           }
         }).catch((err) => {
           this.httploading.ColseServerLoding();
-          alert(err);
+          console.log(err);
         })
       })
     }
@@ -246,7 +246,7 @@ export class GrounpPage {
           this.tokenid = data.tokenid;
 
           this.ajaxserve.getPrivateList({ tokenid: this.tokenid, team_id: this.team_id, cpage: this.pageNumber1 }).then((data) => {
-            if (data.status.Code = "200") {
+            if (data.status.Code == "200") {
 
               // this.publicClientList = data.data;
               Array.prototype.push.apply(this.privateClientList, data.data);
@@ -260,7 +260,7 @@ export class GrounpPage {
             }
           }).catch((err) => {
             this.httploading.ColseServerLoding();
-            alert(err);
+            console.log(err);
           })
         })
       }
@@ -277,7 +277,7 @@ export class GrounpPage {
           this.tokenid = data.tokenid;
 
           this.ajaxserve.getfllowUplist({ tokenid: this.tokenid, team_id: this.team_id, cpage: this.pageNumber2 }).then((data) => {
-            if (data.status.Code = "200") {
+            if (data.status.Code == "200") {
 
               // this.publicClientList = data.data;
               Array.prototype.push.apply(this.fllowClientList, data.data);
@@ -291,7 +291,7 @@ export class GrounpPage {
             }
           }).catch((err) => {
             this.httploading.ColseServerLoding();
-            alert(err);
+            console.log(err);
           })
         })
       }
@@ -308,7 +308,7 @@ export class GrounpPage {
           this.tokenid = data.tokenid;
 
           this.ajaxserve.getnofllowUplist({ tokenid: this.tokenid, team_id: this.team_id, cpage: this.pageNumber3 }).then((data) => {
-            if (data.status.Code = "200") {
+            if (data.status.Code == "200") {
 
               // this.publicClientList = data.data;
               Array.prototype.push.apply(this.nofllowClientList, data.data);
@@ -322,7 +322,7 @@ export class GrounpPage {
             }
           }).catch((err) => {
             this.httploading.ColseServerLoding();
-            alert(err);
+            console.log(err);
           })
         })
       }
@@ -338,7 +338,7 @@ export class GrounpPage {
         this.storage.get('userInfo').then((data) => {
           this.tokenid = data.tokenid;
           this.ajaxserve.grounpList({ tokenid: this.tokenid, team_id: this.team_id, cpage: this.pageNumber4 }).then((data) => {
-            if (data.status.Code = "200") {
+            if (data.status.Code == "200") {
               // this.publicClientList = data.data;
               Array.prototype.push.apply(this.groupList, data.data);
               this.pageNumber4 = data.cpage;
@@ -351,7 +351,7 @@ export class GrounpPage {
             }
           }).catch((err) => {
             this.httploading.ColseServerLoding();
-            alert(err);
+            console.log(err);
           })
         })
       }

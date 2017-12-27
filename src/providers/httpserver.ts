@@ -11,8 +11,9 @@ export class HttpService {
   constructor(public http: Http, public event: Events) {
   }
   public get(url: string, paramObj?: any) {
+    let headers = new Headers({ 'Content-Type': 'Content-type","application/json' });
     this.event.publish("request:before", url, paramObj);
-    return this.http.get(url + this.toQueryString(paramObj))
+    return this.http.get(url + this.toQueryString(paramObj), new RequestOptions({ headers: headers }))
       .toPromise()
       .then(res => this.handleSuccess(res.json()))
       .catch(error => this.handleError(error));

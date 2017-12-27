@@ -60,7 +60,7 @@ export class PrivateFloowPage {
         this.tokenid = data.tokenid;
         this.httploading.HttpServerLoading("更新中...")
         this.ajaxserve.getFollowupcandion({ tokenid: this.tokenid, customer_id: this.customer_id }).then((data) => {
-          if (data.status.Code = "200") {
+          if (data.status.Code == "200") {
             this.httploading.ColseServerLoding();
             console.log(data);
             if (data.data.length == 0) {
@@ -86,7 +86,7 @@ export class PrivateFloowPage {
         this.userid = data.userid;
         // this.httploading.HttpServerLoading("...")
         this.ajaxserve.setRecord({ customer_id: this.customer_id, follow_up_name: this.message, userid: this.userid, tokenid: this.tokenid }).then((data) => {
-          if (data.status.Code = "200") {
+          if (data.status.Code == "200") {
             //this.httploading.ColseServerLoding();
             console.log(data);
             this.getFlowUpList();

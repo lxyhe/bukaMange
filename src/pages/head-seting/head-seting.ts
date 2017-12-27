@@ -62,7 +62,7 @@ export class HeadSetingPage {
               this.imgUrl = imageData;
               this.upload(this.imgUrl);
             }, (err) => {
-              alert(err);
+              console.log(err);
 
             });
           }
@@ -81,7 +81,7 @@ export class HeadSetingPage {
               this.imgUrl = imageData;
               this.upload(this.imgUrl);
             }, (err) => {
-              alert(err);
+              console.log(err);
             });
           }
         }, {
@@ -108,9 +108,12 @@ export class HeadSetingPage {
         {
           text: '确定',
           handler: () => {
-            this.storage.clear().then((data) => {
+            this.storage.remove('userInfo').then((data) => {
+              console.log(data);
+
               setTimeout(() => {
                 // this.navCtrl.setRoot('LogingPage')
+
                 this.app.getRootNav().setRoot('LogingPage')
               }, 500)
             })
@@ -141,7 +144,9 @@ export class HeadSetingPage {
         this.imgUrl = data.response;
         this.setingHeadimg(data.response);
       }, (err) => {
-        alert(err);
+        this.httploading.ColseServerLoding();
+        this.httploading.alertServe('上传失败!,请稍后再试')
+        console.log(err);
       })
   }
   setingHeadimg(img) {
@@ -149,15 +154,15 @@ export class HeadSetingPage {
       this.storage.get('userInfo').then((data) => {
         this.tokenid = data.tokenid;
         this.userid = data.userid;
-        this.httploading.HttpServerLoading("修改中...")
         this.ajaxserve.modifiterHeadImg({ userid: this.userid, tokenid: this.tokenid, useravatar: img }).then((data) => {
-          if (data.status.Code = "200") {
+          if (data.status.Code == "200") {
             this.httploading.ColseServerLoding();
             this.httploading.alertServe('修改成功');
           }
         }).catch((err) => {
+          this.httploading.alertServe('头像修改失败');
           this.httploading.ColseServerLoding();
-          alert(err);
+          console.log(err);
         })
       })
     }

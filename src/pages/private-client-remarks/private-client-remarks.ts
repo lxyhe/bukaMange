@@ -42,7 +42,7 @@ export class PrivateClientRemarksPage {
         this.tokenid = data.tokenid;
         this.httploading.HttpServerLoading("修改中...")
         this.ajaxserve.modifiterClientRemark({ tokenid: this.tokenid, customer_remarks: this.RemarkText, customer_id: this.customer_id }).then((data) => {
-          if (data.status.Code = "200") {
+          if (data.status.Code == "200") {
             this.httploading.ColseServerLoding();
             console.log(data);
           }

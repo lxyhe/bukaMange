@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, IonicPage, NavParams, Events, Refresher } from 'ionic-angular';
+import { NavController, IonicPage, NavParams, Events, Refresher, AlertController, App } from 'ionic-angular';
 import { homeObj } from '../../providers/homeObj';
 import { Storage } from '@ionic/storage';
 //import mickData from '../../providers/mickData';
@@ -74,6 +74,8 @@ export class HomePage {
     private storage: Storage,
     public httploading: HttpLodingService,
     public ajaxserve: ajaxService,
+    public alertCtrl: AlertController,
+    private app: App
   ) {
     //this.clientList = mickData;
 
@@ -113,6 +115,21 @@ export class HomePage {
 
     }).catch(err => {
       console.log(err);
+      let alert = this.alertCtrl.create({
+        subTitle: err.status.Msg,
+        buttons: [
+          {
+            text: "确定",
+            handler: data => {
+              setTimeout(() => {
+                this.app.getRootNav().setRoot('LogingPage')
+              }, 1000);
+            }
+          }]
+
+      });
+      alert.present();
+
     })
 
   }
@@ -125,8 +142,10 @@ export class HomePage {
         this.userid = data.userid;//用户ID
 
         this.ajaxserve.inspectorGroupprivateList({ tokenid: this.tokenid, userid: this.userid }).then((data) => {
-          if (data.status.Code = "200") {
-            console.log(data);
+          console.log(data);
+
+          if (data.status.Code == "200") {
+
             this.httploading.ColseServerLoding();
 
             this.privateClientList = data.data;
@@ -158,12 +177,27 @@ export class HomePage {
             this.privateCilent = data.top.clicount;
 
 
+          } else if (data.status.Code == "405") {
+            this.httploading.ColseServerLoding();
+            let alert = this.alertCtrl.create({
+              subTitle: data.status.Msg,
+              buttons: [
+                {
+                  text: "确定",
+                  handler: data => {
+                    setTimeout(() => {
+                      this.app.getRootNav().setRoot('LogingPage')
+                    }, 1000);
+                  }
+                }]
+
+            });
+            alert.present();
           }
         })
-
       }).catch(err => {
         this.httploading.ColseServerLoding();
-        alert(err);
+        console.log(err);
       })
     }
     catch (err) {
@@ -179,7 +213,7 @@ export class HomePage {
         this.userid = data.userid;//用户ID
 
         this.ajaxserve.inspectorfoloow({ tokenid: this.tokenid, userid: this.userid }).then((data) => {
-          if (data.status.Code = "200") {
+          if (data.status.Code == "200") {
             console.log(data);
 
             //     this.groupList = data.customer;
@@ -202,7 +236,7 @@ export class HomePage {
         })
       }).catch(err => {
         this.httploading.ColseServerLoding();
-        alert(err);
+        console.log(err);
       })
     }
     catch (err) {
@@ -217,7 +251,7 @@ export class HomePage {
         this.userid = data.userid;//用户ID
 
         this.ajaxserve.inspectornofoloow({ tokenid: this.tokenid, userid: this.userid }).then((data) => {
-          if (data.status.Code = "200") {
+          if (data.status.Code == "200") {
             console.log(data);
             this.nofllowClientList = data.data;
             if (data.data.length == 0) {
@@ -236,7 +270,7 @@ export class HomePage {
         })
       }).catch(err => {
         this.httploading.ColseServerLoding();
-        alert(err);
+        console.log(err);
       })
     }
     catch (err) {
@@ -250,7 +284,7 @@ export class HomePage {
         this.userid = data.userid;//用户ID
 
         this.ajaxserve.inspectorGrouList({ tokenid: this.tokenid, userid: this.userid }).then((data) => {
-          if (data.status.Code = "200") {
+          if (data.status.Code == "200") {
             console.log(data);
             this.groupList = data.data;
             if (data.data.length == 0) {
@@ -295,7 +329,7 @@ export class HomePage {
           this.tokenid = data.tokenid;
           this.userid = data.userid;
           this.ajaxserve.inspectorGroupprivateList({ tokenid: this.tokenid, userid: this.userid, cpage: this.pageNumber1 }).then((data) => {
-            if (data.status.Code = "200") {
+            if (data.status.Code == "200") {
 
               // this.publicClientList = data.data;
               Array.prototype.push.apply(this.privateClientList, data.data);
@@ -310,7 +344,7 @@ export class HomePage {
             }
           }).catch((err) => {
             this.httploading.ColseServerLoding();
-            alert(err);
+            console.log(err);
           })
         })
       }
@@ -327,7 +361,7 @@ export class HomePage {
           this.tokenid = data.tokenid;
           this.userid = data.userid;
           this.ajaxserve.inspectorfoloow({ tokenid: this.tokenid, userid: this.userid, cpage: this.pageNumber2 }).then((data) => {
-            if (data.status.Code = "200") {
+            if (data.status.Code == "200") {
 
               // this.publicClientList = data.data;
               Array.prototype.push.apply(this.fllowClientList, data.data);
@@ -345,7 +379,7 @@ export class HomePage {
             }
           }).catch((err) => {
             this.httploading.ColseServerLoding();
-            alert(err);
+            console.log(err);
           })
         })
       }
@@ -362,7 +396,7 @@ export class HomePage {
           this.tokenid = data.tokenid;
           this.userid = data.userid;
           this.ajaxserve.inspectornofoloow({ tokenid: this.tokenid, userid: this.userid, cpage: this.pageNumber3 }).then((data) => {
-            if (data.status.Code = "200") {
+            if (data.status.Code == "200") {
 
               // this.publicClientList = data.data;
               Array.prototype.push.apply(this.nofllowClientList, data.data);
@@ -380,7 +414,7 @@ export class HomePage {
             }
           }).catch((err) => {
             this.httploading.ColseServerLoding();
-            alert(err);
+            console.log(err);
           })
         })
       }
@@ -397,7 +431,7 @@ export class HomePage {
           this.tokenid = data.tokenid;
           this.userid = data.userid;
           this.ajaxserve.inspectorGrouList({ tokenid: this.tokenid, userid: this.userid, cpage: this.pageNumber4 }).then((data) => {
-            if (data.status.Code = "200") {
+            if (data.status.Code == "200") {
 
               // this.publicClientList = data.data;
               Array.prototype.push.apply(this.groupList, data.data);
@@ -415,7 +449,7 @@ export class HomePage {
             }
           }).catch((err) => {
             this.httploading.ColseServerLoding();
-            alert(err);
+            console.log(err);
           })
         })
       }

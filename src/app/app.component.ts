@@ -11,8 +11,8 @@ import { Storage } from '@ionic/storage';
 })
 export class MyApp {
   //rootPage: any = 'TabsPage';
-  rootPage: any = 'LogingPage';
-  //rootPage: any;
+  // rootPage: any = 'LogingPage';
+  rootPage: any;
   constructor(
     platform: Platform,
     statusBar: StatusBar,
@@ -23,17 +23,15 @@ export class MyApp {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      // storage.get('userInfo').then(data => {
-      //   if (data.tokenid) {
-      //     this.rootPage = 'TabsPage'
-      //   } else {
-      //     this.rootPage = 'LogingPage';
-      //   }
-      // })
+      storage.get('userInfo').then(data => {
+        if (data == undefined || data == null) {
+          this.rootPage = 'LogingPage';
+        } else {
+          this.rootPage = 'TabsPage'
+        }
+      })
       statusBar.styleDefault();
       splashScreen.hide();
-
-
     });
   }
 }

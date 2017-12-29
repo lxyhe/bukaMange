@@ -15,10 +15,10 @@
   </ion-navbar>
   <ion-toolbar style="min-height: 68px;background: #fff;">
     <div claas="tabsLsit">
-      <ion-segment style="background: #fff;border:1px solid #ddd" [(ngModel)]="pet">
+      <ion-segment style="background: #fff;border:1px solid #ddd;margin-bottom:2px" [(ngModel)]="pet">
         <ion-segment-button style="color:#666;height: 68px;" value="privateClient">
           <div class="tabContent">
-            <div style="height: 2rem;">
+            <div style="height: 2rem;margin-bottom:3px">
               <!-- <ion-icon name="cog" item-left></ion-icon> -->
               <img src="assets/font/private.svg" alt="">
             </div>
@@ -27,7 +27,7 @@
         </ion-segment-button>
         <ion-segment-button style="color:#666;height: 68px;" value="followUp">
           <div class="tabContent">
-            <div style="height: 2rem;">
+            <div style="height: 2rem;margin-bottom:3px">
               <img src="assets/font/floowUp.svg" alt="">
             </div>
             已跟进 <span>{{follow==null?'0':follow}}</span>
@@ -35,7 +35,7 @@
         </ion-segment-button>
         <ion-segment-button style="color:#666;height: 68px;" value="nofollowUp">
           <div class="tabContent">
-            <div style="height: 2rem;">
+            <div style="height: 2rem;margin-bottom:3px">
               <img src="assets/font/nofllowUp.svg" alt="">
             </div>
             未跟进 <span>{{nofollow==null?'0':nofollow}}</span>
@@ -43,7 +43,7 @@
         </ion-segment-button>
         <ion-segment-button [hidden]="isRoleid" style="color:#666;height: 68px;width:25%" value="grounplist">
           <div class="tabContent">
-            <div style="height: 2rem;">
+            <div style="height: 2rem;margin-bottom:3px">
               <img src="assets/font/group.svg" alt="">
             </div>
             团队成员 <span>{{grounp==null?'0':grounp}}</span>

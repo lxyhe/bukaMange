@@ -43,6 +43,8 @@ export const api = {
   inspectorGrouList: address + "director/getdirmmember",
   //修改头像
   modifiterimg: address + "personal/editperavatar",
+  //联系人修改
+  linkmodifiter: "http://192.168.10.186:8080/personal/editcontact",//要改成正式环境
 
   //头像上传接口
   headeUpload: "http://a.buka.tv/BaseCommon/upload/upload",

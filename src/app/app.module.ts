@@ -7,6 +7,8 @@ import { IonicStorageModule } from '@ionic/storage';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { PipesModule } from '../pipes/pipe.module';
+import { BackButtonService } from '../providers/backbuttonServe';
+import { Toast } from '@ionic-native/toast';
 @NgModule({
   declarations: [
     MyApp,
@@ -27,8 +29,10 @@ import { PipesModule } from '../pipes/pipe.module';
     MyApp,
   ],
   providers: [
+    Toast,
     StatusBar,
     SplashScreen,
+    BackButtonService,
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })

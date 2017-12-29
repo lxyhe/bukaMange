@@ -19,7 +19,7 @@ export class ContactPage {
   public detailsInfo: string = "西八";
   public tokenid: string = "";
   public userid: any = "";
-  public isNoData: boolean = true;
+  public isNoData: boolean = false;
   public publicClientList: Array<object>;
   public pageNumber: number;
   public totalNumber: any;
@@ -91,7 +91,7 @@ export class ContactPage {
           }
         }).catch((err) => {
           let alert = this.alertCtrl.create({
-            subTitle: err.status.Msg,
+            subTitle: "您的账号已在其他端登录",
             buttons: [
               {
                 text: "确定",
@@ -131,7 +131,7 @@ export class ContactPage {
                 this.noMoreData = true;
                 this.noLoading = false;
               }
-              if (data.data.length == 0) {
+              if (data.data.length == 0 && data.isNext == true) {
                 this.isNoData = true;
               } else {
                 this.isNoData = false;

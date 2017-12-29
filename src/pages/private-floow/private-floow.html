@@ -25,13 +25,13 @@
     <ion-list>
       <ion-item ion-item>
         <ion-avatar item-start>
-          <img src="{{followUpAvatar==null?'assets/imgs/timg1.jpg':followUpAvatar}}">
+          <img src="{{followUpAvatar==''?'assets/imgs/timg1.jpg':followUpAvatar}}">
         </ion-avatar>
         <h2>{{followUpName}}</h2>
         <p style="width:100%" class="client">
-          <span *ngIf="followUpLinkCantact==null?false:true" class="nickname spanbox">{{followUpLinkCantact}}</span>
-          <span (click)="link()" *ngIf="followUpPhone==null?false:true" class="phoneNumber spanbox ">{{followUpPhone}}</span>
-          <span *ngIf="followUpWechat==null?false:true" class="weChat spanbox ">{{followUpWechat}}</span></p>
+          <span *ngIf="followUpLinkCantact==''?false:true" class="nickname spanbox">{{followUpLinkCantact}}</span>
+          <span (click)="link()" *ngIf="followUpPhone==''?false:true" class="phoneNumber spanbox ">{{followUpPhone}}</span>
+          <span *ngIf="followUpWechat==''?false:true" class="weChat spanbox "> {{followUpWechat}}</span></p>
       </ion-item>
     </ion-list>
   </ion-card>

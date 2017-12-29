@@ -69,13 +69,13 @@ export class PrivateCilentDetailsPage {
   public compluted: string = "完成";
   public editodr: string = "编辑";
   public isDisabled: boolean = false;
-  public linkCantPageObj = {
+  public linkCantacts = {
     customer_contact_id: "未填写",
-    customer_contact_name: "未填写",
-    customer_contact_position: "未填写",
-    customer_contact_email: "未填写",
-    customer_contact_tell: "未填写",
-    customer_contact_wechat: "未填写",
+    name: "未填写",
+    post: "未填写",
+    email: "未填写",
+    phone: "未填写",
+    wechat: "未填写",
     customer_id: "未填写",
   }
   public ClientAddress: addressObj;
@@ -139,9 +139,10 @@ export class PrivateCilentDetailsPage {
         name: 'col4',
         options: [
           { text: '网站', value: '1' },
-          { text: '待激活', value: '2' },
-          { text: '活动', value: '3' },
-          { text: '其他', value: '4' },
+          { text: '口碑', value: '2' },
+          { text: '电话', value: '3' },
+          { text: '活动', value: '4' },
+          { text: '其他', value: '5' },
         ]
       }
     ]
@@ -152,12 +153,43 @@ export class PrivateCilentDetailsPage {
           { text: '体验了解', value: '1' },
           { text: '已签约', value: '2' },
           { text: '切换人', value: '3' },
+          { text: '待激活', value: '4' },
+          { text: '其他', value: '5' },
         ]
       }
     ]
     this.getClientDetail();
   }
+  goLinkContact() {
+    let profileModal = this.modalCtrl.create('LinkModifPage', { 'linkcontacts': this.linkCantacts });
+    profileModal.onDidDismiss(data => {
+      console.log(data);
+      if (data !== undefined) {
+        if (data.linkcontacts.name !== "" && data.linkcontacts.name !== 'undefined') {
+          this.linkCantacts.name = data.linkcontacts.name;
+          this.linkCantacts.email = data.linkcontacts.email;
+          this.linkCantacts.phone = data.linkcontacts.phone;
+          this.linkCantacts.wechat = data.linkcontacts.wechat;
+          this.linkCantacts.post = data.linkcontacts.post;
+        } else if (data.linkcontacts.name == 'undefined') {
+          this.linkCantacts.name = "未填写"
+        } else if (data.linkcontacts.email == 'undefined') {
+          this.linkCantacts.email = "未填写";
+        }
+        else if (data.linkcontacts.phone == 'undefined') {
+          this.linkCantacts.phone = "未填写";
+        }
+        else if (data.linkcontacts.wechat == 'undefined') {
+          this.linkCantacts.wechat = "未填写";
+        }
+        else if (data.linkcontacts.post == 'undefined') {
+          this.linkCantacts.post = "未填写";
+        }
+      }
 
+    });
+    profileModal.present();
+  }
   ionViewDidEnter() {
 
   }
@@ -192,27 +224,27 @@ export class PrivateCilentDetailsPage {
             this.privateClientDetailsPageObj.flist = data.data.flist;
             if (data.data.contact !== null) {
               //  for (var i = 0; i < data.data.clist.length; i++) {
-              this.linkCantPageObj.customer_contact_id = data.contact.customer_contact_id;
-              this.linkCantPageObj.customer_contact_name = data.contact.customer_contact_name;
-              this.linkCantPageObj.customer_contact_position = data.contact.customer_contact_position;
-              this.linkCantPageObj.customer_contact_email = data.contact.customer_contact_email;
-              this.linkCantPageObj.customer_contact_tell = data.contact.customer_contact_tell;
-              this.linkCantPageObj.customer_contact_wechat = data.contact.customer_contact_wechat;
-              this.linkCantPageObj.customer_id = data.contact.customer_id;
+              this.linkCantacts.customer_contact_id = data.contact.customer_contact_id;
+              this.linkCantacts.name = data.contact.customer_contact_name;
+              this.linkCantacts.post = data.contact.customer_contact_position;
+              this.linkCantacts.email = data.contact.customer_contact_email;
+              this.linkCantacts.phone = data.contact.customer_contact_tell;
+              this.linkCantacts.wechat = data.contact.customer_contact_wechat;
+              this.linkCantacts.customer_id = data.contact.customer_id;
               // this.linkCantPageObj.customer_contact_id = data.contact.customer_contact_id;
               //console.log(this.linkCantPageObj);
               // }
             } else {
-              this.linkCantPageObj.customer_contact_id = "未填写";
-              this.linkCantPageObj.customer_contact_name = "未填写";
-              this.linkCantPageObj.customer_contact_position = "未填写";
-              this.linkCantPageObj.customer_contact_email = "未填写";
-              this.linkCantPageObj.customer_contact_tell = "未填写";
-              this.linkCantPageObj.customer_contact_wechat = "未填写";
-              this.linkCantPageObj.customer_id = "未填写";
+              this.linkCantacts.customer_contact_id = "未填写";
+              this.linkCantacts.name = "未填写";
+              this.linkCantacts.post = "未填写";
+              this.linkCantacts.email = "未填写";
+              this.linkCantacts.phone = "未填写";
+              this.linkCantacts.wechat = "未填写";
+              this.linkCantacts.customer_id = "未填写";
             }
             console.log(this.privateClientDetailsPageObj);
-            console.log(this.linkCantPageObj);
+            console.log(this.linkCantacts);
           }
         }).catch((err) => {
           console.log(err);
@@ -230,9 +262,9 @@ export class PrivateCilentDetailsPage {
         customer_id: this.customer_id,
         avatar: this.privateClientDetailsPageObj.customer_avatar,
         name: this.privateClientDetailsPageObj.customer_name,
-        linkCantact: this.linkCantPageObj.customer_contact_name,
-        wechat: this.linkCantPageObj.customer_contact_wechat,
-        phone: this.linkCantPageObj.customer_contact_tell,
+        linkCantact: this.linkCantacts.name,
+        wechat: this.linkCantacts.wechat,
+        phone: this.linkCantacts.phone,
       }
     })
   }
@@ -276,7 +308,7 @@ export class PrivateCilentDetailsPage {
                   handler: data => {
                     setTimeout(() => {
                       this.navCtrl.pop();
-                    }, 800)
+                    }, 500)
                   }
                 }]
 
@@ -377,7 +409,7 @@ export class PrivateCilentDetailsPage {
       this.storage.get('userInfo').then((data) => {
         this.tokenid = data.tokenid;
         this.httploading.HttpServerLoading("修改中...")
-        this.ajaxserve.modifiterClientStatus({ tokenid: this.tokenid, customer_type_id: event.col5.value, customer_id: this.customer_id }).then((data) => {
+        this.ajaxserve.modifiterClientStatus({ tokenid: this.tokenid, customer_status_id: event.col5.value, customer_id: this.customer_id }).then((data) => {
           if (data.status.Code == "200") {
             this.httploading.ColseServerLoding();
             console.log(data);

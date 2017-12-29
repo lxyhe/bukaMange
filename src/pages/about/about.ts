@@ -1,6 +1,6 @@
 
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, ActionSheetController, ModalController, Events, App } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, AlertController, ActionSheetController, ModalController, Events, App, Tabs } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { Storage } from '@ionic/storage';
 //import mickData from '../../providers/mickData';
@@ -24,6 +24,7 @@ export class addressObj {
   templateUrl: 'about.html'
 })
 export class AboutPage {
+  tabs: Tabs;
   //图片上传
 
 
@@ -120,9 +121,10 @@ export class AboutPage {
         name: 'col4',
         options: [
           { text: '网站', value: '1' },
-          { text: '待激活', value: '2' },
-          { text: '活动', value: '3' },
-          { text: '其他', value: '4' },
+          { text: '口碑', value: '2' },
+          { text: '电话', value: '3' },
+          { text: '活动', value: '4' },
+          { text: '其他', value: '5' },
         ]
       }
     ]
@@ -133,15 +135,22 @@ export class AboutPage {
           { text: '体验了解', value: '1' },
           { text: '已签约', value: '2' },
           { text: '切换人', value: '3' },
+          { text: '待激活', value: '4' },
+          { text: '其他', value: '5' },
         ]
       }
     ]
   }
   publish() {
+    if (this.CilentName == "" || this.CilentName == "未填写") {
+      this.httploading.alertServe("客户名称不能为空")
+      return;
+    }
     if (this.linkCantacts.name == "未填写" || this.linkCantacts.name == "") {
       this.httploading.alertServe("联系人不能为空")
       return;
     }
+
     if (this.clientTypeValue == "") {
       this.httploading.alertServe("客户类型不能为空")
       return;
@@ -152,6 +161,20 @@ export class AboutPage {
     }
     if (this.clientDemandValue == "") {
       this.httploading.alertServe("客户需求不能为空")
+      return;
+    }
+    /** */
+
+    if (this.clientSourceValue == "") {
+      this.httploading.alertServe("客户来源不能为空")
+      return;
+    }
+    if (this.clientStatusValue == "") {
+      this.httploading.alertServe("客户状态不能为空")
+      return;
+    }
+    if (this.ClientAddress.address == "" || this.ClientAddress.address == "未填写") {
+      this.httploading.alertServe("客户地址不能为空")
       return;
     }
     try {
@@ -189,8 +212,9 @@ export class AboutPage {
                   text: "确定",
                   handler: data => {
                     setTimeout(() => {
-                      this.app.getRootNav().setRoot('LogingPage')
-                    }, 1000);
+                      // this.app.getRootNav().setRoot('ContactPage')
+                      this.navCtrl.setRoot('ContactPage');
+                    }, 500);
                   }
                 }]
 
@@ -211,26 +235,29 @@ export class AboutPage {
     let profileModal = this.modalCtrl.create('LinkContactsPage', { 'linkcontacts': this.linkCantacts });
     profileModal.onDidDismiss(data => {
       console.log(data);
-      if (data.linkcontacts.name !== "" && data.linkcontacts.name !== 'undefined') {
-        this.linkCantacts.name = data.linkcontacts.name;
-        this.linkCantacts.email = data.linkcontacts.email;
-        this.linkCantacts.phone = data.linkcontacts.phone;
-        this.linkCantacts.wechat = data.linkcontacts.wechat;
-        this.linkCantacts.post = data.linkcontacts.post;
-      } else if (data.linkcontacts.name == 'undefined') {
-        this.linkCantacts.name = "未填写"
-      } else if (data.linkcontacts.email == 'undefined') {
-        this.linkCantacts.email = "未填写";
+      if (data !== undefined) {
+        if (data.linkcontacts.name !== "" && data.linkcontacts.name !== 'undefined') {
+          this.linkCantacts.name = data.linkcontacts.name;
+          this.linkCantacts.email = data.linkcontacts.email;
+          this.linkCantacts.phone = data.linkcontacts.phone;
+          this.linkCantacts.wechat = data.linkcontacts.wechat;
+          this.linkCantacts.post = data.linkcontacts.post;
+        } else if (data.linkcontacts.name == 'undefined') {
+          this.linkCantacts.name = "未填写"
+        } else if (data.linkcontacts.email == 'undefined') {
+          this.linkCantacts.email = "未填写";
+        }
+        else if (data.linkcontacts.phone == 'undefined') {
+          this.linkCantacts.phone = "未填写";
+        }
+        else if (data.linkcontacts.wechat == 'undefined') {
+          this.linkCantacts.wechat = "未填写";
+        }
+        else if (data.linkcontacts.post == 'undefined') {
+          this.linkCantacts.post = "未填写";
+        }
       }
-      else if (data.linkcontacts.phone == 'undefined') {
-        this.linkCantacts.phone = "未填写";
-      }
-      else if (data.linkcontacts.wechat == 'undefined') {
-        this.linkCantacts.wechat = "未填写";
-      }
-      else if (data.linkcontacts.post == 'undefined') {
-        this.linkCantacts.post = "未填写";
-      }
+
     });
     profileModal.present();
   }

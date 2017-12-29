@@ -44,10 +44,10 @@
   </ion-card>
 
   <ion-list>
-    <button  ion-item>
+    <button  ion-item  (click)="goLinkContact()">
       <div>
         <span class="leftList textColor">联系人</span>
-        <span class="rightLsit">{{linkCantPageObj.customer_contact_name}}</span>
+        <span class="rightLsit">{{linkCantacts.name}}</span>
       </div>
     </button>
       <button ion-item (click)="goFloowUP()">

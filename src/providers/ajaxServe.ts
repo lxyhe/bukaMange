@@ -198,5 +198,8 @@ export class ajaxService {
   modifiterHeadImg(modifiterimg) {
     return this.httpserve.post(api.modifiterimg, modifiterimg)
   }
-
+  //修改联系人
+  modifiterLink(modifiterLink) {
+    return this.httpserve.post(api.linkmodifiter, modifiterLink)
+  }
 }

@@ -91,15 +91,17 @@ export class clientSourePipe implements PipeTransform {
         value = "网站"
         break;
       case 2:
-        value = "待激活"
+        value = "口碑"
         break;
       case 3:
-        value = "活动"
+        value = "电话"
         break;
       case 4:
+        value = "活动"
+        break;
+      case 5:
         value = "其他"
         break;
-
     }
     return value;
   }
@@ -118,6 +120,12 @@ export class clientStatusPipe implements PipeTransform {
         break;
       case 3:
         value = "切换人"
+        break;
+      case 4:
+        value = "待激活"
+        break;
+      case 5:
+        value = "其他"
         break;
     }
     return value;

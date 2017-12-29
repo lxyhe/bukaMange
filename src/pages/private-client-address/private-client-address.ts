@@ -73,7 +73,6 @@ export class PrivateClientAddressPage {
         }).then((data) => {
           if (data.status.Code == "200") {
             this.httploading.ColseServerLoding();
-
           }
         }).catch((err) => {
           console.log(err);

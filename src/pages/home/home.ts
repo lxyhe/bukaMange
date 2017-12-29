@@ -116,7 +116,7 @@ export class HomePage {
     }).catch(err => {
       console.log(err);
       let alert = this.alertCtrl.create({
-        subTitle: err.status.Msg,
+        subTitle: "您的账号已在其他端登录",
         buttons: [
           {
             text: "确定",
@@ -180,7 +180,7 @@ export class HomePage {
           } else if (data.status.Code == "405") {
             this.httploading.ColseServerLoding();
             let alert = this.alertCtrl.create({
-              subTitle: data.status.Msg,
+              subTitle: '您的账号已在其他端登录',
               buttons: [
                 {
                   text: "确定",

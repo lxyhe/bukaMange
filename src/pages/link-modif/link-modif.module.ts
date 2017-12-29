@@ -1,33 +1,37 @@
 // import { NgModule } from '@angular/core';
 // import { IonicPageModule } from 'ionic-angular';
-// import { LogingPage } from './loging';
+// import { LinkModifPage } from './link-modif';
+
+// @NgModule({
+//   declarations: [
+//     LinkModifPage,
+//   ],
+//   imports: [
+//     IonicPageModule.forChild(LinkModifPage),
+//   ],
+// })
+// export class LinkModifPageModule { }
+
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { LogingPage } from './loging';
+import { LinkModifPage } from './link-modif';
 import { HttpService } from '../../providers/httpserver';
 import { HttpLodingService } from '../../providers/loadingServer';
 import { ajaxService } from '../../providers/ajaxServe';
-//import { Storage } from '@ionic/storage';
-// import { Toast } from '@ionic-native/toast';
-// import { BackButtonService } from '../../providers/backbuttonServe';
+
 
 @NgModule({
   declarations: [
-    LogingPage,
+    LinkModifPage,
   ],
   imports: [
-    IonicPageModule.forChild(LogingPage),
-  ],
-  exports: [
-    LogingPage
+    IonicPageModule.forChild(LinkModifPage),
   ],
   providers: [
-    HttpService,
+
     HttpLodingService,
+    HttpService,
     ajaxService,
-    // BackButtonService,
-    // Toast
-    // Storage
   ]
 })
-export class LogingPageModule { }
+export class LinkModifPageModule { }

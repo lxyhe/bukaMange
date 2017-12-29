@@ -4,7 +4,7 @@ import { IonicPage, NavController, NavParams, Events, Platform } from 'ionic-ang
 import { HttpLodingService } from '../../providers/loadingServer';
 import { ajaxService } from '../../providers/ajaxServe';
 import { Storage } from '@ionic/storage';
-import { BackButtonService } from '../../providers/backbuttonServe';
+//import { BackButtonService } from '../../providers/backbuttonServe';
 /**
  * Generated class for the LogingPage page.
  *
@@ -31,11 +31,9 @@ export class LogingPage {
     public ajaxServe: ajaxService,
     private storage: Storage,
     private platform: Platform,
-    private backbutton: BackButtonService
+    //private backbutton: BackButtonService
   ) {
-    platform.ready().then(() => {
-      this.backbutton.registerBackButtonAction(null);
-    })
+
     this.logingObJ = new LogingObject;
   }
   loginMange() {

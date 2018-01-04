@@ -53,7 +53,7 @@ export class AboutPage {
   public tokenid: string;
 
   public customer_avatar: string = "";
-
+  public tabindex: number = 2;
 
   constructor(
     public navCtrl: NavController,
@@ -213,7 +213,9 @@ export class AboutPage {
                   handler: data => {
                     setTimeout(() => {
                       // this.app.getRootNav().setRoot('ContactPage')
-                      this.navCtrl.setRoot('ContactPage');
+
+                      // this.navCtrl.setRoot('ContactPage');
+                      this.event.publish('pulish:over', this.tabindex);
                     }, 500);
                   }
                 }]

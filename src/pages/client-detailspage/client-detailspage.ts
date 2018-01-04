@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, AlertController, Events } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 //import mickData from '../../providers/mickData';
 import { HttpLodingService } from '../../providers/loadingServer';
@@ -11,6 +11,7 @@ import { ajaxService } from '../../providers/ajaxServe';
  * Ionic pages and navigation.
  */
 export class clientDetailsInfo {
+
   avatar: string;
   name: string;
   reliseTime: string;
@@ -28,6 +29,7 @@ export class clientDetailsInfo {
   templateUrl: 'client-detailspage.html',
 })
 export class ClientDetailspagePage {
+  public tabindex: number = 0;
   public publicDetails: clientDetailsInfo;
   public publicDetailsParmas: object;
   public userid: any = "";
@@ -36,7 +38,7 @@ export class ClientDetailspagePage {
   constructor(
     public navCtrl: NavController,
     public navparam: NavParams,
-    //public event: Events,
+    public event: Events,
     private storage: Storage,
     public httploading: HttpLodingService,
     public ajaxserve: ajaxService,
@@ -87,7 +89,10 @@ export class ClientDetailspagePage {
                   text: "确定",
                   handler: data => {
                     setTimeout(() => {
-                      this.navCtrl.setRoot('HomePage');
+                      // this.navCtrl.setRoot('HomePage');
+                      this.navCtrl.pop();
+                      this.event.publish('receive:over', this.tabindex);
+                      // this.event.publish('pulish:over', this.tabindex);
                     }, 1500);
                   }
                 }]

@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 
-import { IonicPage, Tabs } from "ionic-angular";
+import { IonicPage, Tabs, Events, Nav, NavController } from "ionic-angular";
+
 //import { BackButtonService } from '../../providers/backbuttonServe';
 @IonicPage()
 @Component({
@@ -17,9 +18,29 @@ export class TabsPage {
   constructor(
     //private backbutton: BackButtonService,
     //private platfrom: Platform
+    public event: Events,
+    public navCtrl: NavController,
+    private nav: Nav
   ) {
+
+    //
     // platfrom.ready().then(() => {
     //this.backbutton.registerBackButtonAction(null);
     //})
+  }
+  switchTabs(index: number) {
+    this.tabRef.select(index);
+  }
+  ionViewDidEnter() {
+    this.event.subscribe('pulish:over', (index) => {
+      this.switchTabs(index);
+    })
+    this.event.subscribe('receive:over', (index) => {
+      this.switchTabs(index);
+    })
+  }
+  ionViewWillLeave() {
+    this.event.unsubscribe("pulish:over", null);
+    this.event.unsubscribe("receive:over", null);
   }
 }

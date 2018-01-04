@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, ActionSheetController } from 'ionic-angular';
+import { Content } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { HttpLodingService } from '../../providers/loadingServer';
 import { ajaxService } from '../../providers/ajaxServe';
@@ -13,6 +14,7 @@ import { Contacts, Contact, ContactField, ContactName } from '@ionic-native/cont
   templateUrl: 'private-floow.html',
 })
 export class PrivateFloowPage {
+  @ViewChild(Content) content: Content;
   public fllowUpObj: object;
   public tokenid: string = "";
   public customer_id: any = "";
@@ -91,6 +93,7 @@ export class PrivateFloowPage {
             console.log(data);
             this.getFlowUpList();
             this.message = "";
+            this.content.scrollToTop(300);
           }
         }).catch((err) => {
           console.log(err);

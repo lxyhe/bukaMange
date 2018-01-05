@@ -62,7 +62,7 @@
   <div [ngSwitch]="pet">
     <div *ngSwitchCase="'privateClient'">
       <ion-card>
-        <ion-list *ngFor="let item of privateClientList">
+        <ion-list *ngFor="let item of privateClientList ">
           <ion-item style="border:none;border-bottom:1px solid #ddd" (click)="goClientDetails(item)">
             <ion-avatar item-start>
               <img src="{{item.customer_avatar==null?'assets/imgs/timg1.jpg':item.customer_avatar==''?'assets/imgs/timg1.jpg':item.customer_avatar}}">
@@ -71,7 +71,8 @@
             <p> 客户类型: <span>{{item.customer_type_id | clienttypepipe }}</span> </p>
             <p> 客户需求:<span> {{item.customer_needs_id | clientneedpipe   }}</span> </p>
             <p item-right class="time">{{item.receive_time}}</p>
-            <button class="btnStyle" [class.btnNotFollow]="item.follow==0" [class.btnFollowUp]="item.follow>0" ion-button>{{item.follow==0?"未跟进":"继续跟进"}}</button>
+            <!-- <button class="btnStyle" [class.btnNotFollow]="item.follow==0" [class.btnFollowUp]="item.follow>0" ion-button>{{item.follow ==0?"未跟进":"继续跟进" | privateclientstatussort}}</button> -->
+            <button class="btnStyle" [class.btnNotFollow]="item.follow==0" [class.btnFollowUp]="item.follow>0" ion-button>{{item.follow | privateclientstatus  }}</button>
           </ion-item>
         </ion-list>
         <div class="nodata" style="text-align:center" *ngIf="noMoreData1">

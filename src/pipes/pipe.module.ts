@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from "@angular/common";
-import { clientTypePipe, clientRankPipe, clientNeedPipe, clientSourePipe, clientStatusPipe, timePipe } from './clientTypeTransfrom';
+import { clientTypePipe, clientRankPipe, clientNeedPipe, clientSourePipe, clientStatusPipe, timePipe, privateClientStatusSort, privateClientStatus } from './clientTypeTransfrom';
 @NgModule({
   declarations: [
     clientTypePipe,
@@ -9,6 +9,8 @@ import { clientTypePipe, clientRankPipe, clientNeedPipe, clientSourePipe, client
     clientSourePipe,
     clientStatusPipe,
     timePipe,
+    privateClientStatusSort,
+    privateClientStatus
   ],
   imports: [
     CommonModule
@@ -20,6 +22,8 @@ import { clientTypePipe, clientRankPipe, clientNeedPipe, clientSourePipe, client
     clientSourePipe,
     clientStatusPipe,
     timePipe,
+    privateClientStatusSort,
+    privateClientStatus
   ]
 })
 export class PipesModule { }

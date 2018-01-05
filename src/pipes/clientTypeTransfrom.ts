@@ -13,6 +13,39 @@ export class timePipe implements PipeTransform {
 
   }
 }
+
+@Pipe({ name: 'privateclientstatus' })
+export class privateClientStatus implements PipeTransform {
+  transform(value): any {
+    if (value > 0) {
+      value = "继续跟进"
+    } else {
+      value = "未跟进"
+    }
+    return value;
+  }
+}
+
+
+
+/*跟进 未跟进 */
+@Pipe({ name: 'privateclientstatussort' })
+export class privateClientStatusSort implements PipeTransform {
+  transform(value): any {
+
+    //console.log(value);
+    // for (var i = 0; i < value.length; i++) {
+    //   value[i].sort(function (a, b) {
+    //     return b.follow - a.follow;
+    //   });
+    // }
+    // // value.sort(function (a, b) {
+    // //   return b.follow - a.follow;
+    // // });
+  }
+}
+
+
 //客户类型
 @Pipe({ name: 'clienttypepipe' })
 export class clientTypePipe implements PipeTransform {

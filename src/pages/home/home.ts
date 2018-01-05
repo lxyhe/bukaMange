@@ -81,12 +81,14 @@ export class HomePage {
 
   }
   ionViewDidEnter() {
+    this.pet = "privateClient";
     //this.getUserType();
     this.getPrivateClientList();
   }
   doRefresh(refresher) {
     this.getPrivateClientList();
-
+    this.noMoreData1 = false;
+    this.noLoading1 = true;
     this.event.subscribe("request:success", () => {
       this.refresher.complete();
     })
@@ -149,6 +151,11 @@ export class HomePage {
             this.httploading.ColseServerLoding();
 
             this.privateClientList = data.data;
+            // if (Array.isArray(this.privateClientList)) {
+
+            //   this.privateClientList = this.privateClientList.reverse();
+            // }
+
             if (data.data.length == 0) {
               this.privatenoData = true;
             } else {
@@ -204,7 +211,6 @@ export class HomePage {
       console.log(err);
     }
   }
-
   getfollowList() {
     try {
       this.storage.get('userInfo').then((data) => {

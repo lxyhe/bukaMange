@@ -31,6 +31,7 @@ export class MyApp {
         if (data == undefined || data == null) {
           this.rootPage = 'LogingPage';
         } else {
+          //this.rootPage = 'LogingPage';
           this.rootPage = 'TabsPage'
         }
       })

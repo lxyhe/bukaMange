@@ -28,11 +28,17 @@ export class MyApp {
         backbutton.registerBackButtonAction(null);
       })
       storage.get('userInfo').then(data => {
+        console.log(data);
         if (data == undefined || data == null) {
           this.rootPage = 'LogingPage';
         } else {
+          if (data.roleid == 1) {
+            this.rootPage = 'CompanyPage'
+          } else {
+            this.rootPage = 'TabsPage'
+          }
           //this.rootPage = 'LogingPage';
-          this.rootPage = 'TabsPage'
+
         }
       })
       statusBar.styleDefault();

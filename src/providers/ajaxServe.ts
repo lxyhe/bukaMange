@@ -202,4 +202,8 @@ export class ajaxService {
   modifiterLink(modifiterLink) {
     return this.httpserve.post(api.linkmodifiter, modifiterLink)
   }
+  //找回密码
+  findPassword(fintpwd) {
+    return this.httpserve.post(api.findpassword, fintpwd)
+  }
 }

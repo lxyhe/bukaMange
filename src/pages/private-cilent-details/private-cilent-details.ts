@@ -78,7 +78,10 @@ export class PrivateCilentDetailsPage {
     wechat: "未填写",
     customer_id: "未填写",
   }
+  public Count_down: string;
   public ClientAddress: addressObj;
+  public account_id
+  public isfollow: boolean = false;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -94,6 +97,9 @@ export class PrivateCilentDetailsPage {
     this.ClientAddress.addressDetails = "";
     this.privateClientDetailsPageObj = new privateClientDetailsPageOBJ();
     this.privateNavParmObj = this.navParams.get('data');
+    this.userid = this.privateNavParmObj['account_login_id'];
+    //console.log(this.privateNavParmObj)
+
     this.customer_id = this.privateNavParmObj['customer_id'];
     // this.storage.get('userInfo').then((data) => {
     //   this.tokenid = data.tokenid;
@@ -200,7 +206,7 @@ export class PrivateCilentDetailsPage {
     try {
       this.storage.get('userInfo').then((data) => {
         this.tokenid = data.tokenid;
-        this.userid = data.userid;
+        // this.userid = data.userid;
         this.httploading.HttpServerLoading("加载中...")
         this.ajaxserve.getClientDetails({ tokenid: this.tokenid, userid: this.userid, customer_id: this.customer_id }).then((data) => {
           if (data.status.Code == "200") {
@@ -222,6 +228,13 @@ export class PrivateCilentDetailsPage {
             this.privateClientDetailsPageObj.account_login_id = data.data.account_login_id;
             this.privateClientDetailsPageObj.follow = data.data.follow;
             this.privateClientDetailsPageObj.flist = data.data.flist;
+            this.Countdown(this.privateClientDetailsPageObj.receive_time);
+            //console.log(this.privateClientDetailsPageObj.follow);
+            if (Number(this.privateClientDetailsPageObj.follow) <= 0) {
+              this.isfollow = true;
+            } else {
+              this.isfollow = false;
+            }
             if (data.data.contact !== null) {
               //  for (var i = 0; i < data.data.clist.length; i++) {
               this.linkCantacts.customer_contact_id = data.contact.customer_contact_id;
@@ -243,8 +256,8 @@ export class PrivateCilentDetailsPage {
               this.linkCantacts.wechat = "未填写";
               this.linkCantacts.customer_id = "未填写";
             }
-            console.log(this.privateClientDetailsPageObj);
-            console.log(this.linkCantacts);
+            // console.log(this.privateClientDetailsPageObj);
+            // console.log(this.linkCantacts);
           }
         }).catch((err) => {
           console.log(err);
@@ -290,6 +303,7 @@ export class PrivateCilentDetailsPage {
     });
     alert.present();
   }
+
   moveTopublicSea() {
     try {
       this.storage.get('userInfo').then((data) => {
@@ -315,6 +329,23 @@ export class PrivateCilentDetailsPage {
             });
             alert.present();
 
+          }
+        }).catch((err) => {
+          console.log(err);
+        })
+      })
+    }
+    catch (err) {
+      console.log(err);
+    }
+  }
+  moveTopublicSea1() {
+    try {
+      this.storage.get('userInfo').then((data) => {
+        this.tokenid = data.tokenid;
+        this.ajaxserve.moveToPublish({ tokenid: this.tokenid, userid: this.userid, customer_id: this.customer_id }).then((data) => {
+          if (data.status.Code == "200") {
+            console.log(data);
           }
         }).catch((err) => {
           console.log(err);
@@ -460,6 +491,51 @@ export class PrivateCilentDetailsPage {
     });
     profileModal.present();
   }
+  Countdown(date_item) {
+    // var data_item1 = "2017-12-30 11:35:53";
+    var date = new Date(date_item).getTime();//注册时间
+    var date1 = new Date().getTime();//现在时间
+    var date2 = new Date(date + 15 * 24 * 3600 * 1000).getTime();//15天后的时间
+    var second = Math.floor((date2 - date1) / 1000);
+    console.log(second);
+    if (second > 0) {
+      var day = Math.floor(second / 86400);//整数部分代表的是天；一天有24*60*60=86400秒 ；
+      second = second % 86400;//余数代表剩下的秒数；
+      var hour = Math.floor(second / 3600);//整数部分代表小时；
+      second %= 3600; //余数代表 剩下的秒数；
+      var minute = Math.floor(second / 60);
+      second %= 60;
+      // var min = Math.floor(second / 60);
+      // second %= 60;
+      this.Count_down = day + "天" + hour + "小时" + minute + "分钟";
 
+      console.log(this.Count_down);
+    } else {
+      this.Count_down = "您的15天倒计时已到"
+      let alert = this.alertCtrl.create({
+        subTitle: '您的客户15天内未跟进,将移动公海,请至公海领取!',
+        cssClass: 'alertStyle',
+        buttons: [
+          {
+            text: '取消',
+            role: 'cancel',
+            handler: () => {
+              console.log('Cancel clicked');
+            }
+          },
+          {
+            text: '确定',
+            handler: () => {
+              this.moveTopublicSea1();
+              this.navCtrl.pop();
+            }
+          }
+        ]
+      });
+      alert.present();
+
+
+    }
+  }
 }
 

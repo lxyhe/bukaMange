@@ -33,12 +33,32 @@
   <ion-card>
     <ion-list>
       <button ion-item>
-        <ion-avatar item-start>
+        <ion-avatar item-start [class.head]="isfollow" >
           <img src="{{privateClientDetailsPageObj.customer_avatar==null?'assets/imgs/timg1.jpg':
           privateClientDetailsPageObj.customer_avatar==''?'assets/imgs/timg1.jpg':privateClientDetailsPageObj.customer_avatar}}">
         </ion-avatar>
-        <h2>{{privateClientDetailsPageObj.customer_name }}</h2>
-        <p> 发布时间: <span>{{privateClientDetailsPageObj.release_time}}</span> </p>
+        <h2>{{privateClientDetailsPageObj.customer_name }}
+
+        </h2>
+        <p style="font-size:12px"> 发布时间: <span>{{privateClientDetailsPageObj.release_time}}</span> </p>
+        <div *ngIf="isfollow">
+
+             <p style="font-size:12px"> 领取时间: <span>{{privateClientDetailsPageObj.receive_time}}</span> </p>
+            <div>
+                <span style="font-size:12px;color:#e4393c">
+                    <img src="assets/imgs/countdown.png" alt="" style="width:10px;height:10px;display:inline-block;">
+                   {{Count_down}}
+                 </span><br/>
+                <span >
+                    <img src="assets/imgs/hint.png" alt="" style="width:10px;height:10px;display:inline-block;">
+                </span>
+
+                <span style="color:#FABAA6;font-size:12px;">
+                  领取客户资料15天以内,未跟进客户,资料将返回公海,如需可到公海再次领取!
+                </span>
+            </div>
+        </div>
+
       </button >
     </ion-list>
   </ion-card>

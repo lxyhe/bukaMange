@@ -48,7 +48,8 @@ export const api = {
 
   //头像上传接口
   headeUpload: "http://a.buka.tv/BaseCommon/upload/upload",
-
+  //findpassword: address + "login/editpassword",
+  findpassword: address + "login/editpassword"
 }
 
 

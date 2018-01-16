@@ -1,5 +1,6 @@
+
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Events, Platform } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events, Platform, AlertController } from 'ionic-angular';
 
 import { HttpLodingService } from '../../providers/loadingServer';
 import { ajaxService } from '../../providers/ajaxServe';
@@ -11,18 +12,19 @@ import { Storage } from '@ionic/storage';
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-export class LogingObject {
+export class findpwdObject {
   username: string = "";
   password: string = "";
+  password1: string = "";
 }
 
 @IonicPage()
 @Component({
-  selector: 'page-loging',
-  templateUrl: 'loging.html',
+  selector: 'page-findpassword',
+  templateUrl: 'findpassword.html',
 })
-export class LogingPage {
-  public logingObJ: LogingObject;
+export class FindpasswordPage {
+  public logingObJ: findpwdObject;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -31,23 +33,26 @@ export class LogingPage {
     public ajaxServe: ajaxService,
     private storage: Storage,
     private platform: Platform,
-
+    public alertCtrl: AlertController,
     //private backbutton: BackButtonService
   ) {
 
-    this.logingObJ = new LogingObject;
+    this.logingObJ = new findpwdObject;
   }
   loginMange() {
     if (this.logingObJ.username == "") {
-      this.httploading.alertServe("账号不能为空");
+      this.httploading.alertServe("账号不为空");
       return;
     } else if (this.logingObJ.password == "") {
-      this.httploading.alertServe("密码不能为空");
+      this.httploading.alertServe("密码不为空");
+      return;
+    } else if (this.logingObJ.password !== this.logingObJ.password1) {
+      this.httploading.alertServe("两次密码输入不一致");
       return;
     }
     else {
-      this.httploading.HttpServerLoading("登录中...")
-      this.ajaxServe.LogingCrm(this.logingObJ).then(data => {
+      this.httploading.HttpServerLoading("修改中...")
+      this.ajaxServe.findPassword(this.logingObJ).then(data => {
         console.log(data);
         if (data.status.Code == "403") {
           setTimeout(() => {
@@ -59,30 +64,24 @@ export class LogingPage {
         if (data.status.Code == "200") {
           if (data.status.Msg == "成功") {
             this.httploading.ColseServerLoding();
-            if (data.data != null) {
-              let userInfo = {
-                roleid: data.data.roleid,
-                tokenid: data.data.tokenid,
-                userid: data.data.userid
-              }
-              this.storage.set('userInfo', userInfo);
-              // this.storage.set('tokenid', data.data.tokenid);
-              // this.storage.set('userid', data.data.userid);
-              if (data.data.roleid == 1) {
-                this.navCtrl.setRoot('CompanyPage');
-              } else {
-                this.navCtrl.setRoot('TabsPage');
-              }
+            if (data.status.Code == "200") {
+              //this.httploading.alertServe(data.status.Msg);
+              let alert = this.alertCtrl.create({
+                subTitle: "修改" + data.status.Msg,
+                buttons: [
+                  {
+                    text: "确定",
+                    handler: data => {
+                      setTimeout(() => {
+                        this.navCtrl.pop();
+                      }, 100);
+                    }
+                  }]
 
-              // if (data.data.roleid == 2) {
-              //   console.log("总监");
-              //   this.navCtrl.setRoot('TabsPage');
-              // }
-              // if (data.data.roleid == 3) {
-              //   console.log("个人");
-              //   this.navCtrl.setRoot('TabsPage');
-              // }
+              });
+              alert.present();
             }
+
           }
         }
       }).catch(err => {

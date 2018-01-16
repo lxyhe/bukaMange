@@ -222,6 +222,22 @@ export class AboutPage {
 
             });
             alert.present();
+          } else if (data.status.Code == "405") {
+            this.httploading.ColseServerLoding();
+            let alert = this.alertCtrl.create({
+              subTitle: '您的账号已在其他端登录',
+              buttons: [
+                {
+                  text: "确定",
+                  handler: data => {
+                    setTimeout(() => {
+                      this.app.getRootNav().setRoot('LogingPage')
+                    }, 1000);
+                  }
+                }]
+
+            });
+            alert.present();
           }
         }).catch((err) => {
           console.log(err);

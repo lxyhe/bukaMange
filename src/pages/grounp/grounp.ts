@@ -109,15 +109,15 @@ export class GrounpPage {
             this.privateClientList = data.data;
             if (data.data.length == 0) {
               this.privatenoData = true;
+              this.noMoreData1 = false;
             } else {
               this.privatenoData = false;
+              this.noMoreData1 = false;
+              this.noLoading1 = true;
             }
             this.pageNumber1 = data.cpage;
             this.totalNumber1 = data.total;
-            // if (this.pageNumber1 == this.totalNumber1) {
-            //   this.noMoreData1 = true;
-            //   this.noLoading1 = false;
-            // }
+
             this.team_avater = data.top.account_login_avatar;
             this.team_name = data.top.account_login_name;
 
@@ -148,8 +148,11 @@ export class GrounpPage {
             this.totalNumber2 = data.total;
             if (data.data.length == 0) {
               this.followData = true;
+              this.noMoreData2 = false;
             } else {
               this.followData = false;
+              this.noMoreData2 = false;
+              this.noLoading2 = true;
             }
             this.floowUpcount = data.top;
 
@@ -163,6 +166,9 @@ export class GrounpPage {
     catch (err) {
       console.log(err);
     }
+  }
+  goClientDetails(items) {
+    this.navCtrl.push('PrivateCilentDetailsPage', { data: items })
   }
   getnofoollowup() {
     try {
@@ -178,8 +184,11 @@ export class GrounpPage {
             this.totalNumber3 = data.total;
             if (data.data.length == 0) {
               this.nofollowUpdata = true;
+              this.noMoreData3 = false;
             } else {
               this.nofollowUpdata = false;
+              this.noMoreData3 = false;
+              this.noLoading3 = true;
             }
             this.nofollowUp = data.top;
 
@@ -207,8 +216,11 @@ export class GrounpPage {
             this.totalNumber4 = data.total;
             if (data.data.length == 0) {
               this.groupData = true;
+              this.noMoreData4 = false;
             } else {
               this.groupData = false;
+              this.noMoreData4 = false;
+              this.noLoading4 = true;
             }
             //this.groupMember = data.top;
           }

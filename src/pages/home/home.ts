@@ -158,19 +158,17 @@ export class HomePage {
 
             if (data.data.length == 0) {
               this.privatenoData = true;
+              this.noMoreData1 = false;
             } else {
               this.privatenoData = false;
+              this.noMoreData1 = false;
             }
             this.pageNumber1 = data.cpage;
             this.totalNumber1 = data.total;
-            // if (data.isNext) {
-            //   this.noMoreData1 = false;
-            //   this.noLoading1 = true;
-            // } else {
-            //   this.noMoreData1 = true;
-            //   this.noLoading1 = false;
-
-            // }
+            if (data.isNext) {
+              this.noMoreData1 = false;
+              this.noLoading1 = true;
+            }
 
 
             this.pensetingData = data.top;
@@ -229,12 +227,18 @@ export class HomePage {
             this.fllowClientList = data.data;
             if (data.data.length == 0) {
               this.followData = true;
+              this.noMoreData2 = false;
             } else {
               this.followData = false;
+              this.noMoreData2 = false;
             }
             this.pageNumber2 = data.cpage;
             this.totalNumber2 = data.total;
             this.follow = data.top;
+            if (data.isNext) {
+              this.noMoreData2 = false;
+              this.noLoading2 = true;
+            }
 
 
 
@@ -262,8 +266,10 @@ export class HomePage {
             this.nofllowClientList = data.data;
             if (data.data.length == 0) {
               this.nofollowUp = true;
+              this.noMoreData3 = false;
             } else {
               this.nofollowUp = false;
+              this.noMoreData3 = false;
             }
             this.pageNumber3 = data.cpage;
             this.totalNumber3 = data.total;
@@ -271,6 +277,10 @@ export class HomePage {
             // public nofollowUp: boolean = false;
             // public groupData: boolean = false;
             // public followData: boolean = false;
+            if (data.isNext) {
+              this.noMoreData3 = false;
+              this.noLoading3 = true;
+            }
             this.nofollow = data.top;
           }
         })
@@ -295,13 +305,18 @@ export class HomePage {
             this.groupList = data.data;
             if (data.data.length == 0) {
               this.groupData = true;
+              this.noMoreData4 = false;
             } else {
               this.groupData = false;
+              this.noMoreData4 = false;
             }
             this.pageNumber4 = data.cpage;
             this.totalNumber4 = data.total;
             this.grounp = data.top;
-
+            if (data.isNext) {
+              this.noMoreData4 = false;
+              this.noLoading4 = true;
+            }
           }
         })
       }).catch(err => {

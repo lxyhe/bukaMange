@@ -1,4 +1,4 @@
-export const address = "http://a.buka.tv/crm/";
+export const address = "哈哈";
 
 export const api = {
   logingapi: address + "login/islogin",
